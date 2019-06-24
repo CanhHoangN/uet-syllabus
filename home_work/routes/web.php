@@ -15,3 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/index','PageController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/test-login',function (){
+    return view('login.login');
+});
