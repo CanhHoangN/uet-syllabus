@@ -1,13 +1,11 @@
 $(document).ready(function () {
 
     $(".click-outcome").click(function () {
-        $(".text-box").toggleClass("text-box-click");
-        $(".before-click-outcome").toggleClass("after-click");
-        $(".out-text").toggleClass('outcome-textarea');
+        $(".text-box").toggleClass("text-box-1");
+        $(".out-text").toggleClass('show-out-text');
     });
     $(".click-teaching").click(function () {
-        $(".text-box").toggleClass("text-box-click2");
-        $(".before-click-teaching").toggleClass("after-click");
-        $(".teach-text").toggleClass('teach-textarea');
+        $(".text-box").toggleClass("text-box-2");
+        $(".teach-text").toggleClass("show-teaching");
     });
 });

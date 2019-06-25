@@ -22,3 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test-login',function (){
     return view('login.login');
 });
+Route::get('/level/{idLevel}','PageController@getDescLevel')->name('getDesc');
+
+Route::get('/method/{idTemplate}/{idLevel}','PageController@getMethods');
