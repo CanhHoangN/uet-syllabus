@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\levels;
 use App\methods;
+use App\suggests;
 use App\templates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\DocBlock\Tags\Example;
 
 class PageController extends Controller
 {
@@ -22,7 +24,12 @@ class PageController extends Controller
             ['idTemplate', '=', '1'],
             ['idLevel', '=', '1'],
         ])->get();
-        return view('index',compact(['levels','methods','templates','template']));
+        $suggests = suggests::all();
+        $suggest = suggests::where([
+            ['idTemplate', '=', '1'],
+            ['idLevel', '=', '1'],
+        ]);
+        return view('index',compact(['levels','methods','templates','template',"suggests"]));
     }
     public function getDescLevel($idLevel){
         $desc = levels::where('idLevel',$idLevel)->value('descriptionLevel');
@@ -40,6 +47,16 @@ class PageController extends Controller
                 ['idLevel', '=', $idLevel]
             ])->get();
         return response()->json($methods) ;
+    }
+    public function getSuggest($idTemplate,$idLevel){
+        $suggest = DB::table('suggests')
+            ->where([
+                ['idTemplate', '=', $idTemplate],
+                ['idLevel', '=', $idLevel]
+            ])->get();
+        $examples = explode("\n",$suggest[0]->example);
+        $suggest[0]->example = array($examples);
+        return response()->json($suggest) ;
     }
 
 }

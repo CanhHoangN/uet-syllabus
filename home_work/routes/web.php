@@ -25,3 +25,5 @@ Route::get('/test-login',function (){
 Route::get('/level/{idLevel}','PageController@getDescLevel')->name('getDesc');
 
 Route::get('/method/{idTemplate}/{idLevel}','PageController@getMethods');
+
+Route::get('/suggest/{idTemplate}/{idLevel}','PageController@getSuggest');

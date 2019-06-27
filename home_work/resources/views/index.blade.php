@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>OBE Syllabus Builder</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -64,7 +64,7 @@
                                 <li><a href="#">Level 1:Remembering</a></li> -->
                             </ul>
                             <div class="text" style="font-size: 10px">
-                                <div id="descriptionLevel" class="text-info" style="font-size: 10px">
+                                <div id="descriptionLevel" class="text-primary" style="font-size: 11px">
                                     Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
                                 </div>
 
@@ -72,10 +72,10 @@
                         </div>
                     </div>
                     <div class="row bottom-left">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
                                 <div class="text">
-                                    <p class="text-primary" style="font-size: 15px">Action verbs for ILO statements</p>
-                                    <i class="text-info">Select and click on the action verbs for your ILO statement</i>
+                                    <p id="title"  class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid">Action verbs for ILO statements</p>
+                                    <i id="desTitle" class="text-info">Select and click on the action verbs for your ILO statement</i>
                                 </div>
                                 <select id="listMethod" class="custom-select" multiple size="6" style="width: 120px">
                                     @foreach($methods as $method)
@@ -85,11 +85,11 @@
                                 </select>
 
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <div class="text">
-                                <p class="text-primary" style="font-size: 15px">Examples</p>
-                                <i class="text-primary" >On successful completion of this class / programme,students/graduates will be able to</i>
-                                <ul class="text-primary">
+                                <p class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid ">Examples</p>
+                                <i id="descExample" style="font-size: 12px" class="text-primary" >On successful completion of this class / programme,students/graduates will be able to</i>
+                                <ul id="listExample" style="font-size: 11px" class="text-primary">
                                     <li>List the steps for task analysis.</li>
                                     <li>Name the symptoms for Parkinson Disease.</li>
                                     <li>Define the term 'progress' as used by military strategists.</li>
@@ -131,6 +131,40 @@
                 </div>
             </div>
         </div>
+        <div class="copy-print">
+            <input type="submit" id="copy" class="btn-outline-warning" value="copy">
+            <input type="submit" class="btn-outline-warning" value="print">
+        </div>
+        <div class="bg-cover">
+
+        </div>
+        <div class="box-copy">
+            <div class="bg-warning copy-head">
+                My Syllabus
+            </div>
+            <div class="copy-result">
+                <div class="copy-ilo">
+                    <div class="bg-success text-light">
+                        <p>Intended Learning Outcomes</p>
+                    </div>
+                    <div class="text-copy-ilo">
+
+                    </div>
+                </div>
+                <div class="copy-oba">
+                    <div class="bg-info text-light">
+                        <p>Outcome-based Assessment</p>
+                    </div>
+                    <div class="text-copy-oba"></div>
+                </div>
+                <div class="copy-tla">
+                    <div class="bg-danger text-light">
+                        <p>Teaching and Learning Activities</p>
+                    </div>
+                    <div class="text-copy-tla"></div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -139,7 +173,7 @@
     $(document).ready(function(){
         var template = 1;
         var _level = 1;
-        $("#1").click(function () {
+        $("button[id='1']").click(function () {
             $(".top-left").css({
                 border : "3px solid darkred"
             });
@@ -154,8 +188,12 @@
             $(".out-text").removeClass('show-out-text');
             $(".text-box").removeClass("text-box-2");
             $(".teach-text").removeClass("show-teaching");
+            $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
+            $(".custom-select").removeClass("listMethod-2");
+            $(".custom-select").removeClass("listMethod-3");
+
         });
-        $("#2").click(function () {
+        $("button[id='2']").click(function () {
             $(".top-left").css({
                 border : "3px solid orange"
             });
@@ -170,8 +208,10 @@
             $(".text-box").removeClass("text-box-2");
             $(".text-box").addClass("text-box-1");
             $(".out-text").addClass('show-out-text');
+            $(".custom-select").removeClass("listMethod-3");
+            $(".custom-select").addClass("listMethod-2");
         });
-        $("#3").click(function () {
+        $("button[id='3']").click(function () {
             $(".top-left").css({
                 border : "3px solid #20c997"
             });
@@ -186,6 +226,8 @@
             $(".out-text").addClass('show-out-text');
             $(".text-box").addClass("text-box-2");
             $(".teach-text").addClass("show-teaching");
+            $(".custom-select").removeClass("listMethod-2");
+            $(".custom-select").addClass("listMethod-3");
         });
         $("button").click(function () {
            template = $(this).attr("id");
@@ -205,7 +247,37 @@
                     }
 
                 }
-            })
+            });
+            var linkSuggest = "suggest".concat("/",template,"/",_level);
+
+            $.ajax({
+                url : linkSuggest,
+                method : 'get',
+                success : function (data) {
+                    //alert(data.example);
+                    if(template == 1){
+                        for(var k in data){
+                            $("#title").text(data[k].title);
+                            $("#desTitle").text(data[k].descriptionSuggest);
+                        }
+
+                    }
+                    else{
+                        for(var k in data){
+                            $("#title").text(data[k].title);
+                            $("#desTitle").text(data[k].descriptionSuggest);
+                            $("#descExample").text(data[k].example);
+                        }
+                    }
+
+
+
+
+                }
+            });
+            if(template ==2 || template == 3){
+                $("#listExample").empty();
+            }
         });
 
 
@@ -241,6 +313,33 @@
                     }
 
                 }
+            });
+            var linkSuggest = "suggest".concat("/",template,"/",level);
+
+            $.ajax({
+                url : linkSuggest,
+                method : 'get',
+                success : function (data) {
+                    //alert(data.example);
+                    if(template == 1){
+                        $("#listExample").empty();
+                            for(var i in data[0].example[0]){
+
+                                var list = "<li>".concat(data[0].example[0][i],"</li>");
+                                $("#listExample").append(list);
+                            }
+
+
+
+                    }
+                    else {
+                        for(var k in data){
+                            $("#descExample").text(data[k].example);
+                        }
+                    }
+
+
+                }
             })
 
 
@@ -249,6 +348,9 @@
         $("#listMethod").click(function () {
             count++;
             var currentVal = $("#box-outcome").val();
+            var curCopyIlo = $(".text-copy-ilo").val();
+            var curCopyOba = $(".text-copy-oba").val();
+            var curCopyTla = $(".text-copy-tla").val();
             var curBoxCome = $("#box-outcome-2").val();
             var curTeaching = $("#box-teaching").val();
             var text = $( "#listMethod option:selected" ).text();
@@ -257,28 +359,44 @@
 
                 if(template == 1){
                     $("#box-outcome").val(text);
+                    $(".text-copy-ilo").append(text+"<br>");
                 }
                 else if(template == 2){
                     $("#box-outcome-2").val(text);
+                    $(".text-copy-oba").append(text+"<br>");
                 }else{
                     $("#box-teaching").val(text);
+                    $(".text-copy-tla").val(text+"<br>");
                 }
 
             }else{
                 if(template == 1){
                     $("#box-outcome").val(currentVal+"\n"+text);
+                    $(".text-copy-ilo").append(curCopyIlo+text+"<br>");
                 }
                 else if(template == 2){
-
+                    $(".text-copy-oba").append(curCopyOba+text+"<br>");
                     $("#box-outcome-2").val(curBoxCome+"\n"+text);
                 }else{
-
+                    $(".text-copy-tla").append(curCopyTla+text+"<br>");
                     $("#box-teaching").val(curTeaching+"\n"+text);
                 }
 
 
             }
 
+        });
+        $("input[id='copy']").click(function () {
+            $(".box-copy").addClass("show-box-copy");
+            $(".bg-cover").addClass("show-bg-cover");
+           //console.log($("#box-outcome").val());
+            //$(".text-copy-ilo").text($("#box-outcome").val());
+
+
+        });
+        $(".bg-cover").click(function () {
+            $(".box-copy").removeClass("show-box-copy");
+            $(".bg-cover").removeClass("show-bg-cover");
         });
 
 
