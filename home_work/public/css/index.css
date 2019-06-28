@@ -290,3 +290,11 @@ input.btn-outline-warning {
 .text-copy-ilo{
 
 }
+#close{
+    position: absolute;
+    top: 1%;
+    left: 90%;
+}
+#close:hover{
+    cursor: pointer;
+}

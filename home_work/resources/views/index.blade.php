@@ -20,9 +20,13 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
 
     <script type="text/javascript" src="{{asset("js/index.js")}}"></script>
+
+
 </head>
 <body>
     <div class="container">
@@ -133,14 +137,16 @@
         </div>
         <div class="copy-print">
             <input type="submit" id="copy" class="btn-outline-warning" value="copy">
-            <input type="submit" class="btn-outline-warning" value="print">
+            <input type="submit" onclick="printDiv();"  class="btn-outline-warning" value="print" >
+
         </div>
         <div class="bg-cover">
 
         </div>
-        <div class="box-copy">
+        <div id="box-copy" class="box-copy">
             <div class="bg-warning copy-head">
                 My Syllabus
+                <a id="close"><i class="fas fa-times"></i></a>
             </div>
             <div class="copy-result">
                 <div class="copy-ilo">
@@ -170,7 +176,25 @@
 
 </body>
 <script>
+    function printDiv()
+    {
+
+        var divToPrint=document.getElementById('box-copy');
+
+        var newWin=window.open('','Print-Window');
+
+        newWin.document.open();
+
+        newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+        newWin.document.close();
+
+        setTimeout(function(){newWin.close();},10);
+
+    }
+
     $(document).ready(function(){
+
         var template = 1;
         var _level = 1;
         $("button[id='1']").click(function () {
@@ -394,7 +418,7 @@
 
 
         });
-        $(".bg-cover").click(function () {
+        $(".bg-cover,a[id='close']").click(function () {
             $(".box-copy").removeClass("show-box-copy");
             $(".bg-cover").removeClass("show-bg-cover");
         });
