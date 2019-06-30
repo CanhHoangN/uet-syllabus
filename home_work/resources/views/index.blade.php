@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,24 +25,36 @@
 
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
 
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+
     <script type="text/javascript" src="{{asset("js/index.js")}}"></script>
 
 
 </head>
+
 <body>
     <div class="container">
         <div class="box">
-            <div class="row">
-                <div class="col-sm-6 offset-1">
-                    <h4>OBE Syllabus Builder</h4>
+            <div class="header">
+                <div class="row">
+                    <div class="col-sm-6 offset-sm-3">
+                        <h4>OBE Syllabus Builder</h4>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Login</button>
+                            <button type="button" class="btn btn-primary">Register</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="magrin-top: 10px">
                 <div class="col-sm-6 col-left">
                     <div class="row">
                         <div class="col-sm-12">
                             @foreach($templates as $template)
-                                <button id="{{$template->idTemplate}}" class="btn-primary">{{$template->nameTemplate}}</button>
+                            <button id="{{$template->idTemplate}}" class="btn-primary">{{$template->nameTemplate}}</button>
                             @endforeach
 
                         </div>
@@ -58,39 +71,39 @@
                             </div>
                             <ul>
                                 @foreach($levels as $level)
-                                    <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
+                                <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
                                 @endforeach
-                             <!--   <li><a href="#">Level 6:Creating</a></li>
+                                <!--   <li><a href="#">Level 6:Creating</a></li>
                                 <li><a href="#">Level 5:Evaluating</a></li>
                                 <li><a href="#">Level 4:Analysing</a></li>
                                 <li><a href="#">Level 3:Applying</a></li>
                                 <li><a href="#">Level 2:Understanding</a></li>
                                 <li><a href="#">Level 1:Remembering</a></li> -->
                             </ul>
-                                <div id="descriptionLevel" class="text-primary" style="font-size: 11px">
-                                    Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
-                                </div>
+                            <div id="descriptionLevel" class="text-primary" style="font-size: 11px">
+                                Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
+                            </div>
 
                         </div>
                     </div>
                     <div class="row bottom-left">
                         <div class="col-sm-6">
-                                <div class="text">
-                                    <p id="title"  class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid">Action verbs for ILO statements</p>
-                                    <i id="desTitle" class="text-info">Select and click on the action verbs for your ILO statement</i>
-                                </div>
-                                <select id="listMethod" class="custom-select" multiple size="6" style="width: 120px">
-                                    @foreach($methods as $method)
-                                        <option value="{{$method->nameMethod}}">{{$method->nameMethod}}</option>
-                                    @endforeach
+                            <div class="text">
+                                <p id="title" class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid">Action verbs for ILO statements</p>
+                                <i id="desTitle" class="text-info">Select and click on the action verbs for your ILO statement</i>
+                            </div>
+                            <select id="listMethod" class="custom-select" multiple size="6" style="width: 120px">
+                                @foreach($methods as $method)
+                                <option value="{{$method->nameMethod}}">{{$method->nameMethod}}</option>
+                                @endforeach
 
-                                </select>
+                            </select>
 
                         </div>
                         <div class="col-sm-6">
                             <div class="text">
                                 <p id="example" class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid ">Examples</p>
-                                <i id="descExample" style="font-size: 12px" class="text-primary" >On successful completion of this class / programme,students/graduates will be able to</i>
+                                <i id="descExample" style="font-size: 12px" class="text-primary">On successful completion of this class / programme,students/graduates will be able to</i>
                                 <ul id="listExample" style="font-size: 11px" class="text-primary">
                                     <li>List the steps for task analysis.</li>
                                     <li>Name the symptoms for Parkinson Disease.</li>
@@ -104,21 +117,21 @@
                 <div class="col-sm-6 col-right">
                     <div class="text-head">
                         <h4>My Syllabus</h4>
-                        <i>Click and type your  syllabus here.</i>
+                        <i>Click and type your syllabus here.</i>
                     </div>
 
                     <div class="text-box">
                         <div class="btn-info">
                             <p>Intended Learning Outcomes</p>
                         </div>
-                        <textarea  id="box-outcome" style="margin-top: -15px;color: white" class="bg-info" name="text-box-value"></textarea>
+                        <textarea id="box-outcome" style="margin-top: -15px;color: white" class="bg-info" name="text-box-value"></textarea>
                     </div>
-                    
+
                     <div class="outcome">
                         <div class="bg-danger">
                             Outcome-based Assessment
-                            <span class="click-outcome"><i  class="fas fa-angle-down"></i></span>
-                            <textarea id="box-outcome-2" class="bg-danger out-text" ></textarea>
+                            <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
+                            <textarea id="box-outcome-2" class="bg-danger out-text"></textarea>
 
                         </div>
                     </div>
@@ -135,7 +148,7 @@
         </div>
         <div class="copy-print">
             <input type="submit" id="copy" class="btn-outline-warning" value="copy">
-            <input type="submit" onclick="printDiv();"  class="btn-outline-warning" value="print" >
+            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
 
         </div>
         <div class="bg-cover">
@@ -174,62 +187,61 @@
 
 </body>
 <script>
-    function printDiv()
-    {
+    function printDiv() {
 
-        var divToPrint=document.getElementById('box-copy');
+        var divToPrint = document.getElementById('box-copy');
 
-        var newWin=window.open('','Print-Window');
+        var newWin = window.open('', 'Print-Window');
 
         newWin.document.open();
 
-        newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+        newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
 
         newWin.document.close();
 
-        setTimeout(function(){newWin.close();},10);
+        setTimeout(function() {
+            newWin.close();
+        }, 10);
 
     }
 
-    $(document).ready(function(){
+    $(document).ready(function() {
 
         var template = 1;
         var _level = 1;
-        $("button").click(function () {
-           template = $(this).attr("id");
-            var linkMethod = "method".concat("/",template,"/",_level);
+        $("button").click(function() {
+            template = $(this).attr("id");
+            var linkMethod = "method".concat("/", template, "/", _level);
             $.ajax({
-                url : linkMethod,
-                method : 'get',
-                success : function (data) {
+                url: linkMethod,
+                method: 'get',
+                success: function(data) {
                     $("#listMethod").empty();
 
                     for (var k in data) {
-                        $('#listMethod').append($('<option>',
-                            {
-                                value: data[k].nameMethod,
-                                text : data[k].nameMethod
-                            }));
+                        $('#listMethod').append($('<option>', {
+                            value: data[k].nameMethod,
+                            text: data[k].nameMethod
+                        }));
                     }
 
                 }
             });
-            var linkSuggest = "suggest".concat("/",template,"/",_level);
+            var linkSuggest = "suggest".concat("/", template, "/", _level);
 
             $.ajax({
-                url : linkSuggest,
-                method : 'get',
-                success : function (data) {
+                url: linkSuggest,
+                method: 'get',
+                success: function(data) {
                     //alert(data.example);
-                    if(template == 1){
-                        for(var k in data){
+                    if (template == 1) {
+                        for (var k in data) {
                             $("#title").text(data[k].title);
                             $("#desTitle").text(data[k].descriptionSuggest);
                         }
 
-                    }
-                    else{
-                        for(var k in data){
+                    } else {
+                        for (var k in data) {
                             $("#title").text(data[k].title);
                             $("#desTitle").text(data[k].descriptionSuggest);
                             $("#descExample").text(data[k].example);
@@ -241,15 +253,15 @@
 
                 }
             });
-            if(template == 1){
+            if (template == 1) {
                 $(".top-left").css({
-                    border : "3px solid darkred"
+                    border: "3px solid darkred"
                 });
                 $(".bottom-left").css({
-                    border : "3px solid darkred"
+                    border: "3px solid darkred"
                 });
                 $(".top-left ul").css({
-                    marginTop : "10%"
+                    marginTop: "10%"
                 });
                 $("#descriptionTemplate").text("");
                 $(".text-box").removeClass("text-box-1");
@@ -259,17 +271,16 @@
                 $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").removeClass("listMethod-3");
-            }
-            else if(template == 2){
+            } else if (template == 2) {
                 $("#listExample").empty();
                 $(".top-left").css({
-                    border : "3px solid orange"
+                    border: "3px solid orange"
                 });
                 $(".bottom-left").css({
-                    border : "3px solid orange"
+                    border: "3px solid orange"
                 });
                 $(".top-left ul").css({
-                    marginTop : "1%"
+                    marginTop: "1%"
                 });
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".teach-text").removeClass("show-teaching");
@@ -278,16 +289,16 @@
                 $(".out-text").addClass('show-out-text');
                 $(".custom-select").removeClass("listMethod-3");
                 $(".custom-select").addClass("listMethod-2");
-            } else if(template == 3){
+            } else if (template == 3) {
                 $("#listExample").empty();
                 $(".top-left").css({
-                    border : "3px solid #20c997"
+                    border: "3px solid #20c997"
                 });
                 $(".bottom-left").css({
-                    border : "3px solid #20c997"
+                    border: "3px solid #20c997"
                 });
                 $(".top-left ul").css({
-                    marginTop : "1%"
+                    marginTop: "1%"
                 });
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".text-box").addClass("text-box-1");
@@ -298,65 +309,63 @@
                 $(".custom-select").addClass("listMethod-3");
             }
 
-            if(template ==2 || template == 3){
+            if (template == 2 || template == 3) {
 
             }
         });
 
 
-        $("ul li a").click(function () {
+        $("ul li a").click(function() {
             var level = $(this).attr("id");
-            var link =  "level/".concat(level);
+            var link = "level/".concat(level);
             _level = $(this).attr("id");
             $.ajax({
-                url : link,
-                method : 'get',
-                success : function (data) {
-                    var text = "Level ".concat(level,": ",data.desc);
+                url: link,
+                method: 'get',
+                success: function(data) {
+                    var text = "Level ".concat(level, ": ", data.desc);
                     $("#descriptionLevel").text(text);
                 },
-                error : function () {
+                error: function() {
                     alert("error");
                 }
             });
-            var linkMethod = "method".concat("/",template,"/",_level);
+            var linkMethod = "method".concat("/", template, "/", _level);
             //alert(linkMethod);
             $.ajax({
-                url : linkMethod,
-                method : 'get',
-                success : function (data) {
+                url: linkMethod,
+                method: 'get',
+                success: function(data) {
                     $("#listMethod").empty();
 
                     for (var k in data) {
-                        $('#listMethod').append($('<option>',
-                            {
-                                value: data[k].nameMethod,
-                                text : data[k].nameMethod
-                            }));
+                        $('#listMethod').append($('<option>', {
+                            value: data[k].nameMethod,
+                            text: data[k].nameMethod
+                        }));
                     }
 
                 }
             });
-            var linkSuggest = "suggest".concat("/",template,"/",level);
+            var linkSuggest = "suggest".concat("/", template, "/", level);
 
             $.ajax({
-                url : linkSuggest,
-                method : 'get',
-                success : function (data) {
+                url: linkSuggest,
+                method: 'get',
+                success: function(data) {
                     //alert(data.example);
-                    if(template == 1){
+                    if (template == 1) {
                         $("#listExample").empty();
-                            for(var i in data[0].example[0]){
+                        for (var i in data[0].example[0]) {
 
-                                var list = "<li>".concat(data[0].example[0][i],"</li>");
-                                $("#listExample").append(list);
-                            }
+                            var list = "<li>".concat(data[0].example[0][i], "</li>");
+                            $("#listExample").append(list);
+                        }
 
 
 
-                    }
-                    else {
-                        for(var k in data){
+                    } else {
+                        for (var k in data) {
                             $("#descExample").text(data[k].example);
                         }
                     }
@@ -368,7 +377,7 @@
 
         });
         var count = 0;
-        $("#listMethod").click(function () {
+        $("#listMethod").click(function() {
             count++;
             var currentVal = $("#box-outcome").val();
             var curCopyIlo = $(".text-copy-ilo").val();
@@ -376,48 +385,46 @@
             var curCopyTla = $(".text-copy-tla").val();
             var curBoxCome = $("#box-outcome-2").val();
             var curTeaching = $("#box-teaching").val();
-            var text = $( "#listMethod option:selected" ).text();
+            var text = $("#listMethod option:selected").text();
             var val = $("#listMethod").val();
-            if(count == 1){
+            if (count == 1) {
 
-                if(template == 1){
+                if (template == 1) {
                     $("#box-outcome").val(text);
-                    $(".text-copy-ilo").append(text+"<br>");
-                }
-                else if(template == 2){
+                    $(".text-copy-ilo").append(text + "<br>");
+                } else if (template == 2) {
                     $("#box-outcome-2").val(text);
-                    $(".text-copy-oba").append(text+"<br>");
-                }else{
+                    $(".text-copy-oba").append(text + "<br>");
+                } else {
                     $("#box-teaching").val(text);
-                    $(".text-copy-tla").val(text+"<br>");
+                    $(".text-copy-tla").val(text + "<br>");
                 }
 
-            }else{
-                if(template == 1){
-                    $("#box-outcome").val(currentVal+"\n"+text);
-                    $(".text-copy-ilo").append(curCopyIlo+text+"<br>");
-                }
-                else if(template == 2){
-                    $(".text-copy-oba").append(curCopyOba+text+"<br>");
-                    $("#box-outcome-2").val(curBoxCome+"\n"+text);
-                }else{
-                    $(".text-copy-tla").append(curCopyTla+text+"<br>");
-                    $("#box-teaching").val(curTeaching+"\n"+text);
+            } else {
+                if (template == 1) {
+                    $("#box-outcome").val(currentVal + "\n" + text);
+                    $(".text-copy-ilo").append(curCopyIlo + text + "<br>");
+                } else if (template == 2) {
+                    $(".text-copy-oba").append(curCopyOba + text + "<br>");
+                    $("#box-outcome-2").val(curBoxCome + "\n" + text);
+                } else {
+                    $(".text-copy-tla").append(curCopyTla + text + "<br>");
+                    $("#box-teaching").val(curTeaching + "\n" + text);
                 }
 
 
             }
 
         });
-        $("input[id='copy']").click(function () {
+        $("input[id='copy']").click(function() {
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
-           //console.log($("#box-outcome").val());
+            //console.log($("#box-outcome").val());
             //$(".text-copy-ilo").text($("#box-outcome").val());
 
 
         });
-        $(".bg-cover,a[id='close']").click(function () {
+        $(".bg-cover,a[id='close']").click(function() {
             $(".box-copy").removeClass("show-box-copy");
             $(".bg-cover").removeClass("show-bg-cover");
         });
@@ -426,4 +433,5 @@
 
     });
 </script>
+
 </html>

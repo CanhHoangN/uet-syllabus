@@ -27,3 +27,7 @@ Route::get('/level/{idLevel}','PageController@getDescLevel')->name('getDesc');
 Route::get('/method/{idTemplate}/{idLevel}','PageController@getMethods');
 
 Route::get('/suggest/{idTemplate}/{idLevel}','PageController@getSuggest');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
