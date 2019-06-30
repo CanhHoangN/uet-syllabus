@@ -67,12 +67,10 @@
                                 <li><a href="#">Level 2:Understanding</a></li>
                                 <li><a href="#">Level 1:Remembering</a></li> -->
                             </ul>
-                            <div class="text" style="font-size: 10px">
                                 <div id="descriptionLevel" class="text-primary" style="font-size: 11px">
                                     Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
                                 </div>
 
-                            </div>
                         </div>
                     </div>
                     <div class="row bottom-left">
@@ -91,7 +89,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="text">
-                                <p class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid ">Examples</p>
+                                <p id="example" class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid ">Examples</p>
                                 <i id="descExample" style="font-size: 12px" class="text-primary" >On successful completion of this class / programme,students/graduates will be able to</i>
                                 <ul id="listExample" style="font-size: 11px" class="text-primary">
                                     <li>List the steps for task analysis.</li>
@@ -197,62 +195,6 @@
 
         var template = 1;
         var _level = 1;
-        $("button[id='1']").click(function () {
-            $(".top-left").css({
-                border : "3px solid darkred"
-            });
-            $(".bottom-left").css({
-                border : "3px solid darkred"
-            });
-            $(".top-left ul").css({
-                marginTop : "10%"
-            });
-            $("#descriptionTemplate").text("");
-            $(".text-box").removeClass("text-box-1");
-            $(".out-text").removeClass('show-out-text');
-            $(".text-box").removeClass("text-box-2");
-            $(".teach-text").removeClass("show-teaching");
-            $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
-            $(".custom-select").removeClass("listMethod-2");
-            $(".custom-select").removeClass("listMethod-3");
-
-        });
-        $("button[id='2']").click(function () {
-            $(".top-left").css({
-                border : "3px solid orange"
-            });
-            $(".bottom-left").css({
-                border : "3px solid orange"
-            });
-            $(".top-left ul").css({
-                marginTop : "1%"
-            });
-            $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
-            $(".teach-text").removeClass("show-teaching");
-            $(".text-box").removeClass("text-box-2");
-            $(".text-box").addClass("text-box-1");
-            $(".out-text").addClass('show-out-text');
-            $(".custom-select").removeClass("listMethod-3");
-            $(".custom-select").addClass("listMethod-2");
-        });
-        $("button[id='3']").click(function () {
-            $(".top-left").css({
-                border : "3px solid #20c997"
-            });
-            $(".bottom-left").css({
-                border : "3px solid #20c997"
-            });
-            $(".top-left ul").css({
-                marginTop : "1%"
-            });
-            $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
-            $(".text-box").addClass("text-box-1");
-            $(".out-text").addClass('show-out-text');
-            $(".text-box").addClass("text-box-2");
-            $(".teach-text").addClass("show-teaching");
-            $(".custom-select").removeClass("listMethod-2");
-            $(".custom-select").addClass("listMethod-3");
-        });
         $("button").click(function () {
            template = $(this).attr("id");
             var linkMethod = "method".concat("/",template,"/",_level);
@@ -299,8 +241,65 @@
 
                 }
             });
-            if(template ==2 || template == 3){
+            if(template == 1){
+                $(".top-left").css({
+                    border : "3px solid darkred"
+                });
+                $(".bottom-left").css({
+                    border : "3px solid darkred"
+                });
+                $(".top-left ul").css({
+                    marginTop : "10%"
+                });
+                $("#descriptionTemplate").text("");
+                $(".text-box").removeClass("text-box-1");
+                $(".out-text").removeClass('show-out-text');
+                $(".text-box").removeClass("text-box-2");
+                $(".teach-text").removeClass("show-teaching");
+                $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
+                $(".custom-select").removeClass("listMethod-2");
+                $(".custom-select").removeClass("listMethod-3");
+            }
+            else if(template == 2){
                 $("#listExample").empty();
+                $(".top-left").css({
+                    border : "3px solid orange"
+                });
+                $(".bottom-left").css({
+                    border : "3px solid orange"
+                });
+                $(".top-left ul").css({
+                    marginTop : "1%"
+                });
+                $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
+                $(".teach-text").removeClass("show-teaching");
+                $(".text-box").removeClass("text-box-2");
+                $(".text-box").addClass("text-box-1");
+                $(".out-text").addClass('show-out-text');
+                $(".custom-select").removeClass("listMethod-3");
+                $(".custom-select").addClass("listMethod-2");
+            } else if(template == 3){
+                $("#listExample").empty();
+                $(".top-left").css({
+                    border : "3px solid #20c997"
+                });
+                $(".bottom-left").css({
+                    border : "3px solid #20c997"
+                });
+                $(".top-left ul").css({
+                    marginTop : "1%"
+                });
+                $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
+                $(".text-box").addClass("text-box-1");
+                $(".out-text").addClass('show-out-text');
+                $(".text-box").addClass("text-box-2");
+                $(".teach-text").addClass("show-teaching");
+                $(".custom-select").removeClass("listMethod-2");
+                $(".custom-select").addClass("listMethod-3");
+            }
+
+            if(template ==2 || template == 3){
+
             }
         });
 

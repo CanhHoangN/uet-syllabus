@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: monospace;
-
+    box-sizing: border-box;
 }
 h4{
     color: white;
@@ -100,7 +100,7 @@ button{
     padding: 15px;
     box-sizing: border-box;
     border-radius: 10px;
-    width: 200px;
+    width: 47%;
     background: #00F260;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -215,7 +215,7 @@ select option{
     width: 180px !important;
 }
 .listMethod-2{
-    width: 200px !important;
+    width: 220px !important;
 }
 #listExample{
     position: relative;
@@ -297,4 +297,78 @@ input.btn-outline-warning {
 }
 #close:hover{
     cursor: pointer;
+}
+@media screen and (max-width:420px){
+
+    button{
+        margin: 5px;
+        border-radius: 10px;
+
+    }
+    .container{
+        height: 800px !important;
+    }
+    #descriptionLevel{
+        position: relative;
+        top: -20px !important;
+        font-size: 10px;
+    }
+    .top-left ul{
+        position: relative;
+        transform: scale(2);
+
+    }
+    .top-left,.bottom-left{
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    #title,#example{
+        font-size: 13px !important;
+    }
+    #descExample,#desTitle{
+        font-size: 10px !important;
+    }
+    @media (min-width: 576px){
+        .container {
+            max-width: 100%;
+        }
+    }
+}
+    @media  screen and (max-width: 800px) {
+        button{
+            margin: 5px;
+            border-radius: 10px;
+
+        }
+        .container{
+            width: 200% !important;
+            height: 700px;
+        }
+        .top-left ul{
+            position: relative;
+            top: -20%;
+            transform: scale(0.7);
+        }
+        .top-left,.bottom-left{
+            margin-left: -15px;
+            width: 110%;
+        }
+        #descriptionLevel{
+            position: relative;
+            top: -34%;
+            font-size: 10px;
+        }
+        #title,#example{
+            font-size: 13px !important;
+        }
+        #descExample,#desTitle{
+            font-size: 10px !important;
+        }
+        @media (min-width: 576px){
+            .container {
+                max-width: 100%;
+            }
+        }
+
 }
