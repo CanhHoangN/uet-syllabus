@@ -18,7 +18,7 @@ button{
 .container{
     position: relative;
     width: 100%;
-    height: 670px;
+    height: 700px;
     background: #0F2027;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -77,10 +77,12 @@ button{
 .top-left{
     margin-top: 10px;
     margin-left: 50px;
-    border:3px solid darkred ;
+    border:3px solid #273c75;
     width: 80%;
     height: 45%;
     background: whitesmoke;
+
+
 
 
 }
@@ -89,7 +91,7 @@ button{
     margin-left: 50px;
     height: 45%;
     width: 80%;
-    border: 3px solid darkred;
+    border: 3px solid #273c75;
     background: whitesmoke;
 }
 
@@ -104,12 +106,34 @@ button{
     background: #00F260;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    opacity: 0.8;
+    opacity: 1;
 
 
 }
 .top-left ul:hover{
-    opacity: 1;
+    transition: 1s;
+    animation-name: animation-ul;
+    animation-duration: 1s;
+
+}
+@keyframes animation-ul {
+    0%{
+        background: #43cea2;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+    50%{
+        background: #360033;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #0b8793, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+    100%{
+        background: #360033;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #0b8793, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
 }
 .top-left ul li{
 
@@ -121,6 +145,11 @@ button{
 .top-left ul li a{
     color: white;
     text-decoration: none;
+}
+.top-left ul li:hover{
+    transform: scale(1.1);
+    border-bottom: 1px solid #079992;
+
 }
 .text-head{
     position: relative;
@@ -287,8 +316,8 @@ input.btn-outline-warning {
 .copy-oba{
     margin-bottom: 30%;
 }
-.text-copy-ilo{
-
+.text-copy-ilo,.text-copy-oba,.text-copy-tla{
+    margin-top: -15px;
 }
 #close{
     position: absolute;

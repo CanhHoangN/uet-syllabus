@@ -38,13 +38,13 @@
         <div class="box">
             <div class="header">
                 <div class="row">
-                    <div class="col-sm-6 offset-sm-3">
-                        <h4>OBE Syllabus Builder</h4>
+                    <div class="col-sm-6 offset-sm-1">
+                        <h4 style="line-height: 55px">OBE Syllabus Builder</h4>
                     </div>
                     <div class="col-sm-3">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary">Login</button>
-                            <button type="button" class="btn btn-primary">Register</button>
+                            <button type="button" class="btn-primary">Login</button>
+                            <button type="button" class="btn-primary">Register</button>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @foreach($templates as $template)
-                            <button id="{{$template->idTemplate}}" class="btn-primary">{{$template->nameTemplate}}</button>
+                            <button  id="{{$template->idTemplate}}" class="btn-warning btn-template">{{$template->nameTemplate}}</button>
                             @endforeach
 
                         </div>
@@ -73,12 +73,7 @@
                                 @foreach($levels as $level)
                                 <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
                                 @endforeach
-                                <!--   <li><a href="#">Level 6:Creating</a></li>
-                                <li><a href="#">Level 5:Evaluating</a></li>
-                                <li><a href="#">Level 4:Analysing</a></li>
-                                <li><a href="#">Level 3:Applying</a></li>
-                                <li><a href="#">Level 2:Understanding</a></li>
-                                <li><a href="#">Level 1:Remembering</a></li> -->
+
                             </ul>
                             <div id="descriptionLevel" class="text-primary" style="font-size: 11px">
                                 Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
@@ -209,7 +204,7 @@
 
         var template = 1;
         var _level = 1;
-        $("button").click(function() {
+        $("button.btn-template").click(function() {
             template = $(this).attr("id");
             var linkMethod = "method".concat("/", template, "/", _level);
             $.ajax({
@@ -255,10 +250,10 @@
             });
             if (template == 1) {
                 $(".top-left").css({
-                    border: "3px solid darkred"
+                    border: "3px solid #273c75"
                 });
                 $(".bottom-left").css({
-                    border: "3px solid darkred"
+                    border: "3px solid #273c75"
                 });
                 $(".top-left ul").css({
                     marginTop: "10%"
@@ -391,25 +386,40 @@
 
                 if (template == 1) {
                     $("#box-outcome").val(text);
-                    $(".text-copy-ilo").append(text + "<br>");
+                    //$(".text-copy-ilo").append(text + "<br>");
                 } else if (template == 2) {
                     $("#box-outcome-2").val(text);
-                    $(".text-copy-oba").append(text + "<br>");
+                    //$(".text-copy-oba").append(text + "<br>");
                 } else {
                     $("#box-teaching").val(text);
-                    $(".text-copy-tla").val(text + "<br>");
+                    //$(".text-copy-tla").val(text + "<br>");
                 }
 
             } else {
                 if (template == 1) {
                     $("#box-outcome").val(currentVal + "\n" + text);
-                    $(".text-copy-ilo").append(curCopyIlo + text + "<br>");
+                    //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
                 } else if (template == 2) {
-                    $(".text-copy-oba").append(curCopyOba + text + "<br>");
-                    $("#box-outcome-2").val(curBoxCome + "\n" + text);
+                    //$(".text-copy-oba").append(curCopyOba + text + "<br>");
+                    if($("#box-outcome-2").val() == "")
+                    {
+                        $("#box-outcome-2").val(text);
+                    }
+                    else
+                    {
+                        $("#box-outcome-2").val(curBoxCome + "\n" + text);
+                    }
+
                 } else {
-                    $(".text-copy-tla").append(curCopyTla + text + "<br>");
-                    $("#box-teaching").val(curTeaching + "\n" + text);
+
+                    if($("#box-teaching").val() == "")
+                    {
+                        $("#box-teaching").val(text);
+                    }
+                    else
+                    {
+                        $("#box-teaching").val(curTeaching + "\n" + text);
+                    }
                 }
 
 
@@ -417,10 +427,46 @@
 
         });
         $("input[id='copy']").click(function() {
+            $(".text-copy-ilo").empty();
+            $(".text-copy-oba").empty();
+            $(".text-copy-tla").empty();
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
-            //$(".text-copy-ilo").text($("#box-outcome").val());
+            var list = $("#box-outcome").val();
+            for(var i in list){
+                if(list[i]!="\n")
+                {
+                    $(".text-copy-ilo").append(list[i]);
+                }else{
+                    $(".text-copy-ilo").append("<br>");
+                }
+
+
+            }
+            var list2 = $("#box-outcome-2").val();
+            for(var i in list2){
+                if(list2[i]!="\n")
+                {
+                    $(".text-copy-oba").append(list2[i]);
+                }else{
+                    $(".text-copy-oba").append("<br>");
+                }
+
+
+            }
+            var list3 = $("#box-teaching").val();
+            for(var i in list3){
+                if(list3[i]!="\n")
+                {
+                    $(".text-copy-tla").append(list3[i]);
+                }else{
+                    $(".text-copy-tla").append("<br>");
+                }
+
+
+            }
+            //$(".text-copy-ilo").append($("#box-outcome").val()+"<br>");
 
 
         });
