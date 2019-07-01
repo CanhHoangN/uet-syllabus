@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 30, 2019 at 05:00 PM
+-- Generation Time: Jul 01, 2019 at 11:49 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -246,6 +246,19 @@ INSERT INTO `suggests` (`idTemplate`, `idLevel`, `title`, `descriptionSuggest`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Syllabus`
+--
+
+CREATE TABLE `Syllabus` (
+  `idSyllabus` int(11) NOT NULL,
+  `idUser` bigint(20) UNSIGNED NOT NULL,
+  `titleSyllabus` varchar(99) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `templates`
 --
 
@@ -288,7 +301,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `admin`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'nguyenkhacngoc089@gmail.com', NULL, '123456789', NULL, 1, NULL, NULL);
+(1, 'Admin', 'nguyenkhacngoc089@gmail.com', NULL, '123456789', NULL, 1, NULL, NULL),
+(2, 'Khắc Ngọc', 'nguyenngoc99uet@gmail.com', NULL, '$2y$10$ctzkBmAC3nwp01AT7yKPv.62FWx6C8IXKkaZ5QgwglKVtxBTkDEmC', NULL, 0, '2019-06-30 09:54:30', '2019-06-30 09:54:30');
 
 --
 -- Indexes for dumped tables
@@ -328,6 +342,13 @@ ALTER TABLE `suggests`
   ADD UNIQUE KEY `idLevel` (`idLevel`);
 
 --
+-- Indexes for table `Syllabus`
+--
+ALTER TABLE `Syllabus`
+  ADD PRIMARY KEY (`idSyllabus`),
+  ADD UNIQUE KEY `idUser` (`idUser`);
+
+--
 -- Indexes for table `templates`
 --
 ALTER TABLE `templates`
@@ -363,6 +384,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `Syllabus`
+--
+ALTER TABLE `Syllabus`
+  MODIFY `idSyllabus` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `templates`
 --
 ALTER TABLE `templates`
@@ -372,7 +399,7 @@ ALTER TABLE `templates`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -391,6 +418,12 @@ ALTER TABLE `methods`
 ALTER TABLE `suggests`
   ADD CONSTRAINT `suggests_ibfk_1` FOREIGN KEY (`idTemplate`) REFERENCES `templates` (`idTemplate`),
   ADD CONSTRAINT `suggests_ibfk_2` FOREIGN KEY (`idLevel`) REFERENCES `levels` (`idLevel`);
+
+--
+-- Constraints for table `Syllabus`
+--
+ALTER TABLE `Syllabus`
+  ADD CONSTRAINT `Syllabus_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

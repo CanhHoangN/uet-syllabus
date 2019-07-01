@@ -11,7 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/index','PageController@index');
+Route::get('/',['as'=>'index', 'uses'=>'PageController@index']);
+Auth::routes();
+
+Route::get('/level/{idLevel}','PageController@getDescLevel')->name('getDesc');
+
+Route::get('/method/{idTemplate}/{idLevel}','PageController@getMethods');
+
+Route::get('/suggest/{idTemplate}/{idLevel}','PageController@getSuggest');
+
+Route::get('/logout',['as'=>'logout', 'uses'=>'PageController@logout']);
+
+Route::get('/save',['as'=>'save', 'uses'=>'PageController@save']);

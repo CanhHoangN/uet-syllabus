@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: monospace;
-
+    box-sizing: border-box;
 }
 h4{
     color: white;
@@ -18,7 +18,7 @@ button{
 .container{
     position: relative;
     width: 100%;
-    height: 650px;
+    height: 670px;
     background: #0F2027;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -32,7 +32,8 @@ button{
     background: -webkit-linear-gradient(to right, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border: 1px solid white;
-    height: 600px
+    height: 600px;
+    z-index:2;
 
 }
 .col-left{
@@ -76,9 +77,11 @@ button{
 .top-left{
     margin-top: 10px;
     margin-left: 50px;
-    border:2px solid white ;
+    border:3px solid darkred ;
     width: 80%;
     height: 45%;
+    background: whitesmoke;
+
 
 }
 .bottom-left{
@@ -86,17 +89,18 @@ button{
     margin-left: 50px;
     height: 45%;
     width: 80%;
-    border: 2px solid white;
+    border: 3px solid darkred;
+    background: whitesmoke;
 }
 
 .top-left ul{
     color: white;
-    margin-top: 12%;
+    margin-top: 10%;
     margin-left: 20%;
     padding: 15px;
     box-sizing: border-box;
     border-radius: 10px;
-    width: 200px;
+    width: 47%;
     background: #00F260;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -132,6 +136,12 @@ button{
     background: white;
     transition: 0.3s;
 }
+.text-box-1{
+    height: 350px;
+}
+.text-box-2{
+    height: 200px;
+}
 .text-box textarea{
     position: absolute;
     resize: none;
@@ -139,12 +149,7 @@ button{
     width: 100%;
 
 }
-.text-box-click{
-    height: 400px;
-}
-.text-box-click2{
-    height: 300px;
-}
+
 .after-click{
     border-top: 1px solid white;
     height: 100px;
@@ -153,12 +158,22 @@ button{
 }
 .outcome{
     position: relative;
+
 }
 .teaching{
     position: relative;
 }
 .out-text,.teach-text{
     display: none;
+    resize: none;
+    width: 100%;
+    height: 150px;
+}
+.show-out-text{
+    display: block;
+}
+.show-teaching{
+    display: block;
 }
 .outcome-textarea,.teach-textarea{
     position: absolute;
@@ -184,6 +199,176 @@ button{
 .display-text{
     visibility: visible;
 }
+ul li a{
+    cursor: pointer;
+}
+select option{
+    cursor: pointer;
+}
+.template2TextOutCome{
+    transition: 0.5s;
+    transform: translateY(-180px);
+    height: 100px;
 
+}
+.listMethod-3{
+    width: 180px !important;
+}
+.listMethod-2{
+    width: 220px !important;
+}
+#listExample{
+    position: relative;
+    left: -25px;
 
+}
+#listExample li{
+    line-height: 12px;
+}
+.copy-print{
+    float:right;
+}
+input.btn-outline-warning {
+    position: relative;
+    top: 5px;
+}
+.box-copy{
+    position: absolute;
+    transition: 0.5s;
+    width: 400px;
+    height: 500px;
+    background: white;
+    border: 1px solid;
+    top: 15%;
+    left: 36%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 4;
+}
+.bg-cover{
+    position: absolute;
+    transition: 0.5s;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:#0F2027;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 3;
 
+}
+.show-bg-cover{
+    opacity: 0.7;
+    visibility: visible;
+}
+.show-box-copy{
+    opacity: 1;
+    visibility: visible;
+
+}
+.copy-head{
+    color: white;
+    height: 30px;
+    line-height: 30px;
+}
+.copy-result{
+    margin-top: 20px;
+    margin-left: 7%;
+    width: 86%;
+    height: 80%;
+    border: 1px solid;
+    overflow: auto;
+}
+
+.copy-ilo{
+    margin-bottom: 30%;
+}
+.copy-oba{
+    margin-bottom: 30%;
+}
+.text-copy-ilo{
+
+}
+#close{
+    position: absolute;
+    top: 1%;
+    left: 90%;
+}
+#close:hover{
+    cursor: pointer;
+}
+@media screen and (max-width:420px){
+
+    button{
+        margin: 5px;
+        border-radius: 10px;
+
+    }
+    .container{
+        height: 800px !important;
+    }
+    #descriptionLevel{
+        position: relative;
+        top: -20px !important;
+        font-size: 10px;
+    }
+    .top-left ul{
+        position: relative;
+        transform: scale(2);
+
+    }
+    .top-left,.bottom-left{
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    #title,#example{
+        font-size: 13px !important;
+    }
+    #descExample,#desTitle{
+        font-size: 10px !important;
+    }
+    @media (min-width: 576px){
+        .container {
+            max-width: 100%;
+        }
+    }
+}
+    @media  screen and (max-width: 800px) {
+        button{
+            margin: 5px;
+            border-radius: 10px;
+
+        }
+        .container{
+            width: 200% !important;
+            height: 700px;
+        }
+        .top-left ul{
+            position: relative;
+            top: -20%;
+            transform: scale(0.7);
+        }
+        .top-left,.bottom-left{
+            margin-left: -15px;
+            width: 110%;
+        }
+        #descriptionLevel{
+            position: relative;
+            top: -34%;
+            font-size: 10px;
+        }
+        #title,#example{
+            font-size: 13px !important;
+        }
+        #descExample,#desTitle{
+            font-size: 10px !important;
+        }
+        @media (min-width: 576px){
+            .container {
+                max-width: 100%;
+            }
+        }
+
+}
