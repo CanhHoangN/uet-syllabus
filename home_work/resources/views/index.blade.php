@@ -54,7 +54,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @foreach($templates as $template)
-                            <button  id="{{$template->idTemplate}}" class="btn-warning btn-template">{{$template->nameTemplate}}</button>
+                            <button  id="{{$template->idTemplate}}" class="btn-template">{{$template->nameTemplate}}</button>
                             @endforeach
 
                         </div>
@@ -96,7 +96,7 @@
 
                         </div>
                         <div class="col-sm-6">
-                            <div class="text">
+                            <div class="example">
                                 <p id="example" class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid ">Examples</p>
                                 <i id="descExample" style="font-size: 12px" class="text-primary">On successful completion of this class / programme,students/graduates will be able to</i>
                                 <ul id="listExample" style="font-size: 11px" class="text-primary">
@@ -201,7 +201,7 @@
     }
 
     $(document).ready(function() {
-
+        $("button#1").addClass("btn1");
         var template = 1;
         var _level = 1;
         $("button.btn-template").click(function() {
@@ -210,6 +210,7 @@
             $.ajax({
                 url: linkMethod,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     $("#listMethod").empty();
 
@@ -227,6 +228,7 @@
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     //alert(data.example);
                     if (template == 1) {
@@ -248,7 +250,27 @@
 
                 }
             });
+
             if (template == 1) {
+                var linkSuggests = "suggest".concat("/", template, "/", _level);
+
+                $.ajax({
+                    url: linkSuggests,
+                    method: 'get',
+                    async:true,
+                    success: function(data) {
+                        //alert(data.example);
+                            $("#listExample").empty();
+                            for (var i in data[0].example[0]) {
+
+                                var list = "<li>".concat(data[0].example[0][i], "</li>");
+                                // console.log(list);
+                                $("#listExample").append(list);
+                            }
+
+
+                    }
+                });
                 $(".top-left").css({
                     border: "3px solid #273c75"
                 });
@@ -266,6 +288,11 @@
                 $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").removeClass("listMethod-3");
+                $(".example").removeClass("moveExample");
+                $(".example").removeClass("moveExampleTLA");
+                $("button#2").removeClass("btn2");
+                $("button#3").removeClass("btn3");
+                $("button#1").addClass("btn1");
             } else if (template == 2) {
                 $("#listExample").empty();
                 $(".top-left").css({
@@ -284,6 +311,11 @@
                 $(".out-text").addClass('show-out-text');
                 $(".custom-select").removeClass("listMethod-3");
                 $(".custom-select").addClass("listMethod-2");
+                $(".example").addClass("moveExample");
+                $("button#1").removeClass("btn1");
+                $("button#3").removeClass("btn3");
+                $("button#2").addClass("btn2");
+
             } else if (template == 3) {
                 $("#listExample").empty();
                 $(".top-left").css({
@@ -302,11 +334,12 @@
                 $(".teach-text").addClass("show-teaching");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").addClass("listMethod-3");
+                $(".example").addClass("moveExampleTLA");
+                $("button#1").removeClass("btn1");
+                $("button#2").removeClass("btn2");
+                $("button#3").addClass("btn3");
             }
 
-            if (template == 2 || template == 3) {
-
-            }
         });
 
 
@@ -317,6 +350,7 @@
             $.ajax({
                 url: link,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     var text = "Level ".concat(level, ": ", data.desc);
                     $("#descriptionLevel").text(text);
@@ -330,6 +364,7 @@
             $.ajax({
                 url: linkMethod,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     $("#listMethod").empty();
 
@@ -347,6 +382,7 @@
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     //alert(data.example);
                     if (template == 1) {
@@ -354,6 +390,7 @@
                         for (var i in data[0].example[0]) {
 
                             var list = "<li>".concat(data[0].example[0][i], "</li>");
+                            // console.log(list);
                             $("#listExample").append(list);
                         }
 

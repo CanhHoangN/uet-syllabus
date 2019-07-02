@@ -244,7 +244,7 @@ select option{
     width: 180px !important;
 }
 .listMethod-2{
-    width: 220px !important;
+    width: 200px !important;
 }
 #listExample{
     position: relative;
@@ -326,6 +326,33 @@ input.btn-outline-warning {
 }
 #close:hover{
     cursor: pointer;
+
+}
+
+#listMethod{
+    margin-top: 10px;
+    font-size: 11px;
+}
+.moveExample{
+    margin-top:50%;
+}
+.moveExampleTLA{
+    margin-top:62%;
+}
+.btn1{
+    background-color: #273c75;
+    color: white;
+    transform: scale(1.1);
+}
+.btn2{
+    background-color: orange;
+    color: white;
+    transform: scale(1.1);
+}
+.btn3{
+    background-color: rgb(32, 201, 151);
+    color: white;
+    transform: scale(1.1);
 }
 @media screen and (max-width:420px){
 
