@@ -8,12 +8,18 @@ h4{
     color: white;
     letter-spacing: 2px;
 }
-button{
+button.btn-template{
 
     padding: 5px 10px 5px 10px;
     border-radius: 10px;
-    margin-left: 50px;
-    margin-top: 10px;
+    margin-left: 3%;
+    margin-top: 2%;
+}
+.login{
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    margin-right: 10%;
+    margin-top: 9%;
 }
 .container{
     position: relative;
@@ -73,43 +79,28 @@ button{
         transform: translateX(0px);
     }
 }
-
+.template{
+    margin-bottom: 3%;
+}
 .top-left{
-    margin-top: 10px;
-    margin-left: 50px;
+    position: relative;
+    margin-left: 3%;
     border:3px solid #273c75;
-    width: 80%;
+    width: 90%;
     height: 45%;
     background: whitesmoke;
 
-
-
-
 }
 .bottom-left{
-    margin-top: 5px;
-    margin-left: 50px;
+
+    margin-left: 3%;
     height: 45%;
-    width: 80%;
+    width: 90%;
     border: 3px solid #273c75;
     background: whitesmoke;
 }
 
-.top-left ul{
-    color: white;
-    margin-top: 10%;
-    margin-left: 20%;
-    padding: 15px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    width: 47%;
-    background: #00F260;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    opacity: 1;
 
-
-}
 .top-left ul:hover{
     transition: 1s;
     animation-name: animation-ul;
@@ -141,10 +132,6 @@ button{
     list-style: none;
     border-bottom: 1px solid white;
 
-}
-.top-left ul li a{
-    color: white;
-    text-decoration: none;
 }
 .top-left ul li:hover{
     transform: scale(1.1);
@@ -228,7 +215,24 @@ button{
 .display-text{
     visibility: visible;
 }
+.levels{
+    position: absolute;
+    font-size: small;
+    top: 21%;
+    left: 20%;
+    height: 51%;
+    width: 40%;
+    color: white;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: #00F260;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 ul li a{
+
+    width: auto;
     cursor: pointer;
 }
 select option{
@@ -246,14 +250,7 @@ select option{
 .listMethod-2{
     width: 200px !important;
 }
-#listExample{
-    position: relative;
-    left: -25px;
 
-}
-#listExample li{
-    line-height: 12px;
-}
 .copy-print{
     float:right;
 }
@@ -330,8 +327,8 @@ input.btn-outline-warning {
 }
 
 #listMethod{
-    margin-top: 10px;
     font-size: 11px;
+    width: 120px;
 }
 .moveExample{
     margin-top:50%;
@@ -354,77 +351,145 @@ input.btn-outline-warning {
     color: white;
     transform: scale(1.1);
 }
-@media screen and (max-width:420px){
+.descLevel{
+    position: absolute;
+    height: 20%;
+    top: 80%;
 
-    button{
-        margin: 5px;
-        border-radius: 10px;
+}
+#descExample{
 
-    }
-    .container{
-        height: 800px !important;
-    }
-    #descriptionLevel{
-        position: relative;
-        top: -20px !important;
-        font-size: 10px;
-    }
-    .top-left ul{
-        position: relative;
-        transform: scale(2);
+    font-size: 11px;
+}
+.left-bottom{
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+.example{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    overflow: hidden;
+}
 
-    }
-    .top-left,.bottom-left{
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
+#example{
+    font-size: 13px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+.bottom-left{
+    position: relative;
+}
+.left-bottom{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.title-bottom #title{
+    font-size: 13px;
+    width: 93%;
+    margin-bottom: 2%;
+}
+.title-bottom{
+    height: 30%;
+}
+#listExample{
 
-    #title,#example{
-        font-size: 13px !important;
+    font-size: 11px;
+    line-height: 15px;
+}
+.title-top{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20%;
+}
+.method{
+    position: absolute;
+    height: 70%;
+    width: 100%;
+    top: 45%;
+}
+
+@media  screen and (max-width: 991px) {
+    body{
+        background: red;
     }
-    #descExample,#desTitle{
+    .method{
+        margin-top: 10px;
+    }
+    #title{
+        font-size: 10px ;
+    }
+    #desTitle{
+        font-size: 9px;
+        margin-bottom: 10px;
+    }
+    #example{
         font-size: 10px !important;
     }
-    @media (min-width: 576px){
-        .container {
-            max-width: 100%;
-        }
+    #descExample{
+        margin-top: 2%;
+        font-size: 9px ;
+    }
+    #listExample{
+        position: relative;
+        margin-top: -10%;
+        left: -20%;
+        font-size: 8px !important;
+
+    }
+    .levels{
+        width: 55% !important;
+    }
+    #descriptionLevel{
+        font-size: 9px !important;
+    }
+    .box-copy{
+        width: 349px;
+        height: 472px;
+        left: 15%;
     }
 }
-    @media  screen and (max-width: 800px) {
-        button{
-            margin: 5px;
-            border-radius: 10px;
+@media screen and (max-width:767px){
+    .template{
+        margin-left: 0;
+    }
+    .example{
 
-        }
-        .container{
-            width: 200% !important;
-            height: 700px;
-        }
-        .top-left ul{
-            position: relative;
-            top: -20%;
-            transform: scale(0.7);
-        }
-        .top-left,.bottom-left{
-            margin-left: -15px;
-            width: 110%;
-        }
-        #descriptionLevel{
-            position: relative;
-            top: -34%;
-            font-size: 10px;
-        }
-        #title,#example{
-            font-size: 13px !important;
-        }
-        #descExample,#desTitle{
-            font-size: 10px !important;
-        }
-        @media (min-width: 576px){
-            .container {
-                max-width: 100%;
-            }
-        }
+    }
+    #listExample{
+        font-size: 9px !important;
+        line-height: 8px;
+    }
+    #descExample{
 
+    }
+    #listMethod{
+        transform: scale(0.8);
+        width: 80%;
+    }
+    .levels{
+        width: 75% !important;
+        top: 23%;
+        left: 10%;
+    }
+    .title-top .text-primary{
+        font-size: 11px;
+    }
+
+    #descriptionTemplate{
+        font-size: 10px;
+    }
+    .text-head{
+        height: 10%;
+    }
+
+
+}
+@media screen and (max-width:767px) {
+    
 }

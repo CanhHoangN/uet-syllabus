@@ -43,71 +43,69 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="btn-group">
-                            <button type="button" class="btn-primary">Login</button>
-                            <button type="button" class="btn-primary">Register</button>
+                            <button type="button" class="btn-primary login">Login</button>
+                            <button type="button" class="btn-primary login">Register</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" style="magrin-top: 10px">
+            <div class="row">
                 <div class="col-sm-6 col-left">
-                    <div class="row">
-                        <div class="col-sm-12">
+                        <div class="template">
                             @foreach($templates as $template)
                             <button  id="{{$template->idTemplate}}" class="btn-template">{{$template->nameTemplate}}</button>
                             @endforeach
-
                         </div>
-                    </div>
-                    <div class="row top-left">
-                        <div class="col-sm-12">
-                            <div class="text">
-                                <div class="text-primary" style="font-size: 15px">
+                    <div class="top-left">
+                            <div class="title-top">
+                                <div class="text-primary">
                                     Bloom's Taxonomy of Cognitive Outcomes
                                 </div>
-                                <div id="descriptionTemplate" class="text-primary" style="font-size: 12px">
-
-                                </div>
+                                <p id="descriptionTemplate" class="text-primary">
+                                </p>
                             </div>
-                            <ul>
-                                @foreach($levels as $level)
-                                <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
-                                @endforeach
 
+                            <ul class="levels">
+                                @foreach($levels as $level)
+                                    <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
+                                @endforeach
                             </ul>
-                            <div id="descriptionLevel" class="text-primary" style="font-size: 11px">
+
+
+                            <div id="descriptionLevel" class="text-primary descLevel">
                                 Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
                             </div>
 
-                        </div>
                     </div>
-                    <div class="row bottom-left">
-                        <div class="col-sm-6">
-                            <div class="text">
-                                <p id="title" class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid">Action verbs for ILO statements</p>
-                                <i id="desTitle" class="text-info">Select and click on the action verbs for your ILO statement</i>
+                    <div class="bottom-left">
+                        <div class="left-bottom">
+                            <div class="title-bottom">
+                                <p id="title" class="text-primary">Action verbs for ILO statements</p>
+                                <p id="desTitle" class="text-primary">Select and click on the action verbs for your ILO statement</p>
+
                             </div>
-                            <select id="listMethod" class="custom-select" multiple size="6" style="width: 120px">
-                                @foreach($methods as $method)
-                                <option value="{{$method->nameMethod}}">{{$method->nameMethod}}</option>
-                                @endforeach
+                            <div class="method">
+                                <select id="listMethod" class="custom-select" multiple size="8">
+                                    @foreach($methods as $method)
+                                        <option value="{{$method->nameMethod}}">{{$method->nameMethod}}</option>
+                                    @endforeach
 
-                            </select>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="example">
-                                <p id="example" class="text-primary" style="font-size: 15px;margin-bottom: 0;border-bottom: 1px solid ">Examples</p>
-                                <i id="descExample" style="font-size: 12px" class="text-primary">On successful completion of this class / programme,students/graduates will be able to</i>
-                                <ul id="listExample" style="font-size: 11px" class="text-primary">
-                                    <li>List the steps for task analysis.</li>
-                                    <li>Name the symptoms for Parkinson Disease.</li>
-                                    <li>Define the term 'progress' as used by military strategists.</li>
-                                </ul>
+                                </select>
                             </div>
-
                         </div>
-                    </div>
+
+                        <div class="example">
+                            <p id="example" class="text-primary">Examples</p>
+                            <p id="descExample" class="text-primary">On successful completion of this class/programme,students/graduates will be able to</p>
+                            <ul id="listExample" class="text-primary">
+                                <li>List the steps for task analysis.</li>
+                                <li>Name the symptoms for Parkinson Disease.</li>
+                                <li>Define the term 'progress' as used by military strategists.</li>
+                            </ul>
+                        </div>
+
+
+                     </div>
                 </div>
                 <div class="col-sm-6 col-right">
                     <div class="text-head">
@@ -210,7 +208,6 @@
             $.ajax({
                 url: linkMethod,
                 method: 'get',
-                async:true,
                 success: function(data) {
                     $("#listMethod").empty();
 
@@ -228,7 +225,6 @@
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
-                async:true,
                 success: function(data) {
                     //alert(data.example);
                     if (template == 1) {
@@ -257,7 +253,6 @@
                 $.ajax({
                     url: linkSuggests,
                     method: 'get',
-                    async:true,
                     success: function(data) {
                         //alert(data.example);
                             $("#listExample").empty();
@@ -277,10 +272,8 @@
                 $(".bottom-left").css({
                     border: "3px solid #273c75"
                 });
-                $(".top-left ul").css({
-                    marginTop: "10%"
-                });
-                $("#descriptionTemplate").text("");
+
+                //$("#descriptionTemplate").text("");
                 $(".text-box").removeClass("text-box-1");
                 $(".out-text").removeClass('show-out-text');
                 $(".text-box").removeClass("text-box-2");
@@ -288,8 +281,8 @@
                 $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").removeClass("listMethod-3");
-                $(".example").removeClass("moveExample");
-                $(".example").removeClass("moveExampleTLA");
+               // $(".example").removeClass("moveExample");
+                //$(".example").removeClass("moveExampleTLA");
                 $("button#2").removeClass("btn2");
                 $("button#3").removeClass("btn3");
                 $("button#1").addClass("btn1");
@@ -302,7 +295,7 @@
                     border: "3px solid orange"
                 });
                 $(".top-left ul").css({
-                    marginTop: "1%"
+                   // marginTop: "1%"
                 });
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".teach-text").removeClass("show-teaching");
@@ -311,7 +304,7 @@
                 $(".out-text").addClass('show-out-text');
                 $(".custom-select").removeClass("listMethod-3");
                 $(".custom-select").addClass("listMethod-2");
-                $(".example").addClass("moveExample");
+               // $(".example").addClass("moveExample");
                 $("button#1").removeClass("btn1");
                 $("button#3").removeClass("btn3");
                 $("button#2").addClass("btn2");
@@ -325,16 +318,16 @@
                     border: "3px solid #20c997"
                 });
                 $(".top-left ul").css({
-                    marginTop: "1%"
+                   // marginTop: "1%"
                 });
-                $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
+                ///$("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".text-box").addClass("text-box-1");
                 $(".out-text").addClass('show-out-text');
                 $(".text-box").addClass("text-box-2");
                 $(".teach-text").addClass("show-teaching");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").addClass("listMethod-3");
-                $(".example").addClass("moveExampleTLA");
+               // $(".example").addClass("moveExampleTLA");
                 $("button#1").removeClass("btn1");
                 $("button#2").removeClass("btn2");
                 $("button#3").addClass("btn3");
@@ -350,7 +343,6 @@
             $.ajax({
                 url: link,
                 method: 'get',
-                async:true,
                 success: function(data) {
                     var text = "Level ".concat(level, ": ", data.desc);
                     $("#descriptionLevel").text(text);
@@ -364,7 +356,6 @@
             $.ajax({
                 url: linkMethod,
                 method: 'get',
-                async:true,
                 success: function(data) {
                     $("#listMethod").empty();
 
@@ -382,7 +373,6 @@
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
-                async:true,
                 success: function(data) {
                     //alert(data.example);
                     if (template == 1) {
