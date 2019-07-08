@@ -42,19 +42,25 @@
                     <div class="col-sm-6 offset-sm-1">
                         <h4 style="line-height: 55px">OBE Syllabus Builder</h4>
                     </div>
-                    <div class="col-sm-3">
+
                         @if(Auth::check())
-                        <div class="btn-group">
-                            <button type="button" class="btn-primary login"><a href='{{asset('/syllabus')}}'>{{Auth::user()->name}}</a></button>
-                            <button type="button" class="btn-primary login"><a href="{{asset('/logout')}}">Logout</a></button>
-                        </div>
+                            <div class="dropdown dropright">
+                                <button type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    {{Auth::user()->name}}
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item border-bottom" href="{{route("save")}}">Saved</a>
+                                    <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
+
+                                </div>
+                            </div>
                         @else
                         <div class="btn-group">
                             <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Login</a></button>
                             <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Register</a></button>
                         </div>
                         @endif
-                    </div>
+
                 </div>
             </div>
             <div class="row">
@@ -147,10 +153,7 @@
                                 <textarea id="box-teaching" class="bg-success teach-text" name="textboxvalue2"></textarea>
                             </div>
                         </div>
-                        <div class="copy-print">
-                            <input type="submit" class="btn-outline-warning" value="Save">
-                        </div>
-                    </form>
+
                 </div>
             </div>
         </div>
@@ -158,7 +161,11 @@
 
             <input type="submit" id="copy" class="btn-outline-warning" value="copy">
             <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+            @if(Auth::check())
+            <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
+            @endif
         </div>
+        </form>
         <div class="bg-cover">
 
         </div>

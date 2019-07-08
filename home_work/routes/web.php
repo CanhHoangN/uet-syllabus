@@ -28,7 +28,7 @@ Route::get('/suggest/{idTemplate}/{idLevel}','PageController@getSuggest');
 
 Route::get('/logout','PageController@logout');
 
-Route::match(['get', 'post'], '/save', 'PageController@save');
+Route::match(['get', 'post'], '/save', 'PageController@save')->name("save");
 
 Route::match(['get', 'post'], '/confirmsave', 'PageController@confirmsave');
 

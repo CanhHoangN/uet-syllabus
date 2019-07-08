@@ -22,11 +22,10 @@
         <div class="box">
             <div class="header">
                 <div class="col-sm-6 offset-sm-3">
-                    <h4>Confirm</h4>
+                    <h3>Confirm</h3>
                 </div>
             </div>
         </div>
-        <hr>
         <div class="row">
             <div class="col-md-9">
                 <form action="{{asset('/confirmsave')}}" method="post" enctype="multipart/form-data">
@@ -35,7 +34,6 @@
                     <div class="text-box">
                         <label id="TAL">Name syllabus: </label>
                         <textarea class="textbox" name="name" id="" cols="95%" rows="1" placeholder="Enter name syllabus."></textarea>
-
                         <label id="ILO">Intended Learning Outcomes</label>
                         <textarea class="textbox" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
 
@@ -45,7 +43,7 @@
                         <label id="TAL">Teaching and Learning.</label>
                         <textarea class="textbox" name="text3" id="" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
 
-                        <input type="submit" class="btn-outline-warning" value="Confirm">
+                        <input type="submit" class="btn-warning" value="Confirm">
                     </div>
                 </form>
             </div>

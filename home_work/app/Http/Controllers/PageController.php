@@ -67,29 +67,38 @@ class PageController extends Controller
     }
     public function login()
     {
-        return view('loginandregister.login');
+        if(Auth::check()){
+            return redirect('/');
+        }
+        else{
+            return view('loginandregister.login');
+        }
     }
     public function postlogin(Request $req)
     {
-        $this->validate(
-            $req,
-            [
-                'email' => 'required|email',
-                'password' => 'required|min:6|max:20'
-            ],
-            [
-                'email.required' => 'Enter email.',
-                'email.email' => 'Incorrect email format.',
-                'password.required' => 'Enter password.',
-                'password.max' => 'Max 20.',
-                'password.min' => 'Min 6.'
-            ]
-        );
-        $admin = User::where('email', $req->email)->first();
-        if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'])) {
-            return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully.']);
-        } else {
-            return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful.']);
+        if(Auth::check()){
+            return redirect('/');
+        }
+        else{
+            $this->validate(
+                $req,
+                [
+                    'email' => 'required|email',
+                    'password' => 'required|min:6|max:20'
+                ],
+                [
+                    'email.required' => 'Enter email.',
+                    'email.email' => 'Incorrect email format.',
+                    'password.required' => 'Enter password.',
+                    'password.max' => 'Max 20.',
+                    'password.min' => 'Min 6.'
+                ]
+            );
+            if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'])) {
+                return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully.']);
+            } else {
+                return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful.']);
+            }
         }
     }
     public function register()
@@ -102,7 +111,7 @@ class PageController extends Controller
             $req,
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email|unique:users',
                 'password' => 'required|min:6|max:20',
                 'repassword' => 'required|same:password'
             ],
