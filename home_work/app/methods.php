@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class methods extends Model
+class Methods extends Model
 {
     //
     protected $table = "methods";
