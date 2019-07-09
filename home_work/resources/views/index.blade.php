@@ -87,7 +87,7 @@
 
 
                         <div id="descriptionLevel" class="text-primary descLevel">
-                            Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
+
                         </div>
 
                     </div>
@@ -224,6 +224,19 @@
         $("button#1").addClass("btn1");
         var template = 1;
         var _level = 1;
+        var _link = "level/".concat(_level);
+        $.ajax({
+            url: _link,
+            method: 'get',
+            async:true,
+            success: function(data) {
+                var text = "Level ".concat(_level, ": ", data.desc);
+                $("#descriptionLevel").text(text);
+            },
+            error: function() {
+                alert("error");
+            }
+        });
         $("button.btn-template").click(function() {
             template = $(this).attr("id");
             var linkMethod = "method".concat("/", template, "/", _level);
@@ -297,9 +310,6 @@
                 $(".bottom-left").css({
                     border: "3px solid #273c75"
                 });
-                $(".top-left ul").css({
-                    marginTop: "10%"
-                });
                 $("#descriptionTemplate").text("");
                 $(".text-box").removeClass("text-box-1");
                 $(".out-text").removeClass('show-out-text');
@@ -308,8 +318,6 @@
                 $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").removeClass("listMethod-3");
-                $(".example").removeClass("moveExample");
-                $(".example").removeClass("moveExampleTLA");
                 $("button#2").removeClass("btn2");
                 $("button#3").removeClass("btn3");
                 $("button#1").addClass("btn1");
@@ -321,9 +329,6 @@
                 $(".bottom-left").css({
                     border: "3px solid orange"
                 });
-                $(".top-left ul").css({
-                    marginTop: "1%"
-                });
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".teach-text").removeClass("show-teaching");
                 $(".text-box").removeClass("text-box-2");
@@ -331,7 +336,6 @@
                 $(".out-text").addClass('show-out-text');
                 $(".custom-select").removeClass("listMethod-3");
                 $(".custom-select").addClass("listMethod-2");
-                $(".example").addClass("moveExample");
                 $("button#1").removeClass("btn1");
                 $("button#3").removeClass("btn3");
                 $("button#2").addClass("btn2");
@@ -344,9 +348,6 @@
                 $(".bottom-left").css({
                     border: "3px solid #20c997"
                 });
-                $(".top-left ul").css({
-                    marginTop: "1%"
-                });
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".text-box").addClass("text-box-1");
                 $(".out-text").addClass('show-out-text');
@@ -354,7 +355,6 @@
                 $(".teach-text").addClass("show-teaching");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").addClass("listMethod-3");
-                $(".example").addClass("moveExampleTLA");
                 $("button#1").removeClass("btn1");
                 $("button#2").removeClass("btn2");
                 $("button#3").addClass("btn3");
