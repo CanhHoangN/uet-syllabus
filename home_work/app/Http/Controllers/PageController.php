@@ -160,14 +160,9 @@ class PageController extends Controller
         }
         $syllabus->idUser = Auth::user()->id;
         $syllabus->nameSyllabus = $data['name'];
-        $syllabus->content = '<html><div class="text-box">
-        <label id="ILO">Intended Learning Outcomes</label>
-        <p>' . $data['text1'] . '</p>
-        <label id="OBA">Outcome-based Assessment</label>
-        <p>' . $data['text2'] . '</p>
-
-        <label id="TAL">Teaching and Learning.</label>
-        <p>' . $data['text3'] . '</p>';
+        $syllabus->intended = $data['text1'];
+        $syllabus->OutcomeBased = $data['text2'];
+        $syllabus->Teaching = $data['text3'];
         $syllabus->save();
         return redirect('/');
     }
@@ -184,6 +179,6 @@ class PageController extends Controller
     public function content($id)
     {
         $content=Syllabus::where('idSyllabus', $id)->first();
-            echo $content->content;
+        return response()->json($content);
     }
 }

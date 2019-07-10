@@ -44,12 +44,12 @@
                     </div>
 
                         @if(Auth::check())
-                            <div class="dropdown dropright">
+                            <div class="dropdown">
                                 <button type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{Auth::user()->name}}
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item border-bottom" href="{{route("save")}}">Saved</a>
+                                    <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
                                     <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 
                                 </div>
@@ -153,19 +153,19 @@
                                 <textarea id="box-teaching" class="bg-success teach-text" name="textboxvalue2"></textarea>
                             </div>
                         </div>
+                    @if(Auth::check())
+                        <div class="save">
+                            <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
+                        </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="copy-print">
 
-            <input type="submit" id="copy" class="btn-outline-warning" value="copy">
-            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
-            @if(Auth::check())
-            <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
-            @endif
+                    @endif
+                    </form>
+                    <div class="copy-print">
+                        <input type="submit" id="copy" class="btn-outline-warning" value="copy">
+                        <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+                    </div>
         </div>
-        </form>
         <div class="bg-cover">
 
         </div>

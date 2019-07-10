@@ -8,5 +8,5 @@ class Syllabus extends Model
 {
     //
     protected $table = "Syllabus";
-    protected $fillable = ['idSyllabus','idUser','nameSyllabus', 'content', 'updated_at', 'created_at'];
+    protected $fillable = ['idSyllabus','idUser','nameSyllabus', 'updated_at', 'created_at','intended','OutcomeBased','Teaching',];
 }

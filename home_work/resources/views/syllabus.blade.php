@@ -16,17 +16,24 @@
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/syllabus.css')}}">
 </head>
-
+<style>
+    .content{
+        display: none;
+    }
+    .text-copy-ilo,.text-copy-oba,.text-copy-tla{
+        background: white;
+        margin-bottom: 1%;
+    }
+</style>
 <body>
     <div class="container">
         <div class="box">
             <div class="header">
-                <div class="col-sm-6 offset-sm-3">
-                    <h4>List Syllabuses</h4>
+                <div class="col-sm-6 offset-sm-4">
+                    <h3 style="color: white">List Syllabuses</h3>
                 </div>
             </div>
         </div>
-        <hr>
         <div class="row">
             <div class="col-md-3">
                 <select class="form-control" name="title" id="idsyl">
@@ -34,30 +41,87 @@
                     <option value="{{$syl->idSyllabus}}">{{$syl->nameSyllabus}}</option>
                     @endforeach
                 </select>
-                <!-- <ul class="list-group">
-                    @foreach($syllabuses as $syl)
-                        <li class="list-group-item list-group-item-info" id="idsyl"><a id="{{$syl->idSyllabus}}">{{$syl->nameSyllabus}}</a></li>
-                    @endforeach
-                </ul> -->
+
             </div>
+        </div>
+        <div class="row content" style="margin-top: 5%" >
             <div class="col-md-9">
-                <div class="text-box" id="content">
-                    <!-- @foreach($syllabuses as $syl)
-                    {!!$syl->content!!}
-                    @endforeach -->
+                <div class="copy-result">
+                    <div class="copy-ilo">
+                        <div class="bg-success text-light">
+                            <p>Intended Learning Outcomes</p>
+                        </div>
+                        <div class="text-copy-ilo">
+
+                        </div>
+                    </div>
+                    <div class="copy-oba">
+                        <div class="bg-info text-light">
+                            <p>Outcome-based Assessment</p>
+                        </div>
+                        <div class="text-copy-oba"></div>
+                    </div>
+                    <div class="copy-tla">
+                        <div class="bg-danger text-light">
+                            <p>Teaching and Learning Activities</p>
+                        </div>
+                        <div class="text-copy-tla"></div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 </body>
 <script>
     $(document).ready(function() {
-        $("#idsyl").change(function() {
-            var id = $(this).val();
-            $.get("ajax/content/"+id, function(data) {
-                $("#content").html(data);
+
+            $("#idsyl").change(function() {
+                $(".content").css("display","block");
+                $(".text-copy-tla").empty();
+                $(".text-copy-oba").empty();
+                $(".text-copy-ilo").empty();
+
+                var id = $(this).val();
+                $.get("ajax/content/"+id, function(data) {
+                    for(var i in data.intended){
+                        if(data.intended[i]!="\n")
+                        {
+                            $(".text-copy-ilo").append(data.intended[i]);
+                        }else{
+                            $(".text-copy-ilo").append("<br>");
+                        }
+
+
+                    }
+                    //--------------------------------------------------------
+                    for(var i in data.OutcomeBased){
+                        if(data.OutcomeBased[i]!="\n")
+                        {
+                            $(".text-copy-oba").append(data.OutcomeBased[i]);
+                        }else{
+                            $(".text-copy-oba").append("<br>");
+                        }
+
+
+                    }
+                    //--------------------------------------------------------------
+                    for(var i in data.Teaching){
+                        if(data.Teaching[i]!="\n")
+                        {
+                            $(".text-copy-tla").append(data.Teaching[i]);
+                        }else{
+                            $(".text-copy-tla").append("<br>");
+                        }
+
+
+                    }
+                });
+
             });
-        });
+
+
+
     });
 </script>
 

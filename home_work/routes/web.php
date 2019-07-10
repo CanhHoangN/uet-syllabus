@@ -32,7 +32,7 @@ Route::match(['get', 'post'], '/save', 'PageController@save')->name("save");
 
 Route::match(['get', 'post'], '/confirmsave', 'PageController@confirmsave');
 
-Route::get('/syllabus', 'PageController@syllabus');
+Route::get('/syllabus', 'PageController@syllabus')->name("syllabus");
 
 Route::get('/ajax/content/{id}', 'PageController@content');
 

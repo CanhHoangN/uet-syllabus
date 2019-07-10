@@ -266,7 +266,15 @@ select option{
 }
 
 .copy-print{
-    float:right;
+    position: absolute;
+    top: 100%;
+    right: 3%;
+}
+.save{
+    position: absolute;
+    top: 100%;
+
+
 }
 input.btn-outline-warning {
     position: relative;
@@ -346,6 +354,13 @@ button.btn-outline-warning {
 }
 .text-copy-ilo,.text-copy-oba,.text-copy-tla{
     margin-top: -15px;
+
+}
+.bg-danger{
+    color: white;
+}
+.bg-success{
+    color: white;
 }
 #close{
     position: absolute;
