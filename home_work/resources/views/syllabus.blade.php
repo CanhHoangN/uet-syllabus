@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <select class="form-control" name="title" id="idsyl">
+                <select class="form-control" multiple name="title" id="idsyl">
                     @foreach($syllabuses as $syl)
                     <option value="{{$syl->idSyllabus}}">{{$syl->nameSyllabus}}</option>
                     @endforeach
@@ -76,7 +76,7 @@
 <script>
     $(document).ready(function() {
 
-            $("#idsyl").change(function() {
+            $("#idsyl").click(function() {
                 $(".content").css("display","block");
                 $(".text-copy-tla").empty();
                 $(".text-copy-oba").empty();

@@ -33,7 +33,7 @@
                     <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                     <div class="text-box">
                         <label id="TAL">Name syllabus: </label>
-                        <textarea class="textbox" name="name" id="" cols="95%" rows="1" placeholder="Enter name syllabus."></textarea>
+                        <textarea class="textbox" name="name" id="" cols="95%" rows="1" placeholder="Enter name syllabus." required></textarea>
                         <label id="ILO">Intended Learning Outcomes</label>
                         <textarea class="textbox" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
 
