@@ -169,8 +169,14 @@ class PageController extends Controller
     public function syllabus()
     {
         if (Auth::check()) {
+
+            $firstSyllabus = Syllabus::where('idUser',Auth::user()->id)->first();
+            //print_r(explode("\r\n",$firstSyllabus));
             $syllabuses = Syllabus::where('idUser', Auth::user()->id)->get();
-            return view('syllabus', compact('syllabuses'));
+            if(sizeof($syllabuses) == 0){
+                return Redirect('/')->with('empty','Your syllabus is empty');
+            }
+            return view('syllabus', compact('syllabuses','firstSyllabus'));
         } else {
             return Redirect('/login');
         }

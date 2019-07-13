@@ -16,17 +16,79 @@
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/syllabus.css')}}">
 </head>
-<style>
-    .content{
-        display: none;
-    }
-    .text-copy-ilo,.text-copy-oba,.text-copy-tla{
-        background: white;
-        margin-bottom: 1%;
-    }
-</style>
+
 <body>
-    <div class="container">
+<div class="content_box">
+    <div class="left_bar">
+        <ul class=" nav-tabs--vertical nav" role="navigation">
+            @foreach($syllabuses as $syl)
+                <li class="nav-item">
+                    <a href="{{$syl->nameSyllabus}}" id="{{$syl->idSyllabus}}" class="nav-link active" data-toggle="tab" role="tab" aria-controls="{{$syl->nameSyllabus}}">{{$syl->nameSyllabus}}</a>
+                </li>
+            @endforeach
+
+        </ul>
+    </div>
+    <div class="right_bar row ">
+        <div class="intended col-sm-4">
+            <div class="head">
+                Intended Learning Outcomes
+            </div>
+            <div class="text-copy-ilo">
+                @if($firstSyllabus->intended == null)
+                    <i>Danh sách rỗng</i>
+                @else
+                    <?php
+                        $arr = (explode("\r\n",$firstSyllabus->intended));
+                        foreach ($arr as $el){
+                            echo $el;
+                            echo "<br>";
+                        }
+                    ?>
+
+                @endif
+            </div>
+        </div>
+        <div class="outcome col-sm-4">
+            <div class="head">
+                Outcome-based Assessment
+            </div>
+            <div class="text-copy-oba">
+                @if($firstSyllabus->OutcomeBased == null)
+                    <i>Danh sách rỗng</i>
+                @else
+                    <?php
+                    $arr = (explode("\r\n",$firstSyllabus->OutcomeBased));
+                    foreach ($arr as $el){
+                        echo $el;
+                        echo "<br>";
+                    }
+                    ?>
+                @endif
+            </div>
+        </div>
+        <div class="teaching col-sm-4">
+            <div class="head">
+                Teaching and Learning
+            </div>
+            <div class="text-copy-tla">
+                @if($firstSyllabus->Teaching == null)
+                    <i>Danh sách rỗng</i>
+                @else
+                    <?php
+                    $arr = (explode("\r\n",$firstSyllabus->Teaching));
+                    foreach ($arr as $el){
+                        echo $el;
+                        echo "<br>";
+                    }
+                    ?>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!-- <div class="container">
         <div class="box">
             <div class="header">
                 <div class="col-sm-6 offset-sm-4">
@@ -42,7 +104,7 @@
                     @endforeach
                 </select>
 
-            </div>
+            </iv>
         </div>
         <div class="row content" style="margin-top: 5%" >
             <div class="col-md-9">
@@ -71,18 +133,17 @@
 
             </div>
         </div>
-    </div>
+    </div>-->
 </body>
 <script>
     $(document).ready(function() {
 
-            $("#idsyl").click(function() {
-                $(".content").css("display","block");
+            $("li a").click(function() {
                 $(".text-copy-tla").empty();
                 $(".text-copy-oba").empty();
                 $(".text-copy-ilo").empty();
 
-                var id = $(this).val();
+                var id = $(this).attr('id');
                 $.get("ajax/content/"+id, function(data) {
                     for(var i in data.intended){
                         if(data.intended[i]!="\n")

@@ -221,6 +221,9 @@
     }
 
     $(document).ready(function() {
+        @if(session('empty'))
+                alert("Your syllabus is empty !");
+        @endif
         $("button#1").addClass("btn1");
         var template = 1;
         var _level = 1;
