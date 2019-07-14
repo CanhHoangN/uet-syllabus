@@ -143,28 +143,48 @@ class PageController extends Controller
 
     public function save(Request $req)
     {
-        $data = $req->all();
-        return view('save', compact('data'));
+        if(Auth::check())
+        {
+            $data = $req->all();
+            if($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null )
+            {
+                return view('save', compact('data'));
+            }
+            else{
+                return Redirect('/')->with('emptySyllabus','Empty');
+
+            }
+        }
+        else{
+           return Redirect('/login')->with('login','Please login !');
+        }
+
+
+
     }
 
     public function confirmsave(Request $req)
     {
-        $data = $req->all();
 
-        $syllabus = new Syllabus();
 
-        if (Auth::check()) {
+            $data = $req->all();
+            $syllabus = new Syllabus();
+
+            if (Auth::check()) {
+                $syllabus->idUser = Auth::user()->id;
+            } else {
+                return Redirect('/login');
+            }
             $syllabus->idUser = Auth::user()->id;
-        } else {
-            return Redirect('/login');
-        }
-        $syllabus->idUser = Auth::user()->id;
-        $syllabus->nameSyllabus = $data['name'];
-        $syllabus->intended = $data['text1'];
-        $syllabus->OutcomeBased = $data['text2'];
-        $syllabus->Teaching = $data['text3'];
-        $syllabus->save();
-        return redirect('/');
+            $syllabus->nameSyllabus = $data['name'];
+            $syllabus->intended = $data['text1'];
+            $syllabus->OutcomeBased = $data['text2'];
+            $syllabus->Teaching = $data['text3'];
+            $syllabus->save();
+            return redirect('/');
+
+
+
     }
     public function syllabus()
     {

@@ -221,8 +221,11 @@
     }
 
     $(document).ready(function() {
+        @if(session('emptySyllabus'))
+            alert('Currently the list is empty, please enter !');
+        @endif
         @if(session('empty'))
-                alert("Your syllabus is empty !");
+            alert("Your syllabus is empty !");
         @endif
         $("button#1").addClass("btn1");
         var template = 1;

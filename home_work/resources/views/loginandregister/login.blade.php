@@ -55,6 +55,11 @@
         <input type="submit" class="btn" value="Sign in">
     </form><!-- form Finish -->
 </div>
+<script>
+    @if(session('login'))
+        alert('Please login !');
+    @endif
+</script>
 </body>
 
 </html>

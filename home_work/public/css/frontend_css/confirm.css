@@ -45,10 +45,14 @@ input.btn-warning {
 .box.col-sm-9 {
     position: absolute;
     left: 18%;
-    background: #2f7577;
+    /*background: #07585a;*/
     font-family: monospace;
     padding-left: 7%;
     padding-bottom: 1%;
+    background: #bdc3c7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2c3e50, #8598a5);
+
 }
 
 .header {

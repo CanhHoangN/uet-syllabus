@@ -25,8 +25,8 @@
         <div class="content">
                 <form action="{{asset('/confirmsave')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                        <div class="nameSyllabus">Name syllabus: </div>
-                        <textarea class="textbox" name="name" id="" cols="95%" rows="1" placeholder="Enter name syllabus." required></textarea>
+                        <div class="nameSyllabus">Name syllabus</div>
+                        <textarea class="textbox" name="name" id="" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
 
                         <div class="intended">Intended Learning Outcomes</div>
                         <textarea class="textbox" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
