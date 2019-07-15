@@ -43,6 +43,11 @@
         </div>
     </div>
 
+<script>
+    @if(session('used'))
+        alert('The syllabus name already exists !');
+    @endif
+</script>
 </body>
 
 </html>

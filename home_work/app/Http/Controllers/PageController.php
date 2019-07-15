@@ -10,6 +10,7 @@ use App\User;
 use App\Syllabus;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -146,14 +147,18 @@ class PageController extends Controller
         if(Auth::check())
         {
             $data = $req->all();
-            if($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null )
+            if($data != null)
             {
-                return view('save', compact('data'));
-            }
-            else{
-                return Redirect('/')->with('emptySyllabus','Empty');
+                if($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null )
+                {
+                    return view('save', compact('data'));
+                }
+                else{
+                    return Redirect('/')->with('emptySyllabus','Empty');
 
+                }
             }
+
         }
         else{
            return Redirect('/login')->with('login','Please login !');
@@ -166,22 +171,34 @@ class PageController extends Controller
     public function confirmsave(Request $req)
     {
 
-
             $data = $req->all();
-            $syllabus = new Syllabus();
+            $name = DB::table('syllabus')->select('nameSyllabus')->where([
+                ['nameSyllabus','=',$data['name']],
+                ['idUser','=',\Illuminate\Support\Facades\Auth::id()]
 
-            if (Auth::check()) {
+            ])->first();
+            if($name == null)
+            {
+                $syllabus = new Syllabus();
+
+                if (Auth::check()) {
+                    $syllabus->idUser = Auth::user()->id;
+                } else {
+                    return Redirect('/login');
+                }
                 $syllabus->idUser = Auth::user()->id;
-            } else {
-                return Redirect('/login');
+                $syllabus->nameSyllabus = $data['name'];
+                $syllabus->intended = $data['text1'];
+                $syllabus->OutcomeBased = $data['text2'];
+                $syllabus->Teaching = $data['text3'];
+                $syllabus->save();
+                return redirect('/');
+            }else{
+               // dd('error');
+
+                return Redirect('/')->with('used','The syllabus name already exists !');
             }
-            $syllabus->idUser = Auth::user()->id;
-            $syllabus->nameSyllabus = $data['name'];
-            $syllabus->intended = $data['text1'];
-            $syllabus->OutcomeBased = $data['text2'];
-            $syllabus->Teaching = $data['text3'];
-            $syllabus->save();
-            return redirect('/');
+
 
 
 
