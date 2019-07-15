@@ -12,6 +12,9 @@ use App\User;
 use App\Levels;
 use App\Suggests;
 use App\Templates;
+use App\Methods;
+use App\Syllabus;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -87,6 +90,7 @@ class AdminController extends Controller
         if ($request->isMethod('POST')) {
             $data = $request->all();
             $lv = Levels::find($id);
+            $lv->nameLevel = $data['lv'];
             $lv->descriptionLevel = $data['descLV'];
             $lv->save();
             return redirect('admin/descLevels')->with('flash_message_success', 'Description Level Update Successfully!');
@@ -130,4 +134,72 @@ class AdminController extends Controller
             return redirect('admin/suggest/' . $idTemp)->with('flash_message_error', 'Description Level Update Losing!');
         }
     }
+
+    public function methods()
+    {
+        $mt = Methods::all();
+        return view('admin.methods', compact('mt'));
+    }
+    public function editMT($id)
+    {
+        $mt = Methods::find($id);
+        return view('admin.editMT', compact('mt'));
+    }
+    public function editedMT(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) {
+            $data = $request->all();
+            $mt = Methods::find($id);
+            $mt->nameMethod = $data['nameMethod'];
+            $mt->save();
+            return redirect('admin/methods')->with('flash_message_success', 'Method Update Successfully!');
+        } else {
+            return redirect('admin/methods')->with('flash_message_error', 'Methods Update Losing!');
+        }
+    }
+    public function customers()
+    {
+        $customers = User::where('admin', '=', '0')
+            ->paginate(50);
+        $total = User::where('admin', '=', '0')
+            ->count();
+        return view('admin.listCustomers', compact('customers', 'total'));
+    }
+    public function listCustomer(Request $request)
+    {
+        $data = $request->all();
+        $name = $data['cName'];
+
+        $customers = User::where('admin', '=', '0')
+            ->where('name', 'LIKE', '%' . $name . '%')
+            ->paginate(50);
+        $total = User::where('admin', '=', '0')
+            ->where('name', 'LIKE', '%' . $name . '%')
+            ->count();
+        return view('admin.listCustomers', compact('customers', 'total'));
+    }
+    
+    public function deleteCustomer($id)
+    {
+        $customer = User::find($id);
+        $customer->delete();
+        return Redirect('/admin/customers');
+    }
+
+    public function syllabus($id)
+    {
+        $firstSyllabus = Syllabus::where('idUser', $id)->first();
+        //print_r(explode("\r\n",$firstSyllabus));
+        $syllabuses = Syllabus::where('idUser', $id)->get();
+        if (sizeof($syllabuses) == 0) {
+            return Redirect('/admin/customers')->with('empty', 'Your syllabus is empty');
+        }
+        return view('admin.syllabus', compact('syllabuses', 'firstSyllabus'));
+    }
+    public function content($id)
+    {
+        $content=Syllabus::where('idSyllabus', $id)->first();
+        return response()->json($content);
+    }
+
 }

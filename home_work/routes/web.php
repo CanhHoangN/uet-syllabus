@@ -54,5 +54,14 @@ Route::group(['middleware' => ['auth']], function ()
     Route::match(['get', 'post'], '/admin/suggest/{idTemplate}', 'AdminController@suggest');
     Route::get('/admin/editSuggest/{idTemp}/{idLV}', 'AdminController@editSG');
     Route::post('/admin/editedSuggest/{idTemp}/{idLV}', 'AdminController@editedSG');
+
+    Route::match(['get', 'post'], '/admin/methods', 'AdminController@methods');
+    Route::get('/admin/methods/edit/{id}', 'AdminController@editMT');
+    Route::post('/admin/methods/edited/{id}', 'AdminController@editedMT');
+
+    Route::match(['get', 'post'], '/admin/customers', 'AdminController@customers');
+    Route::post('/admin/listCustomer', 'AdminController@listCustomer');
+    Route::get('/admin/syllabus/{id}', 'AdminController@syllabus');
+    Route::get('/admin/customer/delete/{id}', 'AdminController@deleteCustomer');
 });
 Route::get('/admin/logout', 'AdminController@logout');
