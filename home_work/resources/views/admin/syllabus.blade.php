@@ -97,7 +97,7 @@
                 $(".text-copy-ilo").empty();
 
                 var id = $(this).attr('id');
-                $.get("/admin/ajax/content/"+id, function(data) {
+                $.get("ajax/content/"+id, function(data) {
                     if(data.intended == null){
                         $(".text-copy-ilo").append("<i>"+"Danh sách rỗng");
                     }

@@ -36,6 +36,8 @@ Route::get('/syllabus', 'PageController@syllabus')->name("syllabus");
 
 Route::get('/ajax/content/{id}', 'PageController@content');
 
+Route::match(['get', 'post'], '/check', 'PageController@check');
+
 //liem
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
 
@@ -62,6 +64,7 @@ Route::group(['middleware' => ['auth']], function ()
     Route::match(['get', 'post'], '/admin/customers', 'AdminController@customers');
     Route::post('/admin/listCustomer', 'AdminController@listCustomer');
     Route::get('/admin/syllabus/{id}', 'AdminController@syllabus');
+    Route::get('/admin/syllabus/ajax/content/{id}','AdminController@getContent');
     Route::get('/admin/customer/delete/{id}', 'AdminController@deleteCustomer');
 });
 Route::get('/admin/logout', 'AdminController@logout');

@@ -196,7 +196,7 @@ class AdminController extends Controller
         }
         return view('admin.syllabus', compact('syllabuses', 'firstSyllabus'));
     }
-    public function content($id)
+    public function getContent($id)
     {
         $content=Syllabus::where('idSyllabus', $id)->first();
         return response()->json($content);

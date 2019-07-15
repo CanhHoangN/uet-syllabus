@@ -47,7 +47,7 @@
                     <td>{{$c->email}}</td>
                     <td>
                         <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/syllabus/'.$c->id)}}">syllabus</a></button>
-                        <button type="button" class="btn btn-danger"><a style="color:white" href="{{url('/admin/customer/delete/'.$c->id)}}">delete user</a></button>
+                        <button onclick="myFunction()" type="button" class="btn btn-danger"><a style="color:white" href="{{url('/admin/customer/delete/'.$c->id)}}">delete user</a></button>
                     </td>
                 </tr>
                 @endforeach
@@ -57,6 +57,11 @@
 
 
     </div>
+    <script>
+        function myFunction() {
+            var r = confirm("Delete user ?");
+        }
+    </script>
 </div>
 
 @endsection

@@ -224,4 +224,16 @@ class PageController extends Controller
         $content=Syllabus::where('idSyllabus', $id)->first();
         return response()->json($content);
     }
+
+    public function check(Request $req){
+        $name = Syllabus::where('nameSyllabus', $req->name)->count();
+        if($name!= 0)
+        {
+            return 'Name already in use.';
+        }
+        else
+        {
+           return 'Success.';
+        }
+    }
 }
