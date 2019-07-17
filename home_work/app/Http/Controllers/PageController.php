@@ -84,21 +84,19 @@ class PageController extends Controller
             $this->validate(
                 $req,
                 [
-                    'email' => 'required|email',
+                    'email' => 'email',
                     'password' => 'required|min:6|max:20'
                 ],
                 [
-                    'email.required' => 'Enter email.',
-                    'email.email' => 'Incorrect email format.',
-                    'password.required' => 'Enter password.',
-                    'password.max' => 'Max 20.',
-                    'password.min' => 'Min 6.'
+                    'email.email' => 'Incorrect email format',
+                    'password.max' => 'Max 20',
+                    'password.min' => 'Password is at least 6 characters'
                 ]
             );
             if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'])) {
-                return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully.']);
+                return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully']);
             } else {
-                return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful.']);
+                return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful']);
             }
         }
     }
@@ -111,21 +109,16 @@ class PageController extends Controller
         $this->validate(
             $req,
             [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6|max:20',
-                'repassword' => 'required|same:password'
+                'email' => 'email|unique:users',
+                'password' => 'min:6|max:20',
+                'repassword' => 'confirmed'
             ],
             [
-                'name.required' => 'Enter fullname.',
-                'email.required' => 'Enter email.',
-                'email.email' => 'Incorrect email format.',
-                'email.unique' => 'Someone used this email.',
-                'password.required' => 'Enter password.',
-                'password.min' => 'Min: 6.',
+                'email.email' => 'Incorrect email format',
+                'email.unique' => 'Someone used this email',
+                'password.min' => 'Min: 6',
                 'password.max' => 'Max: 20',
-                'repassword.required' => 'Enter repassword.',
-                'repassword.same' => 'Password is not the same.'
+                'repassword.confirmed' => 'Password is not the same'
             ]
         );
         $user = new User();

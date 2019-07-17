@@ -197,9 +197,16 @@
                 </div>
             </div>
         </div>
-
+                <div class="form-group">
+                    <select class="Language form-control-sm"  id="sel1">
+                        <option value="1">English</option>
+                        <option value="0">VietNamese</option>
+                    </select>
+                </div>
     </div>
 
+        </div>
+    </div>
 </body>
 <script>
     function printDiv() {

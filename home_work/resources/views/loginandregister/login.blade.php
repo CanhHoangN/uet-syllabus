@@ -1,32 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Login</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/frontend_css/login.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/frontend_css/login.css">
 </head>
-
 <body>
-<div class="login-box">
-    <h1>Login</h1>
-    <form method="post" action="{!! url('login') !!}">
-        <!-- form Begin -->
-        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-
-
-
-        <div class="textbox">
+<div class="login-form">
+    <form action="{!! url('login') !!}" method="post">
+        @csrf
+        <h2 class="text-center">Sign in</h2>
+        <div class="form-group">
             @if(count($errors)>0)
                 <div class='alert-danger' style="margin-bottom: 10px;">
                     @foreach($errors->all() as $err)
@@ -35,32 +25,36 @@
                     @endforeach
                 </div>
             @endif
-                @if(Session::has('success'))
-                    <div class='alert-success' style="margin-bottom: 10px">
-                        {{Session::get('success')}}
-                    </div>
-                @endif
-                @if(Session::has('flag'))
-                    <div style="margin-bottom: 10px" class="alert-{{Session::get('flag')}}">{{Session::get('message')}}</div>
-                @endif
-            <i class="fas fa-user"></i>
-            <input name="email" placeholder="Email">
+            @if(Session::has('success'))
+                <div class='alert-success' style="margin-bottom: 10px">
+                    {{Session::get('success')}}
+                </div>
+            @endif
+            @if(Session::has('flag'))
+                <div style="margin-bottom: 10px" class="alert-{{Session::get('flag')}}">{{Session::get('message')}}</div>
+            @endif
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
+        </div>
+        <div class="clearfix">
+            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+            <a href="#" class="pull-right">Forgot Password?</a>
         </div>
 
-        <div class="textbox">
-            <i class="fas fa-lock"></i>
-            <input name="password" type="password" placeholder="Password">
-        </div>
 
-        <input type="submit" class="btn" value="Sign in">
-    </form><!-- form Finish -->
+    </form>
+    <p class="text-center text-muted small">Don't have an account? <a href="{{route('register')}}">Sign up here!</a></p>
 </div>
-<script>
-    @if(session('login'))
-        alert('Please login !');
-    @endif
-</script>
 </body>
-
 </html>
-
