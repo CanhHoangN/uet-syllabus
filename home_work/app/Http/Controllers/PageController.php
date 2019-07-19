@@ -10,6 +10,7 @@ use App\User;
 use App\Syllabus;
 use Auth;
 use Hash;
+use http\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Http\Request;
@@ -73,6 +74,7 @@ class PageController extends Controller
         }
         else{
             return view('loginandregister.login');
+            //return view('auth.login');
         }
     }
     public function postlogin(Request $req)
@@ -93,32 +95,38 @@ class PageController extends Controller
                     'password.min' => 'Password is at least 6 characters'
                 ]
             );
-            if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'])) {
+            $remember_me = $req->has('remember') ? true : false;
+
+            if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'],$remember_me)) {
+
                 return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully']);
             } else {
-                return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful']);
+
+                return redirect()->back()->with(['flag' => 'danger', 'message' => 'These credentials do not match our records.']);
             }
+
+
         }
     }
     public function register()
     {
         return view('loginandregister.register');
     }
-    public function postregister(Request $req)
+ /*   public function postregister(Request $req)
     {
         $this->validate(
             $req,
             [
                 'email' => 'email|unique:users',
                 'password' => 'min:6|max:20',
-                'repassword' => 'confirmed'
+                'repassword' => 'same:password'
             ],
             [
                 'email.email' => 'Incorrect email format',
                 'email.unique' => 'Someone used this email',
                 'password.min' => 'Min: 6',
                 'password.max' => 'Max: 20',
-                'repassword.confirmed' => 'Password is not the same'
+                'repassword.same' => 'Password is not the same'
             ]
         );
         $user = new User();
@@ -127,7 +135,7 @@ class PageController extends Controller
         $user->password = Hash::make($req->password);
         $user->save();
         return redirect('/login')->with('success', 'Account successfully created.');
-    }
+    }*/
     public function logout()
     {
         Auth::logout();

@@ -12,13 +12,13 @@
 */
 //ngoc
 Route::get('/','PageController@index');
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/login', ['as'=>'login', 'uses'=>'PageController@login']);
 Route::post('/login', ['as'=>'login', 'uses'=>'PageController@postlogin']);
 
 Route::get('/register', ['as'=>'register', 'uses'=>'PageController@register']);
-Route::post('/register', ['as'=>'register', 'uses'=>'PageController@postregister']);
+Route::post('/register', ['as'=>'register', 'uses'=>'Auth\RegisterController@register']);
 
 Route::get('/level/{idLevel}','PageController@getDescLevel')->name('getDesc');
 
@@ -28,11 +28,11 @@ Route::get('/suggest/{idTemplate}/{idLevel}','PageController@getSuggest');
 
 Route::get('/logout','PageController@logout');
 
-Route::match(['get', 'post'], '/save', 'PageController@save')->name("save");
+Route::match(['get', 'post'], '/save', 'PageController@save')->name('save')->middleware('verified');
 
 Route::match(['get', 'post'], '/confirmsave', 'PageController@confirmsave');
 
-Route::get('/syllabus', 'PageController@syllabus')->name("syllabus");
+Route::get('/syllabus', 'PageController@syllabus')->name("syllabus")->middleware('verified');
 
 Route::get('/ajax/content/{id}', 'PageController@content');
 
@@ -68,3 +68,5 @@ Route::group(['middleware' => ['auth']], function ()
     Route::get('/admin/customer/delete/{id}', 'AdminController@deleteCustomer');
 });
 Route::get('/admin/logout', 'AdminController@logout');
+
+//  Route::get('/password/reset/{token}/{email}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');

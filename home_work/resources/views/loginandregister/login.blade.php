@@ -35,7 +35,7 @@
             @endif
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-                <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+                <input type="email" class="form-control" name="email" placeholder="Email" required="required" value="{{Cookie::get('email')}}">
             </div>
         </div>
         <div class="form-group">
@@ -48,8 +48,8 @@
             <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
         </div>
         <div class="clearfix">
-            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-            <a href="#" class="pull-right">Forgot Password?</a>
+            <label class="pull-left checkbox-inline"><input type="checkbox" name="remember" id="remember"> Remember me</label>
+            <a href="{{ route('password.request') }}" class="pull-right">Forgot Password?</a>
         </div>
 
 
@@ -57,4 +57,5 @@
     <p class="text-center text-muted small">Don't have an account? <a href="{{route('register')}}">Sign up here!</a></p>
 </div>
 </body>
+
 </html>

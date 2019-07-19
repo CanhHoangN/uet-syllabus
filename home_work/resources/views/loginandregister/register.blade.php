@@ -51,7 +51,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                <input type="password" class="form-control" name="repassword" placeholder="Re-Password" required="required">
+                <input type="password" class="form-control" name="password_confirmation" placeholder="Re-Password" required="required">
             </div>
         </div>
         <div class="form-group">
