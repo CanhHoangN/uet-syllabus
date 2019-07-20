@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="{{asset('css/frontend_css/style.css')}}">
 
 
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.3/js/froala_editor.pkgd.min.js"></script>
+
     <script type="text/javascript" src="{{asset("js/frontend_js/index.js")}}"></script>
 
 
@@ -261,6 +264,14 @@
         </div>
     </div>
 </body>
+<script>
+   /* new FroalaEditor('textarea#box-outcome-2',{
+        heightMin: 50,
+        heightMax: 100,
+       // toolbarBottom: true
+    });*/
+    //$('#box-outcome').froalaEditor('html.set', 'My custom paragraph.');
+</script>
 <script>
     function printDiv() {
 
