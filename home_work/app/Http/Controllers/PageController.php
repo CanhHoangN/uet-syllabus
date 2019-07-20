@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\levels;
+use App\levels_vi;
 use App\methods;
+use App\methods_vi;
 use App\suggests;
+use App\suggests_vi;
 use App\templates;
+use App\template_vi;
 use App\User;
 use App\Syllabus;
 use Auth;
 use Hash;
 use http\Cookie;
 use Illuminate\Support\Facades\Redirect;
+use phpDocumentor\Reflection\DocBlock\Tags\Formatter\AlignFormatter;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,52 +25,121 @@ use phpDocumentor\Reflection\DocBlock\Tags\Example;
 class PageController extends Controller
 {
     //
+    public static $language = "en";
+    public function language($lg){
+        Session::put('language', $lg);
+        return Redirect('/');
+    }
     public function index()
     {
-        $levels = levels::all();
-        $templates = templates::all();
-        $template = templates::where([
-            ['idTemplate', '=', '1'],
+        $language = Session::get('language');
+        //dd($language);
+        if($language == "vi")
+        {
+            $levels = levels_vi::all();
+            $templates = template_vi::all();
+            $template = template_vi::where([
+                ['idTemplate', '=', '1'],
 
-        ])->get();
-        $methods = methods::where([
-            ['idTemplate', '=', '1'],
-            ['idLevel', '=', '1'],
-        ])->get();
-        $suggests = suggests::all();
-        $suggest = suggests::where([
-            ['idTemplate', '=', '1'],
-            ['idLevel', '=', '1'],
-        ]);
-        return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests"]));
+            ])->get();
+            $methods = methods_vi::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ])->get();
+            $suggests = suggests_vi::all();
+            $suggests = suggests_vi::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ]);
+            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
+
+        }else{
+            $levels = levels::all();
+            $templates = templates::all();
+            $template = templates::where([
+                ['idTemplate', '=', '1'],
+
+            ])->get();
+            $methods = methods::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ])->get();
+            $suggests = suggests::all();
+            $suggest = suggests::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ]);
+            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
+
+
+        }
+
+
     }
     public function getDescLevel($idLevel)
     {
-        $desc = levels::where('idLevel', $idLevel)->value('descriptionLevel');
-        $arr = array(
-            'desc' => $desc
-        );
-        return response()->json($arr);
+        $language = Session::get('language');
+        if($language == "vi")
+        {
+            $desc = levels_vi::where('idLevel', $idLevel)->value('descriptionLevel');
+            $arr = array(
+                'desc' => $desc
+            );
+            return response()->json($arr);
+        }
+        else{
+            $desc = levels::where('idLevel', $idLevel)->value('descriptionLevel');
+            $arr = array(
+                'desc' => $desc
+            );
+            return response()->json($arr);
+        }
     }
     public function getMethods($idTemplate, $idLevel)
     {
-        $methods = DB::table('methods')
-            ->where([
-                ['idTemplate', '=', $idTemplate],
-                ['idLevel', '=', $idLevel]
-            ])->get();
-        return response()->json($methods);
+        $language = Session::get('language');
+        if($language == "vi")
+        {
+            $methods = DB::table('methods_vi')
+                ->where([
+                    ['idTemplate', '=', $idTemplate],
+                    ['idLevel', '=', $idLevel]
+                ])->get();
+            return response()->json($methods);
+        }
+        else{
+            $methods = DB::table('methods')
+                ->where([
+                    ['idTemplate', '=', $idTemplate],
+                    ['idLevel', '=', $idLevel]
+                ])->get();
+            return response()->json($methods);
+        }
     }
     public function getSuggest($idTemplate, $idLevel)
     {
-        $suggest = DB::table('suggests')
-            ->where([
-                ['idTemplate', '=', $idTemplate],
-                ['idLevel', '=', $idLevel]
-            ])->get();
-        $examples = explode("\n", $suggest[0]->example);
-        $suggest[0]->example = array($examples);
-        return response()->json($suggest);
+        $language = Session::get('language');
+        if($language == "vi")
+        {
+            $suggest = DB::table('suggests_vi')
+                ->where([
+                    ['idTemplate', '=', $idTemplate],
+                    ['idLevel', '=', $idLevel]
+                ])->get();
+            $examples = explode("\n", $suggest[0]->example);
+            $suggest[0]->example = array($examples);
+            return response()->json($suggest);
+        }
+        else{
+            $suggest = DB::table('suggests')
+                ->where([
+                    ['idTemplate', '=', $idTemplate],
+                    ['idLevel', '=', $idLevel]
+                ])->get();
+            $examples = explode("\n", $suggest[0]->example);
+            $suggest[0]->example = array($examples);
+            return response()->json($suggest);
+        }
     }
     public function login()
     {
@@ -145,6 +219,7 @@ class PageController extends Controller
 
     public function save(Request $req)
     {
+        $language = Session::get('language');
         if(Auth::check())
         {
             $data = $req->all();
@@ -152,7 +227,7 @@ class PageController extends Controller
             {
                 if($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null )
                 {
-                    return view('save', compact('data'));
+                    return view('save', compact('data','language'));
                 }
                 else{
                     return Redirect('/')->with('emptySyllabus','Empty');

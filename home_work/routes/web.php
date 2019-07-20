@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/language/{lg}','PageController@language')->name('language');
 //ngoc
 Route::get('/','PageController@index');
 Auth::routes(['verify' => true]);

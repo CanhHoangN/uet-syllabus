@@ -56,8 +56,13 @@
                             </div>
                         @else
                         <div class="btn-group">
-                            <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Login</a></button>
-                            <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Register</a></button>
+                            @if($language == "vi")
+                                <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Đăng nhập</a></button>
+                                <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Đăng kí</a></button>
+                            @else
+                                <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Login</a></button>
+                                <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Register</a></button>
+                            @endif
                         </div>
                         @endif
 
@@ -73,7 +78,11 @@
                     <div class="top-left">
                         <div class="title-top">
                             <div class="text-primary">
-                                Bloom's Taxonomy of Cognitive Outcomes
+                                @if($language == "vi")
+                                    Phân loại tư duy của Bloom về kết quả nhận thức
+                                @else
+                                    Bloom's Taxonomy of Cognitive Outcomes
+                                @endif
                             </div>
                             <p id="descriptionTemplate" class="text-primary">
                             </p>
@@ -94,8 +103,14 @@
                     <div class="bottom-left">
                         <div class="left-bottom">
                             <div class="title-bottom">
-                                <p id="title" class="text-primary">Action verbs for ILO statements</p>
-                                <p id="desTitle" class="text-primary">Select and click on the action verbs for your ILO statement</p>
+                                @if($language == "vi")
+                                    <p id="title" class="text-primary">Động từ hành động cho câu lệnh ILO</p>
+                                    <p id="desTitle" class="text-primary">Chọn và nhấp vào các động từ hành động cho câu lệnh ILO của bạn</p>
+
+                                @else
+                                    <p id="title" class="text-primary">Action verbs for ILO statements</p>
+                                    <p id="desTitle" class="text-primary">Select and click on the action verbs for your ILO statement</p>
+                                @endif
 
                             </div>
                             <div class="method">
@@ -123,8 +138,13 @@
                 </div>
                 <div class="col-sm-6 col-right">
                     <div class="text-head">
-                        <h4>My Syllabus</h4>
-                        <i>Click and type your syllabus here.</i>
+                        @if($language == "vi")
+                            <h4>Giáo trình</h4>
+                            <i>Chọn và gõ giáo trình của bạn ở đây.</i>
+                        @else
+                            <h4>My Syllabus</h4>
+                            <i>Click and type your syllabus here.</i>
+                        @endif
                     </div>
                     <form action="{!! url('save') !!}" method="post" enctype="multipart/form-data">
                         <!-- form Begin -->
@@ -132,14 +152,23 @@
 
                         <div class="text-box">
                             <div class="btn-info">
-                                <p>Intended Learning Outcomes</p>
+                                @if($language == "vi")
+                                    <p>Kết quả học tập dự định</p>
+                                @else
+                                    <p>Intended Learning Outcomes</p>
+                                @endif
                             </div>
                             <textarea id="box-outcome" style="margin-top: -15px;color: white" class="bg-info" name="textboxvalue"></textarea>
                         </div>
 
                         <div class="outcome">
                             <div class="bg-danger">
-                                Outcome-based Assessment
+                                @if($language == "vi")
+                                    Đánh giá dựa trên kết quả
+                                @else
+                                    Outcome-based Assessment
+                                @endif
+
                                 <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
                                 <textarea id="box-outcome-2" class="bg-danger out-text" name="textboxvalue1"></textarea>
 
@@ -148,22 +177,36 @@
 
                         <div class="teaching">
                             <div class="bg-success">
-                                Teaching and Learning
+                                @if($language == "vi")
+                                    Dạy và học
+                                @else
+                                    Teaching and Learning
+                                @endif
+
                                 <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
                                 <textarea id="box-teaching" class="bg-success teach-text" name="textboxvalue2"></textarea>
                             </div>
                         </div>
                     @if(Auth::check())
                         <div class="save">
-                            <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
+                            @if($language == "vi")
+                                <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Lưu">
+                            @else
+                                <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
+                            @endif
                         </div>
 
 
                     @endif
                     </form>
                     <div class="copy-print">
-                        <input type="submit" id="copy" class="btn-outline-warning" value="copy">
-                        <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+                        @if($language == "vi")
+                            <input type="submit" id="copy" class="btn-outline-warning" value="Sao chép">
+                            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="In ra">
+                        @else
+                            <input type="submit" id="copy" class="btn-outline-warning" value="copy">
+                            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+                        @endif
                     </div>
         </div>
         <div class="bg-cover">
@@ -197,13 +240,23 @@
                 </div>
             </div>
         </div>
-                <div class="form-group">
+            <!--   <div class="form-group">
                     <select class="Language form-control-sm"  id="sel1">
                         <option value="1">English</option>
-                        <option value="0">VietNamese</option>
+                        <option value="{{route("save")}}">VietNamese</option>
                     </select>
+                </div> -->
+                <div class="btn-group language">
+                    <button type="button" class="btn-info">Language</button>
+                    <button type="button" class="btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{route('language','en')}}">English</a>
+                        <a class="dropdown-item" href="{{route('language','vi')}}">Vietnamese</a>
+                    </div>
                 </div>
-    </div>
+
+            </div>
 
         </div>
     </div>
@@ -332,7 +385,11 @@
                 $(".out-text").removeClass('show-out-text');
                 $(".text-box").removeClass("text-box-2");
                 $(".teach-text").removeClass("show-teaching");
+                @if($language == "vi")
+                $("#descExample").text("Khi hoàn thành thành công lớp học / chương trình này, sinh viên / sinh viên tốt nghiệp sẽ có thể");
+                @else
                 $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
+                @endif
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").removeClass("listMethod-3");
                 $("button#2").removeClass("btn2");
@@ -346,7 +403,11 @@
                 $(".bottom-left").css({
                     border: "3px solid orange"
                 });
+                @if($language == "vi")
+                $("#descriptionTemplate").text("Quyết định và nhấp vào cấp độ nhận thức về kết quả học tập của bạn");
+                @else
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
+                @endif
                 $(".teach-text").removeClass("show-teaching");
                 $(".text-box").removeClass("text-box-2");
                 $(".text-box").addClass("text-box-1");
@@ -365,7 +426,11 @@
                 $(".bottom-left").css({
                     border: "3px solid #20c997"
                 });
+                @if($language == "vi")
+                $("#descriptionTemplate").text("Quyết định và nhấp vào cấp độ nhận thức về kết quả học tập của bạn");
+                @else
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
+                @endif
                 $(".text-box").addClass("text-box-1");
                 $(".out-text").addClass('show-out-text');
                 $(".text-box").addClass("text-box-2");

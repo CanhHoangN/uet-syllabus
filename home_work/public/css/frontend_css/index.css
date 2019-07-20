@@ -273,6 +273,7 @@ select option{
 .save{
     position: absolute;
     top: 100%;
+    left: 3%;
 
 
 }
@@ -462,6 +463,18 @@ button.btn-outline-warning {
 .form-group{
     position: relative;
     left: 41%;
+}
+.language{
+    position: absolute;
+    bottom: 1%;
+    left: 36%;
+
+}
+.language a{
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 11px;
+
 }
 @media  screen and (max-width: 991px) {
     body{

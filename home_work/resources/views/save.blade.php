@@ -38,20 +38,43 @@
         <div class="content">
             <form action="{{asset('/confirmsave')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="nameSyllabus">Name syllabus</div>
-                <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
-                <span id="nameajax"></span>
+                @if($language == "vi")
+                    <div class="nameSyllabus">Tên giáo trình</div>
+                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
+                @else
+                    <div class="nameSyllabus">Name syllabus</div>
+                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
+                @endif
 
-                <div class="intended">Intended Learning Outcomes</div>
+                <span id="nameajax"></span>
+                @if($language == "vi")
+                    <div class="intended">Kết quả học tập dự định</div>
+                @else
+                    <div class="intended">Intended Learning Outcomes</div>
+                @endif
                 <textarea class="textbox" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
 
-                <div class="outcome">Outcome-based Assessment</div>
+                @if($language == "vi")
+                    <div class="outcome">Đánh giá dựa trên kết quả</div>
+                @else
+                    <div class="outcome">Outcome-based Assessment</div>
+                @endif
                 <textarea class="textbox" name="text2" id="" cols="95%" rows="5">{{$data['textboxvalue1']}}</textarea>
 
-                <div class="teaching">Teaching and Learning.</div>
+                @if($language == "vi")
+                    <div class="teaching">Dạy và học</div>
+                @else
+                    <div class="teaching">Teaching and Learning</div>
+                @endif
+
                 <textarea class="textbox" name="text3" id="" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
 
-                <input id="checkresult" type="submit" class="btn-warning" value="Confirm">
+                @if($language == "vi")
+                    <input id="checkresult" type="submit" class="btn-warning" value="Xác nhận">
+                @else
+                    <input id="checkresult" type="submit" class="btn-warning" value="Confirm">
+                @endif
+
 
             </form>
         </div>
