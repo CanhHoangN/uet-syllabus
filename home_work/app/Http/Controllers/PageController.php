@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\levels;
-use App\levels_vi;
-use App\methods;
-use App\methods_vi;
-use App\suggests;
-use App\suggests_vi;
-use App\templates;
-use App\template_vi;
+use App\Levels;
+use App\Levels_vi;
+use App\Methods;
+use App\Methods_vi;
+use App\Suggests;
+use App\Suggests_vi;
+use App\Templates;
+use App\Template_vi;
 use App\User;
 use App\Syllabus;
 use Auth;
@@ -36,36 +36,36 @@ class PageController extends Controller
         //dd($language);
         if($language == "vi")
         {
-            $levels = levels_vi::all();
-            $templates = template_vi::all();
-            $template = template_vi::where([
+            $levels = Levels_vi::all();
+            $templates = Template_vi::all();
+            $template = Template_vi::where([
                 ['idTemplate', '=', '1'],
 
             ])->get();
-            $methods = methods_vi::where([
+            $methods = Methods_vi::where([
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ])->get();
-            $suggests = suggests_vi::all();
-            $suggests = suggests_vi::where([
+            $suggests = Suggests_vi::all();
+            $suggests = Suggests_vi::where([
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ]);
             return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
 
         }else{
-            $levels = levels::all();
-            $templates = templates::all();
-            $template = templates::where([
+            $levels = Levels::all();
+            $templates = Templates::all();
+            $template = Templates::where([
                 ['idTemplate', '=', '1'],
 
             ])->get();
-            $methods = methods::where([
+            $methods = Methods::where([
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ])->get();
-            $suggests = suggests::all();
-            $suggest = suggests::where([
+            $suggests = Suggests::all();
+            $suggest = Suggests::where([
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ]);
