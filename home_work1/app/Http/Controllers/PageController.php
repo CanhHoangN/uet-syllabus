@@ -67,29 +67,36 @@ class PageController extends Controller
     }
     public function login()
     {
-        return view('loginandregister.login');
+        if (Auth::check()) {
+            return redirect('/');
+        } else {
+            return view('loginandregister.login');
+        }
     }
     public function postlogin(Request $req)
     {
-        $this->validate(
-            $req,
-            [
-                'email' => 'required|email',
-                'password' => 'required|min:6|max:20'
-            ],
-            [
-                'email.required' => 'Enter email.',
-                'email.email' => 'Incorrect email format.',
-                'password.required' => 'Enter password.',
-                'password.max' => 'Max 20.',
-                'password.min' => 'Min 6.'
-            ]
-        );
-        $admin = User::where('email', $req->email)->first();
-        if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'])) {
-            return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully.']);
+        if (Auth::check()) {
+            return redirect('/');
         } else {
-            return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful.']);
+            $this->validate(
+                $req,
+                [
+                    'email' => 'required|email',
+                    'password' => 'required|min:6|max:20'
+                ],
+                [
+                    'email.required' => 'Enter email.',
+                    'email.email' => 'Incorrect email format.',
+                    'password.required' => 'Enter password.',
+                    'password.max' => 'Max 20.',
+                    'password.min' => 'Min 6.'
+                ]
+            );
+            if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'])) {
+                return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully.']);
+            } else {
+                return redirect()->back()->with(['flag' => 'danger', 'message' => 'Login unsuccessful.']);
+            }
         }
     }
     public function register()
@@ -102,7 +109,7 @@ class PageController extends Controller
             $req,
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email|unique:users',
                 'password' => 'required|min:6|max:20',
                 'repassword' => 'required|same:password'
             ],
@@ -134,39 +141,51 @@ class PageController extends Controller
 
     public function save(Request $req)
     {
-        $data = $req->all();
-        return view('save', compact('data'));
+        if (Auth::check()) {
+            $validator = \Validator::make($req->all(), [
+                'name' => 'unique:Syllabus',
+            ]);
+            $data = $req->all();
+            if ($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null) {
+                return view('save', compact('data'));
+            } else {
+                return Redirect('/')->with('emptySyllabus', 'Empty');
+            }
+        } else {
+            return Redirect('/login')->with('login', 'Please login !');
+        }
     }
-
     public function confirmsave(Request $req)
     {
-        $data = $req->all();
 
+
+        $data = $req->all();
         $syllabus = new Syllabus();
 
         if (Auth::check()) {
+
             $syllabus->idUser = Auth::user()->id;
         } else {
             return Redirect('/login');
         }
         $syllabus->idUser = Auth::user()->id;
         $syllabus->nameSyllabus = $data['name'];
-        $syllabus->content = '<html><div class="text-box">
-        <label id="ILO">Intended Learning Outcomes</label>
-        <p>' . $data['text1'] . '</p>
-        <label id="OBA">Outcome-based Assessment</label>
-        <p>' . $data['text2'] . '</p>
-
-        <label id="TAL">Teaching and Learning.</label>
-        <p>' . $data['text3'] . '</p>';
+        $syllabus->intended = $data['text1'];
+        $syllabus->OutcomeBased = $data['text2'];
+        $syllabus->Teaching = $data['text3'];
         $syllabus->save();
-        return redirect('/');
+        return redirect('/')->with('Success', 'Saved.');
     }
     public function syllabus()
     {
         if (Auth::check()) {
-            $syllabuses = Syllabus::where('idUser', Auth::user()->id)->get();
-            return view('syllabus', compact('syllabuses'));
+
+            $firstSyllabus = Syllabus::where('idUser', Auth::user()->id)->first();
+            $syllabuses = Syllabus::where('idUser', Auth::user()->id)->paginate(9);
+            if (sizeof($syllabuses) == 0) {
+                return Redirect('/')->with('empty', 'Your syllabus is empty');
+            }
+            return view('syllabus', compact('syllabuses', 'firstSyllabus'));
         } else {
             return Redirect('/login');
         }
@@ -174,7 +193,30 @@ class PageController extends Controller
 
     public function content($id)
     {
-        $content=Syllabus::where('idSyllabus', $id)->first();
-            echo $content->content;
+        $content = Syllabus::where('idSyllabus', $id)->first();
+        return response()->json($content);
+    }
+    public function check(Request $req)
+    {
+        $name = Syllabus::where('nameSyllabus', $req->name)->count();
+        if ($name != 0) {
+            return 'Name already in use.';
+        } else {
+            return 'Success.';
+        }
+    }
+
+    public function edit(Request $req)
+    {
+        $data = $req->all();
+        DB::table('Syllabus')->where('idSyllabus', $data['idsyl'])->update(['intended' => $data['_ilo'], 'OutcomeBased' => $data['_oba'], 'Teaching' => $data['_tla']]);
+        return Redirect('/syllabus');
+    }
+
+    public function delete(Request $req)
+    {
+        $data = $req->all();
+        DB::table('Syllabus')->where('idSyllabus', $data['idsyl_dl'])->delete();
+        return Redirect('/syllabus');
     }
 }

@@ -23,15 +23,16 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{asset('css/index.css')}}">
+    <link rel="stylesheet" href="{{asset('css/frontend_css/index.css')}}">
 
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/frontend_css/style.css')}}">
 
 
-    <script type="text/javascript" src="{{asset("js/index.js")}}"></script>
+    <script type="text/javascript" src="{{asset("js/frontend_js/index.js")}}"></script>
 
 
 </head>
+
 
 <body>
     <div class="container">
@@ -41,19 +42,25 @@
                     <div class="col-sm-6 offset-sm-1">
                         <h4 style="line-height: 55px">OBE Syllabus Builder</h4>
                     </div>
-                    <div class="col-sm-3">
+
                         @if(Auth::check())
-                        <div class="btn-group">
-                            <button type="button" class="btn-primary login"><a href='{{asset('/syllabus')}}'>{{Auth::user()->name}}</a></button>
-                            <button type="button" class="btn-primary login"><a href="{{asset('/logout')}}">Logout</a></button>
-                        </div>
+                            <div class="dropdown">
+                                <button type="button" class="btn-primary dropdown-togglez" data-toggle="dropdown" style="border-radius: 5px; padding-bottom: 5px; margin-bottom: 5px;">
+                                    {{Auth::user()->name}}
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
+                                    <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
+
+                                </div>
+                            </div>
                         @else
                         <div class="btn-group">
                             <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Login</a></button>
                             <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Register</a></button>
                         </div>
                         @endif
-                    </div>
+
                 </div>
             </div>
             <div class="row">
@@ -80,7 +87,7 @@
 
 
                         <div id="descriptionLevel" class="text-primary descLevel">
-                            Level 1: After class or programme,learner will be able to: Retrieve relevant knowledge from long-term memory
+
                         </div>
 
                     </div>
@@ -146,17 +153,18 @@
                                 <textarea id="box-teaching" class="bg-success teach-text" name="textboxvalue2"></textarea>
                             </div>
                         </div>
-                        <div class="copy-print">
-                            <input type="submit" class="btn-outline-warning" value="Save">
+                    @if(Auth::check())
+                        <div class="save">
+                            <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="copy-print">
 
-            <input type="submit" id="copy" class="btn-outline-warning" value="copy">
-            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+
+                    @endif
+                    </form>
+                    <div class="copy-print">
+                        <input type="submit" id="copy" class="btn-outline-warning" value="copy">
+                        <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+                    </div>
         </div>
         <div class="bg-cover">
 
@@ -213,15 +221,35 @@
     }
 
     $(document).ready(function() {
+        @if(session('emptySyllabus'))
+            alert('Currently the list is empty, please enter !');
+        @endif
+        @if(session('empty'))
+            alert("Your syllabus is empty !");
+        @endif
         $("button#1").addClass("btn1");
         var template = 1;
         var _level = 1;
+        var _link = "level/".concat(_level);
+        $.ajax({
+            url: _link,
+            method: 'get',
+            async:true,
+            success: function(data) {
+                var text = "Level ".concat(_level, ": ", data.desc);
+                $("#descriptionLevel").text(text);
+            },
+            error: function() {
+                alert("error");
+            }
+        });
         $("button.btn-template").click(function() {
             template = $(this).attr("id");
             var linkMethod = "method".concat("/", template, "/", _level);
             $.ajax({
                 url: linkMethod,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     $("#listMethod").empty();
 
@@ -239,6 +267,7 @@
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     //alert(data.example);
                     if (template == 1) {
@@ -267,15 +296,16 @@
                 $.ajax({
                     url: linkSuggests,
                     method: 'get',
+                    async:true,
                     success: function(data) {
                         //alert(data.example);
-                        $("#listExample").empty();
-                        for (var i in data[0].example[0]) {
+                            $("#listExample").empty();
+                            for (var i in data[0].example[0]) {
 
-                            var list = "<li>".concat(data[0].example[0][i], "</li>");
-                            // console.log(list);
-                            $("#listExample").append(list);
-                        }
+                                var list = "<li>".concat(data[0].example[0][i], "</li>");
+                                // console.log(list);
+                                $("#listExample").append(list);
+                            }
 
 
                     }
@@ -286,8 +316,7 @@
                 $(".bottom-left").css({
                     border: "3px solid #273c75"
                 });
-
-                //$("#descriptionTemplate").text("");
+                $("#descriptionTemplate").text("");
                 $(".text-box").removeClass("text-box-1");
                 $(".out-text").removeClass('show-out-text');
                 $(".text-box").removeClass("text-box-2");
@@ -295,8 +324,6 @@
                 $("#descExample").text("On successful completion of this class / programme,students/graduates will be able to");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").removeClass("listMethod-3");
-                // $(".example").removeClass("moveExample");
-                //$(".example").removeClass("moveExampleTLA");
                 $("button#2").removeClass("btn2");
                 $("button#3").removeClass("btn3");
                 $("button#1").addClass("btn1");
@@ -308,9 +335,6 @@
                 $(".bottom-left").css({
                     border: "3px solid orange"
                 });
-                $(".top-left ul").css({
-                    // marginTop: "1%"
-                });
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".teach-text").removeClass("show-teaching");
                 $(".text-box").removeClass("text-box-2");
@@ -318,7 +342,6 @@
                 $(".out-text").addClass('show-out-text');
                 $(".custom-select").removeClass("listMethod-3");
                 $(".custom-select").addClass("listMethod-2");
-                // $(".example").addClass("moveExample");
                 $("button#1").removeClass("btn1");
                 $("button#3").removeClass("btn3");
                 $("button#2").addClass("btn2");
@@ -331,17 +354,13 @@
                 $(".bottom-left").css({
                     border: "3px solid #20c997"
                 });
-                $(".top-left ul").css({
-                    // marginTop: "1%"
-                });
-                ///$("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
+                $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 $(".text-box").addClass("text-box-1");
                 $(".out-text").addClass('show-out-text');
                 $(".text-box").addClass("text-box-2");
                 $(".teach-text").addClass("show-teaching");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").addClass("listMethod-3");
-                // $(".example").addClass("moveExampleTLA");
                 $("button#1").removeClass("btn1");
                 $("button#2").removeClass("btn2");
                 $("button#3").addClass("btn3");
@@ -357,6 +376,7 @@
             $.ajax({
                 url: link,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     var text = "Level ".concat(level, ": ", data.desc);
                     $("#descriptionLevel").text(text);
@@ -370,6 +390,7 @@
             $.ajax({
                 url: linkMethod,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     $("#listMethod").empty();
 
@@ -387,6 +408,7 @@
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
+                async:true,
                 success: function(data) {
                     //alert(data.example);
                     if (template == 1) {
@@ -442,17 +464,23 @@
                     //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
                 } else if (template == 2) {
                     //$(".text-copy-oba").append(curCopyOba + text + "<br>");
-                    if ($("#box-outcome-2").val() == "") {
+                    if($("#box-outcome-2").val() == "")
+                    {
                         $("#box-outcome-2").val(text);
-                    } else {
+                    }
+                    else
+                    {
                         $("#box-outcome-2").val(curBoxCome + "\n" + text);
                     }
 
                 } else {
 
-                    if ($("#box-teaching").val() == "") {
+                    if($("#box-teaching").val() == "")
+                    {
                         $("#box-teaching").val(text);
-                    } else {
+                    }
+                    else
+                    {
                         $("#box-teaching").val(curTeaching + "\n" + text);
                     }
                 }
@@ -469,30 +497,33 @@
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
             var list = $("#box-outcome").val();
-            for (var i in list) {
-                if (list[i] != "\n") {
+            for(var i in list){
+                if(list[i]!="\n")
+                {
                     $(".text-copy-ilo").append(list[i]);
-                } else {
+                }else{
                     $(".text-copy-ilo").append("<br>");
                 }
 
 
             }
             var list2 = $("#box-outcome-2").val();
-            for (var i in list2) {
-                if (list2[i] != "\n") {
+            for(var i in list2){
+                if(list2[i]!="\n")
+                {
                     $(".text-copy-oba").append(list2[i]);
-                } else {
+                }else{
                     $(".text-copy-oba").append("<br>");
                 }
 
 
             }
             var list3 = $("#box-teaching").val();
-            for (var i in list3) {
-                if (list3[i] != "\n") {
+            for(var i in list3){
+                if(list3[i]!="\n")
+                {
                     $(".text-copy-tla").append(list3[i]);
-                } else {
+                }else{
                     $(".text-copy-tla").append("<br>");
                 }
 
@@ -511,5 +542,4 @@
 
     });
 </script>
-
 </html>
