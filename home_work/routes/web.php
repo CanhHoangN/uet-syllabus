@@ -71,3 +71,5 @@ Route::group(['middleware' => ['auth']], function ()
 Route::get('/admin/logout', 'AdminController@logout');
 
 //  Route::get('/password/reset/{token}/{email}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::match(['get','post', 'put'], '/edit', 'PageController@edit');
+Route::match(['get','post', 'put'], '/delete', 'PageController@delete');

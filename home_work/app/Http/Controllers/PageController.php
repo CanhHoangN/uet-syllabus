@@ -285,7 +285,7 @@ class PageController extends Controller
 
             $firstSyllabus = Syllabus::where('idUser',Auth::user()->id)->first();
             //print_r(explode("\r\n",$firstSyllabus));
-            $syllabuses = Syllabus::where('idUser', Auth::user()->id)->get();
+            $syllabuses = Syllabus::where('idUser', Auth::user()->id)->paginate(9);
             if(sizeof($syllabuses) == 0){
                 return Redirect('/')->with('empty','Your syllabus is empty');
             }
@@ -311,5 +311,18 @@ class PageController extends Controller
         {
            return 'Success.';
         }
+    }
+    public function edit(Request $req)
+    {
+        $data = $req->all();
+        DB::table('syllabus')->where('idSyllabus', $data['idsyl'])->update(['intended' => $data['_ilo'], 'OutcomeBased' => $data['_oba'], 'Teaching' => $data['_tla']]);
+        return Redirect('/syllabus');
+    }
+
+    public function delete(Request $req)
+    {
+        $data = $req->all();
+        DB::table('syllabus')->where('idSyllabus', $data['idsyl_dl'])->delete();
+        return Redirect('/syllabus');
     }
 }
