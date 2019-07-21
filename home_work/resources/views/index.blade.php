@@ -127,13 +127,24 @@
                         </div>
 
                         <div class="example">
-                            <p id="example" class="text-primary">Examples</p>
-                            <p id="descExample" class="text-primary">On successful completion of this class/programme,students/graduates will be able to</p>
-                            <ul id="listExample" class="text-primary">
-                                <li>List the steps for task analysis.</li>
-                                <li>Name the symptoms for Parkinson Disease.</li>
-                                <li>Define the term 'progress' as used by military strategists.</li>
-                            </ul>
+                            @if($language == "vi")
+                                <p id="example" class="text-primary">Thí dụ</p>
+                                <p id="descExample" class="text-primary">Khi hoàn thành thành công lớp học / chương trình này, sinh viên / sinh viên tốt nghiệp sẽ có thể</p>
+                                <ul id="listExample" class="text-primary">
+                                    <li>Liệt kê các bước để phân tích nhiệm vụ.</li>
+                                    <li>Kể tên các triệu chứng của bệnh Parkinson.</li>
+                                    <li>Xác định thuật ngữ 'tiến bộ' như được sử dụng bởi các chiến lược gia quân sự.</li>
+                                </ul>
+                            @else
+                                <p id="example" class="text-primary">Examples</p>
+                                <p id="descExample" class="text-primary">On successful completion of this class/programme,students/graduates will be able to</p>
+                                <ul id="listExample" class="text-primary">
+                                    <li>List the steps for task analysis.</li>
+                                    <li>Name the symptoms for Parkinson Disease.</li>
+                                    <li>Define the term 'progress' as used by military strategists.</li>
+                                </ul>
+                            @endif
+
                         </div>
 
 
