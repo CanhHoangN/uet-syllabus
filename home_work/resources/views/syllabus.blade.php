@@ -70,8 +70,7 @@
                     <textarea name="idsyl_dl" style="display:none; height: 0px; width: 0px" id='idsyllabus_dl' required></textarea>
                     <input type="submit" id="delete" value="Delete">
                 </form>
-
-                <input type="submit" id="Home" value="Home">
+                <button><a href="{{url('/')}}">Home</a></button>
             </div>
         </div>
         <div class="left_bar">
