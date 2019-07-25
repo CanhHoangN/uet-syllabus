@@ -32,28 +32,11 @@ class PageController extends Controller
     }
     public function index()
     {
+
         $language = Session::get('language');
         //dd($language);
-        if($language == "vi")
+        if($language == "en")
         {
-            $levels = Levels_vi::all();
-            $templates = Template_vi::all();
-            $template = Template_vi::where([
-                ['idTemplate', '=', '1'],
-
-            ])->get();
-            $methods = Methods_vi::where([
-                ['idTemplate', '=', '1'],
-                ['idLevel', '=', '1'],
-            ])->get();
-            $suggests = Suggests_vi::all();
-            $suggests = Suggests_vi::where([
-                ['idTemplate', '=', '1'],
-                ['idLevel', '=', '1'],
-            ]);
-            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
-
-        }else{
             $levels = Levels::all();
             $templates = Templates::all();
             $template = Templates::where([
@@ -71,6 +54,24 @@ class PageController extends Controller
             ]);
             return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
 
+        }else{
+
+            $levels = Levels_vi::all();
+            $templates = Template_vi::all();
+            $template = Template_vi::where([
+                ['idTemplate', '=', '1'],
+
+            ])->get();
+            $methods = Methods_vi::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ])->get();
+            $suggests = Suggests_vi::all();
+            $suggests = Suggests_vi::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ]);
+            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
 
         }
 

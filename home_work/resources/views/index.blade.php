@@ -60,8 +60,8 @@
                         @else
                         <div class="btn-group">
                             @if($language == "vi")
-                                <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Đăng nhập</a></button>
-                                <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Đăng kí</a></button>
+                                <button type="button" class="btn-primary login" style="line-height: 12px"><a href="{{asset('/login')}}">Đăng nhập</a></button>
+                                <button type="button" class="btn-primary login" style="line-height: 12px"><a href="{{asset('/register')}}">Đăng kí</a></button>
                             @else
                                 <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Login</a></button>
                                 <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Register</a></button>
@@ -176,37 +176,42 @@
                         </div>
 
                         <div class="outcome">
-                            <div class="bg-danger">
-                                @if($language == "vi")
-                                    Đánh giá dựa trên kết quả
-                                @else
-                                    Outcome-based Assessment
-                                @endif
+                            <div class="bg-info" style="color: white">
+                                <div class="head-outcome">
+                                    @if($language == "vi")
+                                        Đánh giá dựa trên kết quả
+                                    @else
+                                        Outcome-based Assessment
+                                    @endif
 
-                                <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
-                                <textarea id="box-outcome-2" class="bg-danger out-text" name="textboxvalue1"></textarea>
+                                    <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
+                                </div>
+
+                                <textarea id="box-outcome-2" style="color: white" class="bg-info out-text" name="textboxvalue1"></textarea>
 
                             </div>
                         </div>
 
                         <div class="teaching">
-                            <div class="bg-success">
-                                @if($language == "vi")
-                                    Dạy và học
-                                @else
-                                    Teaching and Learning
-                                @endif
+                            <div class="bg-info" style="color: white">
+                                <div class="head-outcome">
+                                    @if($language == "vi")
+                                        Dạy và học
+                                    @else
+                                        Teaching and Learning
+                                    @endif
 
-                                <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
-                                <textarea id="box-teaching" class="bg-success teach-text" name="textboxvalue2"></textarea>
+                                    <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
+                                </div>
+                                <textarea id="box-teaching" style="color: white" class="bg-info teach-text" name="textboxvalue2"></textarea>
                             </div>
                         </div>
                     @if(Auth::check())
                         <div class="save">
                             @if($language == "vi")
-                                <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Lưu">
+                                <input type="submit" href="{{route("save")}}" class="btn-outline-info" value="Lưu">
                             @else
-                                <input type="submit" href="{{route("save")}}" class="btn-outline-warning" value="Save">
+                                <input type="submit" href="{{route("save")}}" class="btn-outline-info" value="Save">
                             @endif
                         </div>
 
@@ -215,11 +220,11 @@
                     </form>
                     <div class="copy-print">
                         @if($language == "vi")
-                            <input type="submit" id="copy" class="btn-outline-warning" value="Sao chép">
-                            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="In ra">
+                            <input type="submit" id="copy" class="btn-outline-info" value="Sao chép">
+                            <input type="submit" onclick="printDiv();" class="btn-outline-info" value="In ra">
                         @else
-                            <input type="submit" id="copy" class="btn-outline-warning" value="copy">
-                            <input type="submit" onclick="printDiv();" class="btn-outline-warning" value="print">
+                            <input type="submit" id="copy" class="btn-outline-info" value="copy">
+                            <input type="submit" onclick="printDiv();" class="btn-outline-info" value="print">
                         @endif
                     </div>
         </div>

@@ -11,6 +11,9 @@
 |
 */
 Route::get('/language/{lg}','PageController@language')->name('language');
+Route::get('/feedback',function (){
+   return view('feedback.feedback');
+});
 //ngoc
 Route::get('/','PageController@index');
 Auth::routes(['verify' => true]);

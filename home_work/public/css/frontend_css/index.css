@@ -242,7 +242,7 @@ button.btn-template{
     border-radius: 10px;
     background: #00F260;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #075db5, #0ba046);
 }
 ul li a{
 
@@ -277,11 +277,11 @@ select option{
 
 
 }
-input.btn-outline-warning {
+input.btn-outline-info{
     position: relative;
     top: 5px;
 }
-button.btn-outline-warning {
+button.btn-outline-info {
     position: relative;
     top: 5px;
 }
@@ -375,6 +375,7 @@ button.btn-outline-warning {
 
 #listMethod{
     font-size: 11px;
+    color: #007bff;
     width: 120px;
 }
 .moveExample{
@@ -475,6 +476,9 @@ button.btn-outline-warning {
     text-decoration: none;
     font-size: 11px;
 
+}
+.head-outcome{
+    border-bottom: 1px solid white;
 }
 @media  screen and (max-width: 991px) {
     body{
