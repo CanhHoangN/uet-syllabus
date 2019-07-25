@@ -49,7 +49,7 @@
                     <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
                 @endif
 
-                <span id="nameajax"></span>
+                <div id="nameajax"></div>
                 @if($language == "vi")
                     <div class="intended">Kết quả học tập dự định</div>
                 @else

@@ -34,28 +34,12 @@ class PageController extends Controller
     {
 
         $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         //dd($language);
-        if($language == "en")
+        if($language == "vi")
         {
-            $levels = Levels::all();
-            $templates = Templates::all();
-            $template = Templates::where([
-                ['idTemplate', '=', '1'],
-
-            ])->get();
-            $methods = Methods::where([
-                ['idTemplate', '=', '1'],
-                ['idLevel', '=', '1'],
-            ])->get();
-            $suggests = Suggests::all();
-            $suggest = Suggests::where([
-                ['idTemplate', '=', '1'],
-                ['idLevel', '=', '1'],
-            ]);
-            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
-
-        }else{
-
             $levels = Levels_vi::all();
             $templates = Template_vi::all();
             $template = Template_vi::where([
@@ -73,6 +57,27 @@ class PageController extends Controller
             ]);
             return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
 
+
+        }else{
+
+            $levels = Levels::all();
+            $templates = Templates::all();
+            $template = Templates::where([
+                ['idTemplate', '=', '1'],
+
+            ])->get();
+            $methods = Methods::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ])->get();
+            $suggests = Suggests::all();
+            $suggest = Suggests::where([
+                ['idTemplate', '=', '1'],
+                ['idLevel', '=', '1'],
+            ]);
+            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
+
+
         }
 
 
@@ -80,6 +85,9 @@ class PageController extends Controller
     public function getDescLevel($idLevel)
     {
         $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         if($language == "vi")
         {
             $desc = levels_vi::where('idLevel', $idLevel)->value('descriptionLevel');
@@ -99,6 +107,9 @@ class PageController extends Controller
     public function getMethods($idTemplate, $idLevel)
     {
         $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         if($language == "vi")
         {
             $methods = DB::table('methods_vi')
@@ -120,6 +131,9 @@ class PageController extends Controller
     public function getSuggest($idTemplate, $idLevel)
     {
         $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         if($language == "vi")
         {
             $suggest = DB::table('suggests_vi')
@@ -221,6 +235,9 @@ class PageController extends Controller
     public function save(Request $req)
     {
         $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         if(Auth::check())
         {
             $data = $req->all();
@@ -269,7 +286,7 @@ class PageController extends Controller
                 $syllabus->OutcomeBased = $data['text2'];
                 $syllabus->Teaching = $data['text3'];
                 $syllabus->save();
-                return redirect('/');
+                return redirect('/')->with('success','Success!');
             }else{
                // dd('error');
 

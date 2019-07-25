@@ -267,24 +267,21 @@ select option{
 
 .copy-print{
     position: absolute;
-    top: 100%;
+    top: 101%;
     right: 3%;
 }
 .save{
     position: absolute;
-    top: 100%;
+    top: 101%;
     left: 3%;
 
 
 }
-input.btn-outline-info{
+input.btn-info{
     position: relative;
     top: 5px;
 }
-button.btn-outline-info {
-    position: relative;
-    top: 5px;
-}
+
 .box-copy{
     position: absolute;
     transition: 0.5s;
@@ -467,7 +464,7 @@ button.btn-outline-info {
 }
 .language{
     position: absolute;
-    bottom: 1%;
+    bottom: 0.5%;
     left: 36%;
 
 }

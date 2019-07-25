@@ -165,7 +165,7 @@
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
                         <div class="text-box">
-                            <div class="btn-info">
+                            <div class="btn-info" style="color: antiquewhite">
                                 @if($language == "vi")
                                     <p>Kết quả học tập dự định</p>
                                 @else
@@ -176,7 +176,7 @@
                         </div>
 
                         <div class="outcome">
-                            <div class="bg-info" style="color: white">
+                            <div class="bg-info" style="color: antiquewhite">
                                 <div class="head-outcome">
                                     @if($language == "vi")
                                         Đánh giá dựa trên kết quả
@@ -193,7 +193,7 @@
                         </div>
 
                         <div class="teaching">
-                            <div class="bg-info" style="color: white">
+                            <div class="bg-info" style="color:antiquewhite">
                                 <div class="head-outcome">
                                     @if($language == "vi")
                                         Dạy và học
@@ -209,9 +209,9 @@
                     @if(Auth::check())
                         <div class="save">
                             @if($language == "vi")
-                                <input type="submit" href="{{route("save")}}" class="btn-outline-info" value="Lưu">
+                                <input type="submit" href="{{route("save")}}" class="btn-info" value="Lưu">
                             @else
-                                <input type="submit" href="{{route("save")}}" class="btn-outline-info" value="Save">
+                                <input type="submit" href="{{route("save")}}" class="btn-info" value="Save">
                             @endif
                         </div>
 
@@ -220,11 +220,11 @@
                     </form>
                     <div class="copy-print">
                         @if($language == "vi")
-                            <input type="submit" id="copy" class="btn-outline-info" value="Sao chép">
-                            <input type="submit" onclick="printDiv();" class="btn-outline-info" value="In ra">
+                            <input type="submit" id="copy" class="btn-info" value="Sao chép">
+                            <input type="submit" onclick="printDiv();" class="btn-info" value="In ra">
                         @else
-                            <input type="submit" id="copy" class="btn-outline-info" value="copy">
-                            <input type="submit" onclick="printDiv();" class="btn-outline-info" value="print">
+                            <input type="submit" id="copy" class="btn-info" value="copy">
+                            <input type="submit" onclick="printDiv();" class="btn-info" value="print">
                         @endif
                     </div>
         </div>
@@ -308,14 +308,27 @@
     }
 
     $(document).ready(function() {
-        @if(session('used'))
-            alert('The syllabus name already exists !');
-        @endif
         @if(session('emptySyllabus'))
-            alert('Currently the list is empty, please enter !');
+            @if($language == "vi")
+                alert('Hiện tại giáo trình đang rỗng, vui lòng chọn hoặc nhập thêm !');
+            @else
+                alert('Currently the list is empty, please enter !');
+            @endif
         @endif
         @if(session('empty'))
-            alert("Your syllabus is empty !");
+             @if($language == "vi")
+                alert('Hiện tại chưa có giáo trình nào được lưu !');
+            @else
+                alert("Your syllabus is empty !");
+            @endif
+
+        @endif
+        @if(session('success'))
+            @if($language == "vi")
+                alert('Lưu thành công !');
+            @else
+                alert('success !');
+        @endif
         @endif
 
         $("button#1").addClass("btn1");
