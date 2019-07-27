@@ -42,7 +42,7 @@
             <form action="{{asset('/confirmsave')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @if($language == "vi")
-                    <div class="nameSyllabus">Tên giáo trình</div>
+                    <div class="nameSyllabus">Tên đề cương</div>
                     <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
                 @else
                     <div class="nameSyllabus">Name syllabus</div>

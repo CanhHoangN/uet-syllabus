@@ -25,19 +25,24 @@ use phpDocumentor\Reflection\DocBlock\Tags\Example;
 class PageController extends Controller
 {
     //
-    public static $language = "en";
     public function language($lg){
+        if(Session::has('language') == true)
+        {
+            Session::forget('language');
+        }
+
         Session::put('language', $lg);
+
         return Redirect('/');
     }
     public function index()
     {
-
         $language = Session::get('language');
+
         if($language == null){
             $language = "vi";
+
         }
-        //dd($language);
         if($language == "vi")
         {
             $levels = Levels_vi::all();
@@ -58,7 +63,7 @@ class PageController extends Controller
             return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
 
 
-        }else{
+        }else if($language == "en"){
 
             $levels = Levels::all();
             $templates = Templates::all();
@@ -75,6 +80,7 @@ class PageController extends Controller
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ]);
+
             return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
 
 
@@ -96,7 +102,7 @@ class PageController extends Controller
             );
             return response()->json($arr);
         }
-        else{
+        else if($language == "en"){
             $desc = levels::where('idLevel', $idLevel)->value('descriptionLevel');
             $arr = array(
                 'desc' => $desc
@@ -145,7 +151,7 @@ class PageController extends Controller
             $suggest[0]->example = array($examples);
             return response()->json($suggest);
         }
-        else{
+        else if($language == "en"){
             $suggest = DB::table('suggests')
                 ->where([
                     ['idTemplate', '=', $idTemplate],
@@ -163,7 +169,7 @@ class PageController extends Controller
         }
         else{
             return view('loginandregister.login');
-            //return view('auth.login');
+
         }
     }
     public function postlogin(Request $req)
@@ -201,6 +207,9 @@ class PageController extends Controller
     {
         return view('loginandregister.register');
     }
+    public function tutorial(){
+        return view('tutorial');
+    }
  /*   public function postregister(Request $req)
     {
         $this->validate(
@@ -235,9 +244,9 @@ class PageController extends Controller
     public function save(Request $req)
     {
         $language = Session::get('language');
-        if($language == null){
+        /*if($language == null){
             $language = "vi";
-        }
+        }*/
         if(Auth::check())
         {
             $data = $req->all();

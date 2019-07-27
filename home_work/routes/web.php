@@ -11,9 +11,7 @@
 |
 */
 Route::get('/language/{lg}','PageController@language')->name('language');
-Route::get('/feedback',function (){
-   return view('feedback.feedback');
-});
+Route::get('/tutorial','PageController@tutorial')->name('tutorial');
 //ngoc
 Route::get('/','PageController@index');
 Auth::routes(['verify' => true]);
@@ -51,12 +49,12 @@ Route::group(['middleware' => ['auth']], function ()
     Route::get('/admin/settings', 'AdminController@settings');
     Route::get('/admin/check-pwd', 'AdminController@checkPassword');
     Route::match(['get', 'post'], '/admin/update-pwd', 'AdminController@updatePassword');
-    
+
     //new
     Route::match(['get', 'post'], '/admin/descLevels', 'AdminController@descLevels');
     Route::get('/admin/descLevels/edit/{id}', 'AdminController@editDL');
     Route::post('/admin/descLevels/edited/{id}', 'AdminController@editedDL');
-  
+
     Route::match(['get', 'post'], '/admin/suggest/{idTemplate}', 'AdminController@suggest');
     Route::get('/admin/editSuggest/{idTemp}/{idLV}', 'AdminController@editSG');
     Route::post('/admin/editedSuggest/{idTemp}/{idLV}', 'AdminController@editedSG');

@@ -33,7 +33,7 @@ button.btn-template{
 }
 .login a{
     text-decoration: none;
-    color: white;
+    color: black;
 }
 .container{
     position: relative;
@@ -121,25 +121,7 @@ button.btn-template{
     animation-duration: 1s;
 
 }
-@keyframes animation-ul {
-    0%{
-        background: #43cea2;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-    }
-    50%{
-        background: #360033;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #0b8793, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    }
-    100%{
-        background: #360033;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #0b8793, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
-}
 .top-left ul li{
 
     text-align: left;
@@ -240,9 +222,8 @@ button.btn-template{
     padding: 8px;
     box-sizing: border-box;
     border-radius: 10px;
-    background: #00F260;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #075db5, #0ba046);
+    background: #17a2b8;  /* fallback for old browsers */
+
 }
 ul li a{
 
@@ -277,7 +258,7 @@ select option{
 
 
 }
-input.btn-info{
+input.btn-light{
     position: relative;
     top: 5px;
 }
@@ -382,17 +363,19 @@ input.btn-info{
     margin-top:62%;
 }
 .btn1{
-    background-color: #273c75;
+   /* background-color: #273c75;*/
+    background-color: #17a2b8;
     color: white;
     transform: scale(1.1);
 }
 .btn2{
-    background-color: orange;
+    background-color: #17a2b8;
     color: white;
     transform: scale(1.1);
 }
 .btn3{
-    background-color: rgb(32, 201, 151);
+   /* background-color: rgb(32, 201, 151);*/
+    background-color: #17a2b8;
     color: white;
     transform: scale(1.1);
 }
@@ -477,6 +460,17 @@ input.btn-info{
 .head-outcome{
     border-bottom: 1px solid white;
 }
+.tutorial a {
+    padding: 4px;
+    /* margin-top: 10px; */
+    text-decoration: none;
+}
+
+.tutorial {
+    position: absolute;
+    top: 102.5%;
+    left: 57%;
+}
 @media  screen and (max-width: 991px) {
     body{
         background: red;
@@ -554,5 +548,5 @@ input.btn-info{
 
 }
 @media screen and (max-width:767px) {
-    
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
@@ -21,15 +21,13 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/index.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/style.css')}}">
 
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.3/js/froala_editor.pkgd.min.js"></script>
 
     <script type="text/javascript" src="{{asset("js/frontend_js/index.js")}}"></script>
 
@@ -42,13 +40,17 @@
         <div class="box">
             <div class="header">
                 <div class="row">
-                    <div class="col-sm-6 offset-sm-1">
-                        <h4 style="line-height: 55px">OBE Syllabus Builder</h4>
+                    <div class="col-sm-8 offset-sm-1">
+                        @if($language == "vi")
+                            <h4 style="line-height: 55px">Hệ thống hỗ trợ xây dựng đề cương</h4>
+                        @else
+                            <h4 style="line-height: 55px">OBE Syllabus Builder</h4>
+                        @endif
                     </div>
 
                         @if(Auth::check())
                             <div class="dropdown">
-                                <button type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn-info dropdown-toggle" data-toggle="dropdown">
                                     {{Auth::user()->name}}
                                 </button>
                                 <div class="dropdown-menu">
@@ -60,11 +62,11 @@
                         @else
                         <div class="btn-group">
                             @if($language == "vi")
-                                <button type="button" class="btn-primary login" style="line-height: 12px"><a href="{{asset('/login')}}">Đăng nhập</a></button>
-                                <button type="button" class="btn-primary login" style="line-height: 12px"><a href="{{asset('/register')}}">Đăng kí</a></button>
-                            @else
-                                <button type="button" class="btn-primary login"><a href="{{asset('/login')}}">Login</a></button>
-                                <button type="button" class="btn-primary login"><a href="{{asset('/register')}}">Register</a></button>
+                                <button type="button" class="btn-light login" style="line-height: 12px;width: 120px"><a href="{{asset('/login')}}">Đăng nhập</a></button>
+                                <button type="button" class="btn-light login" style="line-height: 12px;width: 100px"><a href="{{asset('/register')}}">Đăng kí</a></button>
+                            @elseif($language == "en")
+                                <button type="button" class="btn-light login"><a href="{{asset('/login')}}">Login</a></button>
+                                <button type="button" class="btn-light login"><a href="{{asset('/register')}}">Register</a></button>
                             @endif
                         </div>
                         @endif
@@ -92,9 +94,15 @@
                         </div>
 
                         <ul class="levels">
-                            @foreach($levels as $level)
-                            <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
-                            @endforeach
+                            @if($language == "vi")
+                                @foreach($levels as $level)
+                                <li><a id="{{$level->idLevel}}">Mức {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
+                                @endforeach
+                            @else
+                                @foreach($levels as $level)
+                                    <li><a id="{{$level->idLevel}}">Level {{$level->idLevel}}:{{$level->nameLevel}}</a></li>
+                                @endforeach
+                            @endif
                         </ul>
 
 
@@ -153,8 +161,8 @@
                 <div class="col-sm-6 col-right">
                     <div class="text-head">
                         @if($language == "vi")
-                            <h4>Giáo trình</h4>
-                            <i>Chọn và gõ giáo trình của bạn ở đây.</i>
+                            <h4>Đề cương</h4>
+                            <i>Chọn và gõ đề cương của bạn ở đây.</i>
                         @else
                             <h4>My Syllabus</h4>
                             <i>Click and type your syllabus here.</i>
@@ -172,6 +180,7 @@
                                     <p>Intended Learning Outcomes</p>
                                 @endif
                             </div>
+                           <!-- <div id="box-outcome" style="height: 80% !important;" name="textboxvalue"></div>-->
                             <textarea id="box-outcome" style="margin-top: -15px;color: white" class="bg-info" name="textboxvalue"></textarea>
                         </div>
 
@@ -188,6 +197,7 @@
                                 </div>
 
                                 <textarea id="box-outcome-2" style="color: white" class="bg-info out-text" name="textboxvalue1"></textarea>
+
 
                             </div>
                         </div>
@@ -209,9 +219,9 @@
                     @if(Auth::check())
                         <div class="save">
                             @if($language == "vi")
-                                <input type="submit" href="{{route("save")}}" class="btn-info" value="Lưu">
+                                <input type="submit" href="{{route("save")}}" class="btn-light" value="Lưu">
                             @else
-                                <input type="submit" href="{{route("save")}}" class="btn-info" value="Save">
+                                <input type="submit" href="{{route("save")}}" class="btn-light" value="Save">
                             @endif
                         </div>
 
@@ -220,11 +230,20 @@
                     </form>
                     <div class="copy-print">
                         @if($language == "vi")
-                            <input type="submit" id="copy" class="btn-info" value="Sao chép">
-                            <input type="submit" onclick="printDiv();" class="btn-info" value="In ra">
+                            <input type="submit" id="copy" class="btn-light" value="Sao chép">
+                            <input type="submit" onclick="printDiv();" class="btn-light" value="In ra">
+
                         @else
-                            <input type="submit" id="copy" class="btn-info" value="copy">
-                            <input type="submit" onclick="printDiv();" class="btn-info" value="print">
+                            <input type="submit" id="copy" class="btn-light" value="copy">
+                            <input type="submit" onclick="printDiv();" class="btn-light" value="print">
+
+                        @endif
+                    </div>
+                    <div class="tutorial">
+                        @if($language == "vi")
+                            <a class="btn-light" target="_blank" href="{{route('tutorial')}}">Hướng dẫn</a>
+                        @else
+                            <a class="btn-light" target="_blank" href="{{route('tutorial')}}">Tutorial</a>
                         @endif
                     </div>
         </div>
@@ -232,14 +251,24 @@
 
         </div>
         <div id="box-copy" class="box-copy">
-            <div class="bg-warning copy-head">
-                My Syllabus
+            <div class="bg-info copy-head">
+                @if($language == "vi")
+                    <h5>Đề cương</h5>
+                @else
+                    <h5>My Syllabus</h5>
+                @endif
+
                 <a id="close"><i class="fas fa-times"></i></a>
             </div>
             <div class="copy-result">
                 <div class="copy-ilo">
-                    <div class="bg-success text-light">
-                        <p>Intended Learning Outcomes</p>
+                    <div class="bg-info text-light">
+                        @if($language == "vi")
+                            <p>Kết quả học tập dự định</p>
+                        @else
+                            <p>Intended Learning Outcomes</p>
+                        @endif
+
                     </div>
                     <div class="text-copy-ilo">
 
@@ -247,24 +276,27 @@
                 </div>
                 <div class="copy-oba">
                     <div class="bg-info text-light">
-                        <p>Outcome-based Assessment</p>
+                        @if($language == "vi")
+                            <p>Đánh giá dựa trên kết quả</p>
+                        @else
+                            <p>Outcome-based Assessment</p>
+                        @endif
                     </div>
                     <div class="text-copy-oba"></div>
                 </div>
                 <div class="copy-tla">
-                    <div class="bg-danger text-light">
-                        <p>Teaching and Learning Activities</p>
+                    <div class="bg-info text-light">
+                        @if($language == "vi")
+                            <p>Dạy và học</p>
+                        @else
+                            <p>Teaching and Learning</p>
+                        @endif
                     </div>
                     <div class="text-copy-tla"></div>
                 </div>
             </div>
         </div>
-            <!--   <div class="form-group">
-                    <select class="Language form-control-sm"  id="sel1">
-                        <option value="1">English</option>
-                        <option value="{{route("save")}}">VietNamese</option>
-                    </select>
-                </div> -->
+
                 <div class="btn-group language">
                     <button type="button" class="btn-info">Language</button>
                     <button type="button" class="btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
@@ -280,14 +312,9 @@
         </div>
     </div>
 </body>
-<script>
-   /* new FroalaEditor('textarea#box-outcome-2',{
-        heightMin: 50,
-        heightMax: 100,
-       // toolbarBottom: true
-    });*/
-    //$('#box-outcome').froalaEditor('html.set', 'My custom paragraph.');
-</script>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <script>
     function printDiv() {
 
@@ -308,6 +335,32 @@
     }
 
     $(document).ready(function() {
+       /* var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+
+            //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            //[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            //[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            //[{ 'direction': 'rtl' }],                         // text direction
+
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+
+            ['clean']                                         // remove formatting button
+        ];
+       var quill = new Quill('#box-outcome', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Compose an epic...',
+            theme: 'snow'  // or 'bubble'
+        });*/
         @if(session('emptySyllabus'))
             @if($language == "vi")
                 alert('Hiện tại giáo trình đang rỗng, vui lòng chọn hoặc nhập thêm !');
@@ -328,7 +381,7 @@
                 alert('Lưu thành công !');
             @else
                 alert('success !');
-        @endif
+            @endif
         @endif
 
         $("button#1").addClass("btn1");
@@ -340,8 +393,14 @@
             method: 'get',
             async:true,
             success: function(data) {
-                var text = "Level ".concat(_level, ": ", data.desc);
-                $("#descriptionLevel").text(text);
+                    @if($language == "vi")
+                    var text = "Mức ".concat(_level, ": ", data.desc);
+                    $("#descriptionLevel").text(text);
+                    @else
+                    var text = "Level ".concat(_level, ": ", data.desc);
+                    $("#descriptionLevel").text(text);
+                    @endif
+
             },
             error: function() {
                 alert("error");
@@ -438,10 +497,10 @@
             } else if (template == 2) {
                 $("#listExample").empty();
                 $(".top-left").css({
-                    border: "3px solid orange"
+                    border: "3px solid #273c75"
                 });
                 $(".bottom-left").css({
-                    border: "3px solid orange"
+                    border: "3px solid #273c75"
                 });
                 @if($language == "vi")
                 $("#descriptionTemplate").text("Quyết định và nhấp vào cấp độ nhận thức về kết quả học tập của bạn");
@@ -461,10 +520,10 @@
             } else if (template == 3) {
                 $("#listExample").empty();
                 $(".top-left").css({
-                    border: "3px solid #20c997"
+                    border: "3px solid #273c75"
                 });
                 $(".bottom-left").css({
-                    border: "3px solid #20c997"
+                    border: "3px solid #273c75"
                 });
                 @if($language == "vi")
                 $("#descriptionTemplate").text("Quyết định và nhấp vào cấp độ nhận thức về kết quả học tập của bạn");
@@ -494,8 +553,13 @@
                 method: 'get',
                 async:true,
                 success: function(data) {
-                    var text = "Level ".concat(level, ": ", data.desc);
+                    @if($language == "vi")
+                    var text = "Mức ".concat(_level, ": ", data.desc);
                     $("#descriptionLevel").text(text);
+                        @else
+                    var text = "Level ".concat(_level, ": ", data.desc);
+                    $("#descriptionLevel").text(text);
+                    @endif
                 },
                 error: function() {
                     alert("error");
@@ -509,18 +573,15 @@
                 async:true,
                 success: function(data) {
                     $("#listMethod").empty();
-
                     for (var k in data) {
                         $('#listMethod').append($('<option>', {
                             value: data[k].nameMethod,
                             text: data[k].nameMethod
                         }));
                     }
-
                 }
             });
             var linkSuggest = "suggest".concat("/", template, "/", level);
-
             $.ajax({
                 url: linkSuggest,
                 method: 'get',
@@ -530,25 +591,17 @@
                     if (template == 1) {
                         $("#listExample").empty();
                         for (var i in data[0].example[0]) {
-
                             var list = "<li>".concat(data[0].example[0][i], "</li>");
                             // console.log(list);
                             $("#listExample").append(list);
                         }
-
-
-
                     } else {
                         for (var k in data) {
                             $("#descExample").text(data[k].example);
                         }
                     }
-
-
                 }
             })
-
-
         });
         var count = 0;
         $("#listMethod").click(function() {
@@ -562,7 +615,6 @@
             var text = $("#listMethod option:selected").text();
             var val = $("#listMethod").val();
             if (count == 1) {
-
                 if (template == 1) {
                     $("#box-outcome").val(text);
                     //$(".text-copy-ilo").append(text + "<br>");
@@ -573,10 +625,10 @@
                     $("#box-teaching").val(text);
                     //$(".text-copy-tla").val(text + "<br>");
                 }
-
             } else {
                 if (template == 1) {
                     $("#box-outcome").val(currentVal + "\n" + text);
+
                     //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
                 } else if (template == 2) {
                     //$(".text-copy-oba").append(curCopyOba + text + "<br>");
@@ -588,9 +640,7 @@
                     {
                         $("#box-outcome-2").val(curBoxCome + "\n" + text);
                     }
-
                 } else {
-
                     if($("#box-teaching").val() == "")
                     {
                         $("#box-teaching").val(text);
@@ -600,10 +650,7 @@
                         $("#box-teaching").val(curTeaching + "\n" + text);
                     }
                 }
-
-
             }
-
         });
         $("input[id='copy']").click(function() {
             $(".text-copy-ilo").empty();
@@ -612,7 +659,9 @@
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
-            var list = $("#box-outcome").val();
+            var list =  $("#box-outcome").val();
+
+            //$(".text-copy-ilo").html(quill.getText());
             for(var i in list){
                 if(list[i]!="\n")
                 {
@@ -658,4 +707,5 @@
 
     });
 </script>
+
 </html>
