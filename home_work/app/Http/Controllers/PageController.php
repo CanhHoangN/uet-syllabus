@@ -25,9 +25,9 @@ use phpDocumentor\Reflection\DocBlock\Tags\Example;
 class PageController extends Controller
 {
     //
-    public function language($lg){
-        if(Session::has('language') == true)
-        {
+    public function language($lg)
+    {
+        if (Session::has('language') == true) {
             Session::forget('language');
         }
 
@@ -39,12 +39,10 @@ class PageController extends Controller
     {
         $language = Session::get('language');
 
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
-
         }
-        if($language == "vi")
-        {
+        if ($language == "vi") {
             $levels = Levels_vi::all();
             $templates = Template_vi::all();
             $template = Template_vi::where([
@@ -60,10 +58,8 @@ class PageController extends Controller
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ]);
-            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
-
-
-        }else if($language == "en"){
+            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests", 'language']));
+        } else if ($language == "en") {
 
             $levels = Levels::all();
             $templates = Templates::all();
@@ -81,28 +77,22 @@ class PageController extends Controller
                 ['idLevel', '=', '1'],
             ]);
 
-            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests",'language']));
-
-
+            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests", 'language']));
         }
-
-
     }
     public function getDescLevel($idLevel)
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
-        if($language == "vi")
-        {
+        if ($language == "vi") {
             $desc = levels_vi::where('idLevel', $idLevel)->value('descriptionLevel');
             $arr = array(
                 'desc' => $desc
             );
             return response()->json($arr);
-        }
-        else if($language == "en"){
+        } else if ($language == "en") {
             $desc = levels::where('idLevel', $idLevel)->value('descriptionLevel');
             $arr = array(
                 'desc' => $desc
@@ -113,19 +103,17 @@ class PageController extends Controller
     public function getMethods($idTemplate, $idLevel)
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
-        if($language == "vi")
-        {
+        if ($language == "vi") {
             $methods = DB::table('methods_vi')
                 ->where([
                     ['idTemplate', '=', $idTemplate],
                     ['idLevel', '=', $idLevel]
                 ])->get();
             return response()->json($methods);
-        }
-        else{
+        } else {
             $methods = DB::table('methods')
                 ->where([
                     ['idTemplate', '=', $idTemplate],
@@ -137,11 +125,10 @@ class PageController extends Controller
     public function getSuggest($idTemplate, $idLevel)
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
-        if($language == "vi")
-        {
+        if ($language == "vi") {
             $suggest = DB::table('suggests_vi')
                 ->where([
                     ['idTemplate', '=', $idTemplate],
@@ -150,8 +137,7 @@ class PageController extends Controller
             $examples = explode("\n", $suggest[0]->example);
             $suggest[0]->example = array($examples);
             return response()->json($suggest);
-        }
-        else if($language == "en"){
+        } else if ($language == "en") {
             $suggest = DB::table('suggests')
                 ->where([
                     ['idTemplate', '=', $idTemplate],
@@ -164,20 +150,17 @@ class PageController extends Controller
     }
     public function login()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect('/');
-        }
-        else{
+        } else {
             return view('loginandregister.login');
-
         }
     }
     public function postlogin(Request $req)
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect('/');
-        }
-        else{
+        } else {
             $this->validate(
                 $req,
                 [
@@ -192,25 +175,24 @@ class PageController extends Controller
             );
             $remember_me = $req->has('remember') ? true : false;
 
-            if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'],$remember_me)) {
+            if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'], $remember_me)) {
 
                 return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully']);
             } else {
 
                 return redirect()->back()->with(['flag' => 'danger', 'message' => 'These credentials do not match our records.']);
             }
-
-
         }
     }
     public function register()
     {
         return view('loginandregister.register');
     }
-    public function tutorial(){
+    public function tutorial()
+    {
         return view('tutorial');
     }
- /*   public function postregister(Request $req)
+    /*   public function postregister(Request $req)
     {
         $this->validate(
             $req,
@@ -244,79 +226,64 @@ class PageController extends Controller
     public function save(Request $req)
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $data = $req->all();
-            if($data != null)
-            {
-                if($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null )
-                {
-                    return view('save', compact('data','language'));
-                }
-                else{
-                    return Redirect('/')->with('emptySyllabus','Empty');
-
+            if ($data != null) {
+                if ($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null) {
+                    return view('save', compact('data', 'language'));
+                } else {
+                    return Redirect('/')->with('emptySyllabus', 'Empty');
                 }
             }
-
+        } else {
+            return Redirect('/login')->with('login', 'Please login !');
         }
-        else{
-           return Redirect('/login')->with('login','Please login !');
-        }
-
-
-
     }
 
     public function confirmsave(Request $req)
     {
 
-            $data = $req->all();
-            $name = DB::table('syllabus')->select('nameSyllabus')->where([
-                ['nameSyllabus','=',$data['name']],
-                ['idUser','=',\Illuminate\Support\Facades\Auth::id()]
+        $data = $req->all();
+        $name = DB::table('syllabus')->select('nameSyllabus')->where([
+            ['nameSyllabus', '=', $data['name']],
+            ['idUser', '=', \Illuminate\Support\Facades\Auth::id()]
 
-            ])->first();
-            if($name == null)
-            {
-                $syllabus = new Syllabus();
+        ])->first();
+        if ($name == null) {
+            $syllabus = new Syllabus();
 
-                if (Auth::check()) {
-                    $syllabus->idUser = Auth::user()->id;
-                } else {
-                    return Redirect('/login');
-                }
+            if (Auth::check()) {
                 $syllabus->idUser = Auth::user()->id;
-                $syllabus->nameSyllabus = $data['name'];
-                $syllabus->intended = $data['text1'];
-                $syllabus->OutcomeBased = $data['text2'];
-                $syllabus->Teaching = $data['text3'];
-                $syllabus->save();
-                return redirect('/')->with('success','Success!');
-            }else{
-               // dd('error');
-
-                return Redirect('/')->with('used','The syllabus name already exists !');
+            } else {
+                return Redirect('/login');
             }
+            $syllabus->idUser = Auth::user()->id;
+            $syllabus->nameSyllabus = $data['name'];
+            $syllabus->intended = $data['text1'];
+            $syllabus->OutcomeBased = $data['text2'];
+            $syllabus->Teaching = $data['text3'];
+            $syllabus->save();
+            return redirect('/')->with('success', 'Success!');
+        } else {
+            // dd('error');
 
-
-
-
+            return Redirect('/')->with('used', 'The syllabus name already exists !');
+        }
     }
     public function syllabus()
     {
         if (Auth::check()) {
 
-            $firstSyllabus = Syllabus::where('idUser',Auth::user()->id)->first();
+            $firstSyllabus = Syllabus::where('idUser', Auth::user()->id)->first();
             //print_r(explode("\r\n",$firstSyllabus));
             $syllabuses = Syllabus::where('idUser', Auth::user()->id)->paginate(9);
-            if(sizeof($syllabuses) == 0){
-                return Redirect('/')->with('empty','Your syllabus is empty');
+            if (sizeof($syllabuses) == 0) {
+                return Redirect('/')->with('empty', 'Your syllabus is empty');
             }
-            return view('syllabus', compact('syllabuses','firstSyllabus'));
+            return view('syllabus', compact('syllabuses', 'firstSyllabus'));
         } else {
             return Redirect('/login');
         }
@@ -324,19 +291,17 @@ class PageController extends Controller
 
     public function content($id)
     {
-        $content=Syllabus::where('idSyllabus', $id)->first();
+        $content = Syllabus::where('idSyllabus', $id)->first();
         return response()->json($content);
     }
 
-    public function check(Request $req){
+    public function check(Request $req)
+    {
         $name = Syllabus::where('nameSyllabus', $req->name)->count();
-        if($name!= 0)
-        {
+        if ($name != 0) {
             return 'Name already in use.';
-        }
-        else
-        {
-           return 'Success.';
+        } else {
+            return 'Success.';
         }
     }
     public function edit(Request $req)
@@ -351,5 +316,34 @@ class PageController extends Controller
         $data = $req->all();
         DB::table('syllabus')->where('idSyllabus', $data['idsyl_dl'])->delete();
         return Redirect('/syllabus');
+    }
+
+    public function export(Request $req)
+    {
+        $data = $req->all();
+        $sylep = Syllabus::where('idSyllabus', $data['idsyl_ep'])->first();
+        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+
+        $newSection = $wordTest->addSection();
+        $desc1 = "Intended Learning Outcomes: ";
+        $desc2 = $sylep->intended;
+        $desc3 = "Outcome-based Assessment";
+        $desc4 = $sylep->OutcomeBased;
+        $desc5 = "Teaching and Learning Activities";
+        $desc6 = $sylep->Teaching;
+
+        $newSection->addText($desc1);
+        $newSection->addText($desc2);
+        $newSection->addText($desc3);
+        $newSection->addText($desc4);
+        $newSection->addText($desc5);
+        $newSection->addText($desc6);
+
+        $objectWriter = \PhpOffice\PhpWord\IOFactory::createWriter($wordTest, 'Word2007');
+        try {
+            $objectWriter->save(storage_path('Syllabus.docx'));
+        } catch (Exception $e) { }
+
+        return response()->download(storage_path('Syllabus.docx'));
     }
 }

@@ -38,19 +38,19 @@
                                 <span class="close">&times;</span>
                             </div>
                             <div class="copy-ilo">
-                                <div class="bg-success text-light">
+                                <div class="texttitle text-light">
                                     <p>Intended Learning Outcomes</p>
                                 </div>
                                 <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo"></textarea>
                             </div>
                             <div class="copy-oba">
-                                <div class="bg-info text-light">
+                                <div class="texttitle text-light">
                                     <p>Outcome-based Assessment</p>
                                 </div>
                                 <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba"></textarea>
                             </div>
                             <div class="copy-tla">
-                                <div class="bg-danger text-light">
+                                <div class="texttitle text-light">
                                     <p>Teaching and Learning Activities</p>
                                 </div>
                                 <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla"></textarea>
@@ -70,7 +70,13 @@
                     <textarea name="idsyl_dl" style="display:none; height: 0px; width: 0px" id='idsyllabus_dl' required></textarea>
                     <input type="submit" id="delete" value="Delete">
                 </form>
-                <button><a href="{{url('/')}}">Home</a></button>
+                <form action="{!! url('export') !!}" id="formep" method="post" enctype="multipart/form-data">
+                    <!-- form Begin -->
+                    <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+                    <textarea name="idsyl_ep" style="display:none; height: 0px; width: 0px" id='idsyllabus_ep' required></textarea>
+                    <input type="submit" id="export" value="Export">
+                </form>
+                <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
             </div>
         </div>
         <div class="left_bar">
@@ -221,7 +227,10 @@
     var btnsave = document.getElementById("save");
 
     var btndelete = document.getElementById("delete");
+    var btnexport = document.getElementById("export");
+
     var idsyl_dl = document.getElementById("idsyllabus_dl");
+    var idsyl_ep = document.getElementById("idsyllabus_ep");
     var id;
     $("li a").click(function() {
         id = $(this).attr('id');
@@ -259,9 +268,9 @@
 
     btndelete.onclick = function() {
         if (Number(id) % 1 == 0) {
-            idsyl_dl.innerHTML = id.trim();
             var cf = confirm("Are you sure you want to delete this syllabus.");
             if (cf) {
+                idsyl_dl.innerHTML = id.trim();
                 let timerInterval
                 Swal.fire({
                     title: 'Auto close alert!',
@@ -290,6 +299,41 @@
             Swal.fire("Please select a syllabus.");
         }
     }
+
+    btnexport.onclick = function() {
+        if (Number(id) % 1 == 0) {
+            var cf = confirm("Are you sure you want to export this syllabus.");
+            if (cf) {
+                idsyl_ep.innerHTML = id.trim();
+                let timerInterval
+                Swal.fire({
+                    title: 'Auto close alert!',
+                    html: 'I will export in <strong></strong> seconds.',
+                    timer: 1000,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            Swal.getContent().querySelector('strong')
+                                .textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.timer
+                    ) {
+                        console.log('I was closed by the timer')
+                    }
+                })
+            }
+        } else {
+            Swal.fire("Please select a syllabus.");
+        }
+    }
 </script>
+
 
 </html>
