@@ -38,7 +38,7 @@ button.btn-template{
 .container{
     position: relative;
     width: 100%;
-    height: 700px;
+    height: 800px;
     background: #0F2027;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -52,7 +52,7 @@ button.btn-template{
     background: -webkit-linear-gradient(to right, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border: 1px solid white;
-    height: 600px;
+    height: 700px;
     z-index:2;
 
 }
@@ -144,24 +144,18 @@ button.btn-template{
 
 .text-box{
     position: relative;
-    height: 500px;
-    background: white;
-    transition: 0.3s;
+    height: 210px;
+
 }
-.text-box-1{
-    height: 350px;
-}
-.text-box-2{
+.outcome{
     height: 200px;
 }
-.text-box textarea{
-    position: absolute;
-    resize: none;
-    height: 100%;
-    width: 100%;
-
+.teaching{
+    height: 180px;
 }
-
+.cke_toolbar {
+    zoom: 0.8;
+}
 .after-click{
     border-top: 1px solid white;
     height: 100px;
@@ -181,15 +175,9 @@ button.btn-template{
     width: 100%;
     height: 150px;
 }
-.show-out-text{
-    display: block;
-}
-.show-teaching{
-    display: block;
-}
 .outcome-textarea,.teach-textarea{
     position: absolute;
-    height: 80%;
+    height: 100%;
     width: 100%;
     resize: none;
     display: block;

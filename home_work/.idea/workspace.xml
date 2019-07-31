@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="update_language">
-      <change afterPath="$PROJECT_DIR$/public/images/copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/email.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/index.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/login.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/print.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/register.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/save.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/tutorial.blade.php" afterDir="false" />
+    <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/save-to-pdf/icons/save-to-pdf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/save-to-pdf/plugin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/homeWork.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/homeWork.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/frontend_css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/save.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/save.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +120,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/unisharp/laravel-ckeditor" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -136,7 +134,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -144,16 +142,16 @@
     <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/css" />
+      <recent name="C:\xampp\htdocs\homeWork\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/resources/views" />
       <recent name="$PROJECT_DIR$/public/images/frontend_images" />
       <recent name="C:\xampp\htdocs\homework\home_work\public" />
-      <recent name="C:\xampp\htdocs\homework\home_work\public\images" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/css" />
-      <recent name="C:\xampp\htdocs\homeWork\public" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -265,7 +263,11 @@
       <workItem from="1564131733490" duration="468000" />
       <workItem from="1564147573065" duration="5072000" />
       <workItem from="1564192937212" duration="6200000" />
-      <workItem from="1564213127390" duration="3745000" />
+      <workItem from="1564213127390" duration="4058000" />
+      <workItem from="1564408158302" duration="2096000" />
+      <workItem from="1564490291219" duration="3697000" />
+      <workItem from="1564539990822" duration="3253000" />
+      <workItem from="1564559078797" duration="8501000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1561359950138</created>
@@ -358,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563598194162</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update_language_tutorial">
+      <created>1564217586191</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1564217586191</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,6 +396,7 @@
     <MESSAGE value="update_login_register" />
     <MESSAGE value="update_login" />
     <MESSAGE value="update_language" />
-    <option name="LAST_COMMIT_MESSAGE" value="update_language" />
+    <MESSAGE value="update_language_tutorial" />
+    <option name="LAST_COMMIT_MESSAGE" value="update_language_tutorial" />
   </component>
 </project>

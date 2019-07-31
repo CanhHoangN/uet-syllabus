@@ -244,9 +244,9 @@ class PageController extends Controller
     public function save(Request $req)
     {
         $language = Session::get('language');
-        /*if($language == null){
+        if($language == null){
             $language = "vi";
-        }*/
+        }
         if(Auth::check())
         {
             $data = $req->all();

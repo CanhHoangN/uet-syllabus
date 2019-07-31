@@ -27,10 +27,16 @@
     <link rel="stylesheet" href="{{asset('css/frontend_css/style.css')}}">
 
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
     <script type="text/javascript" src="{{asset("js/frontend_js/index.js")}}"></script>
 
+
+
+
+
+
+    <script type="text/javascript" src="{{asset('save-to-pdf/plugin.js')}}"></script>
 
 </head>
 
@@ -168,20 +174,24 @@
                             <i>Click and type your syllabus here.</i>
                         @endif
                     </div>
-                    <form action="{!! url('save') !!}" method="post" enctype="multipart/form-data">
+                    <form action="{!! url('save') !!}" method="post" enctype="multipart/form-data" id="print">
                         <!-- form Begin -->
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
                         <div class="text-box">
                             <div class="btn-info" style="color: antiquewhite">
-                                @if($language == "vi")
-                                    <p>Kết quả học tập dự định</p>
-                                @else
-                                    <p>Intended Learning Outcomes</p>
-                                @endif
+                                <div class="head-outcome">
+                                    @if($language == "vi")
+                                        <p>Kết quả học tập dự định</p>
+                                    @else
+                                        <p>Intended Learning Outcomes</p>
+                                    @endif
+                                </div>
+
                             </div>
                            <!-- <div id="box-outcome" style="height: 80% !important;" name="textboxvalue"></div>-->
-                            <textarea id="box-outcome" style="margin-top: -15px;color: white" class="bg-info" name="textboxvalue"></textarea>
+                            <textarea id="boxoutcome" style="margin-top: -15px;color: white" class="bg-info" name="textboxvalue"></textarea>
+                            <textarea id="boxoutcome1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue"></textarea>
                         </div>
 
                         <div class="outcome">
@@ -196,7 +206,8 @@
                                     <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
                                 </div>
 
-                                <textarea id="box-outcome-2" style="color: white" class="bg-info out-text" name="textboxvalue1"></textarea>
+                                <textarea id="boxoutcome2" style="color: white" class="bg-info" name="textboxvalue1"></textarea>
+                                <textarea id="boxoutcome21" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue1"></textarea>
 
 
                             </div>
@@ -213,7 +224,9 @@
 
                                     <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
                                 </div>
-                                <textarea id="box-teaching" style="color: white" class="bg-info teach-text" name="textboxvalue2"></textarea>
+                                <textarea id="boxteaching" style="color: white" class="bg-info" name="textboxvalue2"></textarea>
+                                <textarea id="boxteaching1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue2"></textarea>
+
                             </div>
                         </div>
                     @if(Auth::check())
@@ -231,11 +244,11 @@
                     <div class="copy-print">
                         @if($language == "vi")
                             <input type="submit" id="copy" class="btn-light" value="Sao chép">
-                            <input type="submit" onclick="printDiv();" class="btn-light" value="In ra">
+                            <input type="submit" onclick="exportHTML();" class="btn-light" value="In ra">
 
                         @else
                             <input type="submit" id="copy" class="btn-light" value="copy">
-                            <input type="submit" onclick="printDiv();" class="btn-light" value="print">
+                            <input type="submit" onclick="print();" class="btn-light" value="print">
 
                         @endif
                     </div>
@@ -313,8 +326,40 @@
     </div>
 </body>
 
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
+
+<script>
+    CKEDITOR.replace('boxoutcome');
+    CKEDITOR.replace('boxoutcome2');
+    CKEDITOR.replace('boxteaching');
+    CKEDITOR.disableAutoInline = true;
+    CKEDITOR.config.width = '100%';
+    CKEDITOR.config.resize_enabled = false;
+    CKEDITOR.config.height = "120px";
+
+
+
+
+</script>
+<script>
+    function exportHTML(){
+        var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+            "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+            "xmlns='http://www.w3.org/TR/REC-html40'>"+
+            "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+        var footer = "</body></html>";
+        //var sourceHTML = header+document.getElementById("source-html").innerHTML+footer;
+        var sourceHTML = header+"<h3 style='color:red'>Kết quả học tập dự định</h3>"+CKEDITOR.instances.boxoutcome.getData()+"<h3 style='color:red'>Đánh giá dựa trên kết quả</h3>"+CKEDITOR.instances.boxoutcome2.getData()+"<h3 style='color:red'>Dạy và học</h3>"+CKEDITOR.instances.boxteaching.getData()+footer;
+
+        var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+        var fileDownload = document.createElement("a");
+        document.body.appendChild(fileDownload);
+        fileDownload.href = source;
+        fileDownload.download = 'document.doc';
+        fileDownload.click();
+        document.body.removeChild(fileDownload);
+    }
+</script>
 <script>
     function printDiv() {
 
@@ -334,33 +379,14 @@
 
     }
 
+    function print(){
+
+        var data = CKEDITOR.instances.boxoutcome.getData();
+        alert(data);
+
+    }
+
     $(document).ready(function() {
-       /* var toolbarOptions = [
-            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-            ['blockquote', 'code-block'],
-
-            //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
-            //[{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-            //[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-            //[{ 'direction': 'rtl' }],                         // text direction
-
-            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-            [{ 'font': [] }],
-            [{ 'align': [] }],
-
-            ['clean']                                         // remove formatting button
-        ];
-       var quill = new Quill('#box-outcome', {
-            modules: {
-                toolbar: toolbarOptions
-            },
-            placeholder: 'Compose an epic...',
-            theme: 'snow'  // or 'bubble'
-        });*/
         @if(session('emptySyllabus'))
             @if($language == "vi")
                 alert('Hiện tại giáo trình đang rỗng, vui lòng chọn hoặc nhập thêm !');
@@ -480,10 +506,7 @@
                     border: "3px solid #273c75"
                 });
                 $("#descriptionTemplate").text("");
-                $(".text-box").removeClass("text-box-1");
-                $(".out-text").removeClass('show-out-text');
-                $(".text-box").removeClass("text-box-2");
-                $(".teach-text").removeClass("show-teaching");
+
                 @if($language == "vi")
                 $("#descExample").text("Khi hoàn thành thành công lớp học / chương trình này, sinh viên / sinh viên tốt nghiệp sẽ có thể");
                 @else
@@ -495,6 +518,7 @@
                 $("button#3").removeClass("btn3");
                 $("button#1").addClass("btn1");
             } else if (template == 2) {
+
                 $("#listExample").empty();
                 $(".top-left").css({
                     border: "3px solid #273c75"
@@ -507,10 +531,7 @@
                 @else
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 @endif
-                $(".teach-text").removeClass("show-teaching");
-                $(".text-box").removeClass("text-box-2");
-                $(".text-box").addClass("text-box-1");
-                $(".out-text").addClass('show-out-text');
+
                 $(".custom-select").removeClass("listMethod-3");
                 $(".custom-select").addClass("listMethod-2");
                 $("button#1").removeClass("btn1");
@@ -530,10 +551,6 @@
                 @else
                 $("#descriptionTemplate").text("Decide and click on the cognitive level of your learning outcomes");
                 @endif
-                $(".text-box").addClass("text-box-1");
-                $(".out-text").addClass('show-out-text');
-                $(".text-box").addClass("text-box-2");
-                $(".teach-text").addClass("show-teaching");
                 $(".custom-select").removeClass("listMethod-2");
                 $(".custom-select").addClass("listMethod-3");
                 $("button#1").removeClass("btn1");
@@ -545,6 +562,7 @@
 
 
         $("ul li a").click(function() {
+
             var level = $(this).attr("id");
             var link = "level/".concat(level);
             _level = $(this).attr("id");
@@ -605,49 +623,59 @@
         });
         var count = 0;
         $("#listMethod").click(function() {
+
             count++;
-            var currentVal = $("#box-outcome").val();
+            var currentVal = $("#boxoutcome1").val();
             var curCopyIlo = $(".text-copy-ilo").val();
             var curCopyOba = $(".text-copy-oba").val();
             var curCopyTla = $(".text-copy-tla").val();
-            var curBoxCome = $("#box-outcome-2").val();
-            var curTeaching = $("#box-teaching").val();
+            var curBoxCome = $("#boxoutcome21").val();
+            var curTeaching = $("#boxteaching1").val();
             var text = $("#listMethod option:selected").text();
             var val = $("#listMethod").val();
+            if(template == 1){
+                CKEDITOR.instances['boxoutcome'].insertText(text+"\n");
+            }
+            else if(template == 2){
+                CKEDITOR.instances['boxoutcome2'].insertText(text+"\n");
+            }
+            else if(template == 3){
+                CKEDITOR.instances['boxteaching'].insertText(text+"\n");
+            }
             if (count == 1) {
                 if (template == 1) {
-                    $("#box-outcome").val(text);
+                    $("#boxoutcome1").val(text);
                     //$(".text-copy-ilo").append(text + "<br>");
                 } else if (template == 2) {
-                    $("#box-outcome-2").val(text);
+                    $("#boxoutcome21").val(text);
                     //$(".text-copy-oba").append(text + "<br>");
                 } else {
-                    $("#box-teaching").val(text);
+                    $("#boxteaching1").val(text);
                     //$(".text-copy-tla").val(text + "<br>");
                 }
             } else {
                 if (template == 1) {
-                    $("#box-outcome").val(currentVal + "\n" + text);
+                    $("#boxoutcome1").val(currentVal + "\n" + text);
 
                     //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
                 } else if (template == 2) {
                     //$(".text-copy-oba").append(curCopyOba + text + "<br>");
-                    if($("#box-outcome-2").val() == "")
+                    if($("#boxoutcome21").val() == "")
                     {
-                        $("#box-outcome-2").val(text);
+                        $("#boxoutcome21").val(text);
                     }
                     else
                     {
-                        $("#box-outcome-2").val(curBoxCome + "\n" + text);
+                        $("#boxoutcome21").val(curBoxCome + "\n" + text);
                     }
                 } else {
-                    if($("#box-teaching").val() == "")
+                    if($("#boxteaching1").val() == "")
                     {
-                        $("#box-teaching").val(text);
+                        $("#boxteaching1").val(text);
                     }
                     else
                     {
-                        $("#box-teaching").val(curTeaching + "\n" + text);
+                        $("#boxteaching1").val(curTeaching + "\n" + text);
                     }
                 }
             }
@@ -659,7 +687,7 @@
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
-            var list =  $("#box-outcome").val();
+            var list =  $("#boxoutcome1").val();
 
             //$(".text-copy-ilo").html(quill.getText());
             for(var i in list){
@@ -672,7 +700,7 @@
 
 
             }
-            var list2 = $("#box-outcome-2").val();
+            var list2 = $("#boxoutcome21").val();
             for(var i in list2){
                 if(list2[i]!="\n")
                 {
@@ -683,7 +711,7 @@
 
 
             }
-            var list3 = $("#box-teaching").val();
+            var list3 = $("#boxteaching1").val();
             for(var i in list3){
                 if(list3[i]!="\n")
                 {
