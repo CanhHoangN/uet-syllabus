@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2019 at 07:26 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Jul 26, 2019 at 05:01 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.2.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_homework2`
+-- Database: `db_homework`
 --
 
 -- --------------------------------------------------------
@@ -447,18 +447,18 @@ CREATE TABLE `suggests_vi` (
 --
 
 INSERT INTO `suggests_vi` (`idTemplate`, `idLevel`, `title`, `descriptionSuggest`, `example`) VALUES
-(1, 1, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Liệt kê các bước để phân tích nhiệm vụ. Kể tên các triệu chứng của bệnh Parkinson. Xác định thuật ngữ \'tiến bộ\' được sử dụng bởi các chiến lược gia quân sự'),
-(1, 2, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Tóm tắt những điểm chính của lập luận chính trị. Xác định các khái niệm được sử dụng trong phát triển tổ chức. Tóm tắt các nghi thức email cho giao tiếp kinh doanh'),
-(1, 3, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Sử dụng MS PowerPoint để tạo một bản trình bày tương tác. Minh họa các cấu trúc chính của lý thuyết học tập xã hội. Thiết lập một bộ quy tắc có thể được sử dụng để giảm thiểu thư rác trong các cài đặt văn phòng nhỏ'),
-(1, 4, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Xác định các thành phần logic và cấu trúc khác nhau của một đối số. Phân biệt giữa kiến ​​tạo và lý thuyết học tập xã hội. So sánh và đối chiếu những điểm mạnh và điểm yếu của một cuộc tranh luận chính trị bằng cách sử dụng phân tích ngôn ngữ.\r\n'),
-(1, 5, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Đánh giá hiệu quả thiết kế nghiên cứu, phương pháp và kết luận. Đánh giá điểm mạnh, điểm yếu và thiếu sót của chính họ. Chứng minh tính hợp lệ của các báo cáo tài chính bằng phân tích XYZ.\r\n'),
-(1, 6, 'Động từ hành động cho câu lệnh ILO   ', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Giao tiếp hiệu quả cả chính thức và không chính thức thông qua nói, viết và nghe. Điều chỉnh hiệu suất trong tương lai theo ánh sáng tự đánh giá của họ. Viết hướng dẫn vận hành công ty để giảm tiêu thụ năng lượng.'),
-(2, 1, 'Các loại đánh giá đề xuất', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Hỏi sinh viên về định nghĩa bền vững được đưa ra bởi Ủy ban Brundtland\r\n'),
-(2, 2, 'Các loại đánh giá đề xuất ', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Yêu cầu học sinh minh họa quá trình melamine ảnh hưởng đến thận của con người như thế nào.\r\n'),
-(2, 3, 'Các loại đánh giá đề xuất', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Tiến hành một phòng thí nghiệm cho sinh viên áp dụng hiểu biết của họ về vi sinh để xác định một loại vi khuẩn chưa biết.\r\n'),
+(1, 1, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Liệt kê các bước để phân tích nhiệm vụ.\r\nKể tên các triệu chứng của bệnh Parkinson.\r\nXác định thuật ngữ \'tiến bộ\' được sử dụng bởi các chiến lược gia quân sự'),
+(1, 2, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Tóm tắt những điểm chính của lập luận chính trị.\r\nXác định các khái niệm được sử dụng trong phát triển tổ chức.\r\nTóm tắt các nghi thức email cho giao tiếp kinh doanh.'),
+(1, 3, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Sử dụng MS PowerPoint để tạo một bản trình bày tương tác.\r\nMinh họa các cấu trúc chính của lý thuyết học tập xã hội.\r\nThiết lập một bộ quy tắc có thể được sử dụng để giảm thiểu thư rác trong các cài đặt văn phòng nhỏ'),
+(1, 4, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Xác định các thành phần logic và cấu trúc khác nhau của một đối số.\r\nPhân biệt giữa kiến ​​tạo và lý thuyết học tập xã hội.\r\nSo sánh và đối chiếu những điểm mạnh và điểm yếu của một cuộc tranh luận chính trị bằng cách sử dụng phân tích ngôn ngữ.'),
+(1, 5, 'Động từ hành động cho câu lệnh ILO', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Đánh giá hiệu quả thiết kế nghiên cứu, phương pháp và kết luận.\r\nĐánh giá điểm mạnh, điểm yếu và thiếu sót của chính họ.\r\nChứng minh tính hợp lệ của các báo cáo tài chính bằng phân tích XYZ.'),
+(1, 6, 'Động từ hành động cho câu lệnh ILO   ', 'Chọn và nhấp vào các động từ hành động cho câu lệnh của bạn', 'Giao tiếp hiệu quả cả chính thức và không chính thức thông qua nói, viết và nghe.\r\nĐiều chỉnh hiệu suất trong tương lai theo ánh sáng tự đánh giá của họ.\r\nViết hướng dẫn vận hành công ty để giảm tiêu thụ năng lượng.'),
+(2, 1, 'Các loại đánh giá đề xuất', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Hỏi sinh viên về định nghĩa bền vững được đưa ra bởi Ủy ban Brundtland.'),
+(2, 2, 'Các loại đánh giá đề xuất ', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Yêu cầu học sinh minh họa quá trình melamine ảnh hưởng đến thận của con người như thế nào.'),
+(2, 3, 'Các loại đánh giá đề xuất', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Tiến hành một phòng thí nghiệm cho sinh viên áp dụng hiểu biết của họ về vi sinh để xác định một loại vi khuẩn chưa biết.'),
 (2, 4, 'Các loại đánh giá đề xuất ', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Phát triển một nghiên cứu trường hợp về cuộc khủng hoảng tài chính năm 2008 để cho sinh viên phân tích các tác động toàn cầu của nó.'),
 (2, 5, 'Các loại đánh giá đề xuất ', 'Chọn và nhấp vào các loại đánh giá cho giáo trình dựa trên kết quả của bạn', 'Yêu cầu sinh viên soạn một tạp chí cá nhân cho các dự án nhóm của họ, bao gồm đánh giá tài liệu, động lực nhóm và tiến bộ.'),
-(3, 1, 'Đề nghị đánh giá hoạt động dạy và học', 'Chọn và nhấp vào các loại hoạt động cho giáo trình dựa trên kết quả của bạn', 'Thực hiện một bài giảng về các định nghĩa khác nhau về tính bền vững'),
+(3, 1, 'Đề nghị đánh giá hoạt động dạy và học', 'Chọn và nhấp vào các loại hoạt động cho giáo trình dựa trên kết quả của bạn', 'Thực hiện một bài giảng về các định nghĩa khác nhau về tính bền vững.'),
 (3, 2, 'Đề nghị đánh giá hoạt động dạy và học', 'Chọn và nhấp vào các loại hoạt động cho giáo trình dựa trên kết quả của bạn\r\n', 'Tiến hành một cuộc thảo luận về cách melamine ảnh hưởng đến thận của con người sau khi giảng về cấu trúc phân tử của nó.'),
 (3, 3, 'Đề nghị đánh giá hoạt động dạy và học ', 'Chọn và nhấp vào các loại hoạt động cho giáo trình dựa trên kết quả của bạn', 'Tiến hành một thí nghiệm về việc truyền tín hiệu của các sợi thần kinh ở ếch.'),
 (3, 4, 'Đề nghị đánh giá hoạt động dạy và học    ', 'Chọn và nhấp vào các loại hoạt động cho giáo trình dựa trên kết quả của bạn', 'Yêu cầu sinh viên phân tích tác động toàn cầu của cuộc khủng hoảng tài chính năm 2008 và viết một bài luận về nó.'),
@@ -475,11 +475,11 @@ CREATE TABLE `syllabus` (
   `idSyllabus` int(11) NOT NULL,
   `idUser` bigint(20) UNSIGNED NOT NULL,
   `nameSyllabus` text NOT NULL,
-  `intended` text,
-  `OutcomeBased` text,
-  `Teaching` text,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `intended` text DEFAULT NULL,
+  `OutcomeBased` text DEFAULT NULL,
+  `Teaching` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -488,7 +488,9 @@ CREATE TABLE `syllabus` (
 
 INSERT INTO `syllabus` (`idSyllabus`, `idUser`, `nameSyllabus`, `intended`, `OutcomeBased`, `Teaching`, `created_at`, `updated_at`) VALUES
 (1, 2, 'syllabus1', 'Collect\r\nCollect', 'Fill-in the blanks\r\nFill-in the blanks', 'Discussions\r\nDiscussions', '2019-07-15 08:53:40', '2019-07-15 08:53:40'),
-(2, 2, 'syll2', 'Describe\r\nDescribe\r\nDescribe', NULL, NULL, '2019-07-15 08:53:50', '2019-07-15 08:53:50');
+(2, 2, 'syll2', 'Describe\r\nDescribe\r\nDescribe', NULL, NULL, '2019-07-15 08:53:50', '2019-07-15 08:53:50'),
+(4, 12, 'jkhkjhkjhkjh', 'Miêu tả\r\nDanh sách\r\nDanh sách', 'Đọc thuộc lòng\r\nĐiền vào chỗ trống\r\nĐiền vào chỗ trống\r\nĐiền vào chỗ trống\r\nĐọc thuộc lòng', 'Bài giảng\r\nBài giảng\r\nBài giảng\r\nBài giảng\r\nBài giảng\r\nBài giảng', '2019-07-25 05:52:22', '2019-07-25 05:52:22'),
+(5, 12, 'syllabus2', 'Nhận định\r\nNhận định\r\nNhận định\r\nMiêu tả', NULL, NULL, '2019-07-25 07:48:05', '2019-07-25 07:48:05');
 
 -- --------------------------------------------------------
 
@@ -546,7 +548,7 @@ CREATE TABLE `users` (
   `email` varchar(191) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) NOT NULL,
-  `admin` int(1) NOT NULL DEFAULT '0',
+  `admin` int(1) NOT NULL DEFAULT 0,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -559,7 +561,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `admin`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Dang Liem', 'dangliem.uet@gmail.com', NULL, '$2y$10$WFYsEEN0kCVBa.Oe3xQaruZqdsB3a0SLg9wXysu17folv6SDPsdSe', 1, NULL, '2019-07-02 10:20:47', '2019-07-02 10:20:47'),
 (2, 'Dang Liem', 'test1@gmail.com', NULL, '$2y$10$jrIrsyJqIlJLs3FiRFBKf.3zP4/ToSPA9H/Ho2mzS1z2uiVnVlMb6', 0, NULL, NULL, NULL),
-(11, 'Nguyễn Khắc Ngọc', 'nguyenngoc99uet@gmail.com', NULL, '$2y$10$/CHJc7RM/LSgD73tjTtTwOu0cvBr/rJgKxZt4mq7NPcy.QF4kHeQC', 0, NULL, NULL, NULL);
+(11, 'Nguyễn Khắc Ngọc', 'nguyenngoc99uet@gmail.com', NULL, '$2y$10$/CHJc7RM/LSgD73tjTtTwOu0cvBr/rJgKxZt4mq7NPcy.QF4kHeQC', 0, NULL, NULL, NULL),
+(12, 'Hoang', 'checkpassnch@gmail.com', '2019-07-20 04:32:49', '$2y$10$1AMrsLjcWuwBVEzLlMqCiOv8jh2mdLrUNH7d547knpiXNEDzjxfOa', 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -683,7 +686,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `syllabus`
 --
 ALTER TABLE `syllabus`
-  MODIFY `idSyllabus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idSyllabus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `templates`
@@ -701,7 +704,7 @@ ALTER TABLE `templates_vi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
