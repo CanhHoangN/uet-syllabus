@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 01, 2019 at 11:08 PM
+-- Generation Time: Aug 01, 2019 at 11:24 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -597,7 +597,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `admin`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Dang Liem', 'dangliem.uet@gmail.com', NULL, '$2y$10$WFYsEEN0kCVBa.Oe3xQaruZqdsB3a0SLg9wXysu17folv6SDPsdSe', 1, NULL, '2019-07-02 10:20:47', '2019-07-02 10:20:47');
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$jdL8vuK.4YuBASmJrbfSROZqUP.qpNZk95mQ07Ek4E8dISAZvAw3C', 1, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
