@@ -2,7 +2,7 @@
 @section('content')
 <div id="content">
     <div id="content-header">
-        <h2 class="text-center lead">List Customer</h2>
+        <h2 class="text-center lead">List Users</h2>
         @if(Session::has('flash_message_success'))
         <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert"></button>
@@ -18,7 +18,7 @@
         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{url('/admin/listCustomer')}}">
             @csrf
             <div class="control-group">
-                <label class="control-label">Customer Name</label>
+                <label class="control-label">User Name</label>
                 <div class="controls">
                     <input type="text" name="cName">
                 </div>
@@ -36,6 +36,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Admin</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -45,9 +46,13 @@
                     <td>{{$c->id}}</td>
                     <td>{{$c->name}}</td>
                     <td>{{$c->email}}</td>
+                    <td>{{$c->admin}}</td>
                     <td>
                         <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/syllabus/'.$c->id)}}">syllabus</a></button>
-                        <button onclick="myFunction()" type="button" class="btn btn-danger"><a style="color:white" href="{{url('/admin/customer/delete/'.$c->id)}}">delete user</a></button>
+                        <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/editUser/'.$c->id)}}">edit</a></button>
+                        <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/add/'.$c->id)}}">add admin</a></button>
+                        <button onclick="return myFunction()" type="button" class="btn btn-danger"><a style="color:white" href="{{url('/admin/customer/delete/'.$c->id)}}">delete user</a></button>
+
                     </td>
                 </tr>
                 @endforeach
@@ -60,6 +65,7 @@
     <script>
         function myFunction() {
             var r = confirm("Delete user ?");
+            return r;
         }
     </script>
 </div>

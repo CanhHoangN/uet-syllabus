@@ -47,11 +47,7 @@
             <div class="header">
                 <div class="row">
                     <div class="col-sm-8 offset-sm-1">
-                        @if($language == "vi")
-                            <h4 style="line-height: 55px">Hệ thống hỗ trợ xây dựng đề cương</h4>
-                        @else
-                            <h4 style="line-height: 55px">OBE Syllabus Builder</h4>
-                        @endif
+                            <h4 style="line-height: 55px">{{$cstLB->nameApp}}</h4>
                     </div>
 
                         @if(Auth::check())
@@ -89,11 +85,7 @@
                     <div class="top-left">
                         <div class="title-top">
                             <div class="text-primary">
-                                @if($language == "vi")
-                                    Phân loại tư duy của Bloom về kết quả nhận thức
-                                @else
-                                    Bloom's Taxonomy of Cognitive Outcomes
-                                @endif
+                                {{$cstLB->l1}}
                             </div>
                             <p id="descriptionTemplate" class="text-primary">
                             </p>
@@ -166,13 +158,10 @@
                 </div>
                 <div class="col-sm-6 col-right">
                     <div class="text-head">
-                        @if($language == "vi")
-                            <h4>Đề cương</h4>
-                            <i>Chọn và gõ đề cương của bạn ở đây.</i>
-                        @else
-                            <h4>My Syllabus</h4>
-                            <i>Click and type your syllabus here.</i>
-                        @endif
+                     
+                            <h4>{{$cstLB->title}}</h4>
+                            <i>{{$cstLB->des}}</i>
+        
                     </div>
                     <form action="{!! url('save') !!}" method="post" enctype="multipart/form-data" id="print">
                         <!-- form Begin -->
@@ -181,11 +170,7 @@
                         <div class="text-box">
                             <div class="btn-info" style="color: antiquewhite">
                                 <div class="head-outcome">
-                                    @if($language == "vi")
-                                        <p>Kết quả học tập dự định</p>
-                                    @else
-                                        <p>Intended Learning Outcomes</p>
-                                    @endif
+                                        <p>{{$cstLB->r1}}</p>
                                 </div>
 
                             </div>
@@ -197,12 +182,7 @@
                         <div class="outcome">
                             <div class="bg-info" style="color: antiquewhite">
                                 <div class="head-outcome">
-                                    @if($language == "vi")
-                                        Đánh giá dựa trên kết quả
-                                    @else
-                                        Outcome-based Assessment
-                                    @endif
-
+                                    {{$cstLB->r2}}
                                     <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
                                 </div>
 
@@ -216,12 +196,7 @@
                         <div class="teaching">
                             <div class="bg-info" style="color:antiquewhite">
                                 <div class="head-outcome">
-                                    @if($language == "vi")
-                                        Dạy và học
-                                    @else
-                                        Teaching and Learning
-                                    @endif
-
+                                    {{$cstLB->r3}}
                                     <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
                                 </div>
                                 <textarea id="boxteaching" style="color: white" class="bg-info" name="textboxvalue2"></textarea>

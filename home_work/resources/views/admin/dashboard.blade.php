@@ -28,7 +28,22 @@
                         </div>
                         <div class="span3">
                             <ul class="site-stats">
-                                <li class="bg_lh"><i class="icon-user"></i> {{$total}}</strong> <small>Total User</small></li>
+                                <li class="bg_lh"><i class="icon-user"></i> {{$totalUsers}}</strong> <small>Users</small></li>
+                            </ul>
+                            <ul class="site-stats">
+                                <li class="bg_lh"><i class="fab fa-accusoft"></i>{{$totalTemps}}</strong> <small>Templates</small></li>
+                            </ul>
+                            <ul class="site-stats">
+                                <li class="bg_lh"><i class="fas fa-level-up-alt"></i>{{$totalLevels}}</strong> <small>Levels </small></li>
+                            </ul>
+                            <ul class="site-stats">
+                                <li class="bg_lh"><i class="fas fa-angle-double-right"></i>{{$totalMethods}}</strong> <small>Methods </small></li>
+                            </ul>
+                            <ul class="site-stats">
+                                <li class="bg_lh"><i class="fas fa-align-left"></i>{{$totalSuggests}}</strong> <small>Suggests </small></li>
+                            </ul>
+                            <ul class="site-stats">
+                                <li class="bg_lh"><i class="fas fa-book"></i>{{$totalSyllabus}}</strong> <small>Syllabus </small></li>
                             </ul>
                         </div>
                     </div>

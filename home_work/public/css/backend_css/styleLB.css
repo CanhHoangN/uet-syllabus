@@ -1,0 +1,56 @@
+*{
+
+}
+
+.save {
+
+}
+
+.value {
+    height: 44px;
+}
+
+.r {
+    height: 133px;
+    border-style: outset;
+}
+
+.title {
+    height: 82px;
+    border-style: outset;
+}
+
+.container {
+    border-style: inset;
+    border-width: 8px;
+    margin: 20px;
+    background-color: azure;
+}
+
+.mid {
+    overflow: hidden;
+    border-style: outset;
+}
+
+.right {
+    width: 50%;
+    height: 500px;
+    float: right;
+    padding-top: 10px;
+    border-style: inset;
+}
+
+.left {
+    width: 48%;
+    height: 500px;
+    float: left;
+    padding-top: 10px;
+    border-style: inset;
+}
+
+.top {
+    width: 100%;
+    height: 50px;
+    padding-left: 0px;
+    border-style: inset;
+}

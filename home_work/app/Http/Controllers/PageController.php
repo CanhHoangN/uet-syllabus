@@ -12,6 +12,8 @@ use App\Templates;
 use App\Template_vi;
 use App\User;
 use App\Syllabus;
+use App\ConstraintLabel_vi;
+use App\ConstraintLabel;
 use Auth;
 use Hash;
 use http\Cookie;
@@ -43,6 +45,7 @@ class PageController extends Controller
             $language = "vi";
         }
         if ($language == "vi") {
+            $cstLB = ConstraintLabel_vi::find(1);
             $levels = Levels_vi::all();
             $templates = Template_vi::all();
             $template = Template_vi::where([
@@ -58,9 +61,9 @@ class PageController extends Controller
                 ['idTemplate', '=', '1'],
                 ['idLevel', '=', '1'],
             ]);
-            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests", 'language']));
+            return view('index', compact(['cstLB', 'levels', 'methods', 'templates', 'template', "suggests", 'language']));
         } else if ($language == "en") {
-
+            $cstLB = ConstraintLabel::find(1);
             $levels = Levels::all();
             $templates = Templates::all();
             $template = Templates::where([
@@ -77,7 +80,7 @@ class PageController extends Controller
                 ['idLevel', '=', '1'],
             ]);
 
-            return view('index', compact(['levels', 'methods', 'templates', 'template', "suggests", 'language']));
+            return view('index', compact(['cstLB', 'levels', 'methods', 'templates', 'template', "suggests", 'language']));
         }
     }
     public function getDescLevel($idLevel)

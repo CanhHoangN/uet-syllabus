@@ -6,18 +6,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
-
-
 use App\User;
 use App\Levels;
 use App\Suggests;
 use App\Templates;
 use App\Methods;
+use App\Levels_vi;
+use App\Suggests_vi;
+use App\Templates_vi;
+use App\Methods_vi;
 use App\Syllabus;
+use App\ConstraintLabel_vi;
+use App\ConstraintLabel;
+
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
+    public function language($lg)
+    {
+        if (Session::has('language')) {
+            Session::forget('language');
+        }
+        Session::put('language', $lg);
+        return redirect('/admin/dashboard');
+    }
+
     public function login(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -32,8 +46,13 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
-        $total = User::where('admin', '=', '0')->count();
-        return view('admin.dashboard', compact('total'));
+        $totalUsers = User::where('admin', '=', '0')->count();
+        $totalTemps = Templates::count();
+        $totalLevels = Levels::count();
+        $totalMethods = Methods::count();
+        $totalSuggests = Suggests::count();
+        $totalSyllabus = Syllabus::count();
+        return view('admin.dashboard', compact('totalUsers', 'totalTemps', 'totalLevels', 'totalMethods', 'totalSuggests', 'totalSyllabus'));
     }
     public function logout()
     {
@@ -77,19 +96,49 @@ class AdminController extends Controller
     }
     public function descLevels()
     {
-        $descLevels = Levels::all();
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
+        if ($language == "en") {
+            $descLevels = Levels::all();
+        } else {
+            $descLevels = Levels_vi::all();
+        }
+
         return view('admin.descLevels', compact('descLevels'));
     }
     public function editDL($id)
     {
-        $dl = Levels::find($id);
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
+        if ($language == "en") {
+            $dl = Levels::find($id);
+        } else {
+            $dl = Levels_vi::find($id);
+        }
+
         return view('admin.editDL', compact('dl'));
     }
     public function editedDL(Request $request, $id)
     {
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
         if ($request->isMethod('POST')) {
             $data = $request->all();
-            $lv = Levels::find($id);
+            if ($language == "en") {
+                $lv = Levels::find($id);
+            } else {
+                $lv = Levels_vi::find($id);
+            }
+
             $lv->nameLevel = $data['lv'];
             $lv->descriptionLevel = $data['descLV'];
             $lv->save();
@@ -100,16 +149,38 @@ class AdminController extends Controller
     }
     public function suggest(Request  $request, $idTemplate)
     {
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
+        if ($language == "en") {
+            $sg = Suggests::where('idTemplate', $idTemplate)->get();
+        } else {
+            $sg = Suggests_vi::where('idTemplate', $idTemplate)->get();
+        }
         $template = Templates::find($idTemplate);
-        $sg = Suggests::where('idTemplate', $idTemplate)->get();
         return view('admin.suggests', compact('sg', 'template'));
     }
     public function editSG($idTemp, $idLV)
     {
-        $sg = Suggests::where([
-            ['idTemplate', '=', $idTemp],
-            ['idLevel', '=', $idLV]
-        ])->first();
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
+        if ($language == "en") {
+            $sg = Suggests::where([
+                ['idTemplate', '=', $idTemp],
+                ['idLevel', '=', $idLV]
+            ])->first();
+        } else {
+            $sg = Suggests_vi::where([
+                ['idTemplate', '=', $idTemp],
+                ['idLevel', '=', $idLV]
+            ])->first();
+        }
+
         return view('admin.editSG', compact('idTemp', 'sg'));
     }
     public function editedSG(Request $request, $idTemp, $idLV)
@@ -119,16 +190,36 @@ class AdminController extends Controller
             $title = $data['titleSG'];
             $desc = $data['descSG'];
             $ex = $data['exampleSG'];
-            Suggests::where([
-                ['idTemplate', '=', $idTemp],
-                ['idLevel', '=', $idLV]
-            ])->update(
-                [
-                    'title' => $title,
-                    'descriptionSuggest' => $desc,
-                    'example' => $ex
-                ]
-            );
+
+            $language = Session::get('language');
+
+            if ($language == null) {
+                $language = "vi";
+            }
+            if ($language == "en") {
+                Suggests::where([
+                    ['idTemplate', '=', $idTemp],
+                    ['idLevel', '=', $idLV]
+                ])->update(
+                    [
+                        'title' => $title,
+                        'descriptionSuggest' => $desc,
+                        'example' => $ex
+                    ]
+                );
+            } else {
+                Suggests_vi::where([
+                    ['idTemplate', '=', $idTemp],
+                    ['idLevel', '=', $idLV]
+                ])->update(
+                    [
+                        'title' => $title,
+                        'descriptionSuggest' => $desc,
+                        'example' => $ex
+                    ]
+                );
+            }
+
             return redirect('admin/suggest/' . $idTemp)->with('flash_message_success', 'Suggest Update Successfully!');
         } else {
             return redirect('admin/suggest/' . $idTemp)->with('flash_message_error', 'Description Level Update Losing!');
@@ -137,19 +228,48 @@ class AdminController extends Controller
 
     public function methods()
     {
-        $mt = Methods::all();
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
+        if ($language == "en") {
+            $mt = Methods::all();
+        } else {
+            $mt = Methods_vi::all();
+        }
+
         return view('admin.methods', compact('mt'));
     }
     public function editMT($id)
     {
-        $mt = Methods::find($id);
+        $language = Session::get('language');
+
+        if ($language == null) {
+            $language = "vi";
+        }
+        if ($language == "en") {
+            $mt = Methods::find($id);
+        } else {
+            $mt = Methods_vi::find($id);
+        }
         return view('admin.editMT', compact('mt'));
     }
     public function editedMT(Request $request, $id)
     {
         if ($request->isMethod('POST')) {
             $data = $request->all();
-            $mt = Methods::find($id);
+
+            $language = Session::get('language');
+
+            if ($language == null) {
+                $language = "vi";
+            }
+            if ($language == "en") {
+                $mt = Methods::find($id);
+            } else {
+                $mt = Methods_vi::find($id);
+            }
             $mt->nameMethod = $data['nameMethod'];
             $mt->save();
             return redirect('admin/methods')->with('flash_message_success', 'Method Update Successfully!');
@@ -159,10 +279,8 @@ class AdminController extends Controller
     }
     public function customers()
     {
-        $customers = User::where('admin', '=', '0')
-            ->paginate(50);
-        $total = User::where('admin', '=', '0')
-            ->count();
+        $customers = User::orderBy('admin', 'DESC')->paginate(50);
+        $total = User::count();
         return view('admin.listCustomers', compact('customers', 'total'));
     }
     public function listCustomer(Request $request)
@@ -170,20 +288,91 @@ class AdminController extends Controller
         $data = $request->all();
         $name = $data['cName'];
 
-        $customers = User::where('admin', '=', '0')
-            ->where('name', 'LIKE', '%' . $name . '%')
+        $customers = User::where('name', 'LIKE', '%' . $name . '%')
             ->paginate(50);
-        $total = User::where('admin', '=', '0')
-            ->where('name', 'LIKE', '%' . $name . '%')
+        $total = User::where('name', 'LIKE', '%' . $name . '%')
             ->count();
         return view('admin.listCustomers', compact('customers', 'total'));
     }
-    
+
     public function deleteCustomer($id)
     {
         $customer = User::find($id);
         $customer->delete();
-        return Redirect('/admin/customers');
+        return redirect('admin/customers')->with('flash_message_success', 'Delete User Successfully!');
+    }
+
+    public function addAdmin($id)
+    {
+        $customer = User::find($id);
+        if ($customer->admin == 0) {
+            $customer->admin = 1;
+            $customer->save();
+            return redirect('admin/customers')->with('flash_message_success', 'Add Admin Successfully!');
+        } else {
+            return redirect('admin/customers')->with('flash_message_error', 'Add Admin failure!');
+        }
+    }
+    public function editUser($id)
+    {
+        $customer = User::find($id);
+        return view('admin.editUser', compact('customer'));
+    }
+
+    public function editedUser(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) 
+        {
+            $data = $request->all();
+            $customer = User::find($id);
+            $customer->name = $data['nameUser'];
+            $customer->email = $data['email'];
+            $customer->save();
+            return redirect('admin/customers')->with('flash_message_success', 'Edit User Successfully!');
+        }
+    }
+    public function editConstraintLB()
+    {
+        $language = Session::get('language');
+
+            if ($language == null) {
+                $language = "vi";
+            }
+        if($language == "en")
+        {
+            $lb = ConstraintLabel::find(1);
+        }
+        else
+        {
+            $lb = ConstraintLabel_vi::find(1);
+        }
+        return view('admin.editConstraintLB', compact('lb'));
+    }
+    public function editedConstraintLB(Request $request)
+    {
+        $data = $request->all();
+        
+        $language = Session::get('language');
+
+            if ($language == null) {
+                $language = "vi";
+            }
+        if($language == "en")
+        {
+            $lb = ConstraintLabel::find(1);
+        }
+        else
+        {
+            $lb = ConstraintLabel_vi::find(1);
+        }
+        $lb->nameApp = $data['nameApp'];
+        $lb->l1 = $data['l1'];
+        $lb->title = $data['title'];
+        $lb->des = $data['des'];
+        $lb->r1 = $data['r1'];
+        $lb->r2 = $data['r2'];
+        $lb->r3 = $data['r3'];
+        $lb->save();
     }
 
     public function syllabus($id)
@@ -198,8 +387,7 @@ class AdminController extends Controller
     }
     public function getContent($id)
     {
-        $content=Syllabus::where('idSyllabus', $id)->first();
+        $content = Syllabus::where('idSyllabus', $id)->first();
         return response()->json($content);
     }
-
 }
