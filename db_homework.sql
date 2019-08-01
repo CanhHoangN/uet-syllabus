@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2019 at 05:01 AM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.2.20
+-- Generation Time: Aug 01, 2019 at 11:08 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,56 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_homework`
+-- Database: `db_homework3`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `constraintlabel`
+--
+
+CREATE TABLE `constraintlabel` (
+  `id` int(11) NOT NULL,
+  `nameApp` text NOT NULL,
+  `l1` text NOT NULL,
+  `title` text NOT NULL,
+  `des` text NOT NULL,
+  `r1` text NOT NULL,
+  `r2` text NOT NULL,
+  `r3` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `constraintlabel`
+--
+
+INSERT INTO `constraintlabel` (`id`, `nameApp`, `l1`, `title`, `des`, `r1`, `r2`, `r3`) VALUES
+(1, 'OBE Syllabus Builder', 'Bloom\'s Taxonomy of Cognitive Outcomes', 'My Syllabus', 'Click and type your syllabus here.', 'Intended learning Outcomes', 'Outcome-based Assessment', 'Teaching and Learning');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `constraintlabel_vi`
+--
+
+CREATE TABLE `constraintlabel_vi` (
+  `id` int(11) NOT NULL,
+  `nameApp` text NOT NULL,
+  `l1` text NOT NULL,
+  `title` text NOT NULL,
+  `des` text NOT NULL,
+  `r1` text NOT NULL,
+  `r2` text NOT NULL,
+  `r3` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `constraintlabel_vi`
+--
+
+INSERT INTO `constraintlabel_vi` (`id`, `nameApp`, `l1`, `title`, `des`, `r1`, `r2`, `r3`) VALUES
+(1, 'Hệ thống hỗ trợ xây dựng đề cương', 'Phân loại tư duy của Bloom về kết quả nhận thức', 'Đề cương', 'Chọn và gõ đề cương của bạn ở đây.', 'Kết quả học tập dự định', 'Đánh giá dựa trên kết quả', 'Dạy và học');
 
 -- --------------------------------------------------------
 
@@ -63,12 +111,12 @@ CREATE TABLE `levels_vi` (
 --
 
 INSERT INTO `levels_vi` (`idLevel`, `nameLevel`, `descriptionLevel`) VALUES
-(1, 'Ghi nhớ', 'Sau chương trình này, người học có thế: Lấy kiến thức từ các tài liệu.'),
-(2, 'Hiểu', 'Sau chương trình này, người học có thế hiểu rõ kiến thức từ tài liệu, bài giảng.'),
-(3, 'Áp dụng', 'Sau chương trình này, người học có thế: Thực hiện hay sử dụng một quy trình trong một tình huống nhất định.'),
-(4, 'Phân tích', 'Sau chương trình này, người học có thế: Xác định sự liên quan các kiến thức với nhau và cấu trúc tổng thế. '),
-(5, 'Đánh giá', 'Sau chương trình này, người học có thế: Đánh giá dựa trên các tiêu chí và tiêu chuẩn.'),
-(6, 'Sáng tạo', 'Sau chương trình này, người học có thế: sắp xếp các yếu tố để tạo thành mô hình mới.');
+(1, 'Ghi nhớ', 'Sau chương trình này, người học có thế: Lấy kiến thức từ các tài liệu'),
+(2, 'Hiểu', 'Sau chương trình này, người học có thế hiểu rõ kiến thức từ tài liệu, bài giảng'),
+(3, 'Áp dụng', 'Sau chương trình này, người học có thế: Thực hiện hay sử dụng một quy trình trong một tình huống nhất định'),
+(4, 'Phân tích', 'Sau chương trình này, người học có thế: Xác định sự liên quan các kiến thức với nhau và cấu trúc tổng thế'),
+(5, 'Đánh giá', 'Sau chương trình này, người học có thế: Đánh giá dựa trên các tiêu chí và tiêu chuẩn'),
+(6, 'Sáng tạo', 'Sau chương trình này, người học có thế: sắp xếp các yếu tố để tạo thành mô hình mới');
 
 -- --------------------------------------------------------
 
@@ -475,22 +523,12 @@ CREATE TABLE `syllabus` (
   `idSyllabus` int(11) NOT NULL,
   `idUser` bigint(20) UNSIGNED NOT NULL,
   `nameSyllabus` text NOT NULL,
-  `intended` text DEFAULT NULL,
-  `OutcomeBased` text DEFAULT NULL,
-  `Teaching` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `intended` text,
+  `OutcomeBased` text,
+  `Teaching` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `syllabus`
---
-
-INSERT INTO `syllabus` (`idSyllabus`, `idUser`, `nameSyllabus`, `intended`, `OutcomeBased`, `Teaching`, `created_at`, `updated_at`) VALUES
-(1, 2, 'syllabus1', 'Collect\r\nCollect', 'Fill-in the blanks\r\nFill-in the blanks', 'Discussions\r\nDiscussions', '2019-07-15 08:53:40', '2019-07-15 08:53:40'),
-(2, 2, 'syll2', 'Describe\r\nDescribe\r\nDescribe', NULL, NULL, '2019-07-15 08:53:50', '2019-07-15 08:53:50'),
-(4, 12, 'jkhkjhkjhkjh', 'Miêu tả\r\nDanh sách\r\nDanh sách', 'Đọc thuộc lòng\r\nĐiền vào chỗ trống\r\nĐiền vào chỗ trống\r\nĐiền vào chỗ trống\r\nĐọc thuộc lòng', 'Bài giảng\r\nBài giảng\r\nBài giảng\r\nBài giảng\r\nBài giảng\r\nBài giảng', '2019-07-25 05:52:22', '2019-07-25 05:52:22'),
-(5, 12, 'syllabus2', 'Nhận định\r\nNhận định\r\nNhận định\r\nMiêu tả', NULL, NULL, '2019-07-25 07:48:05', '2019-07-25 07:48:05');
 
 -- --------------------------------------------------------
 
@@ -548,7 +586,7 @@ CREATE TABLE `users` (
   `email` varchar(191) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) NOT NULL,
-  `admin` int(1) NOT NULL DEFAULT 0,
+  `admin` int(1) NOT NULL DEFAULT '0',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -559,14 +597,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `admin`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Dang Liem', 'dangliem.uet@gmail.com', NULL, '$2y$10$WFYsEEN0kCVBa.Oe3xQaruZqdsB3a0SLg9wXysu17folv6SDPsdSe', 1, NULL, '2019-07-02 10:20:47', '2019-07-02 10:20:47'),
-(2, 'Dang Liem', 'test1@gmail.com', NULL, '$2y$10$jrIrsyJqIlJLs3FiRFBKf.3zP4/ToSPA9H/Ho2mzS1z2uiVnVlMb6', 0, NULL, NULL, NULL),
-(11, 'Nguyễn Khắc Ngọc', 'nguyenngoc99uet@gmail.com', NULL, '$2y$10$/CHJc7RM/LSgD73tjTtTwOu0cvBr/rJgKxZt4mq7NPcy.QF4kHeQC', 0, NULL, NULL, NULL),
-(12, 'Hoang', 'checkpassnch@gmail.com', '2019-07-20 04:32:49', '$2y$10$1AMrsLjcWuwBVEzLlMqCiOv8jh2mdLrUNH7d547knpiXNEDzjxfOa', 0, NULL, NULL, NULL);
+(1, 'Dang Liem', 'dangliem.uet@gmail.com', NULL, '$2y$10$WFYsEEN0kCVBa.Oe3xQaruZqdsB3a0SLg9wXysu17folv6SDPsdSe', 1, NULL, '2019-07-02 10:20:47', '2019-07-02 10:20:47');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `constraintlabel`
+--
+ALTER TABLE `constraintlabel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `constraintlabel_vi`
+--
+ALTER TABLE `constraintlabel_vi`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `levels`
@@ -686,7 +733,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `syllabus`
 --
 ALTER TABLE `syllabus`
-  MODIFY `idSyllabus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idSyllabus` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `templates`
@@ -704,7 +751,7 @@ ALTER TABLE `templates_vi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
