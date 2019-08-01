@@ -28,7 +28,7 @@ button.btn-template{
 }
 .dropdown {
     position: absolute;
-    top: 6%;
+    top: 5%;
     right: 1.2%;
 }
 .login a{
@@ -204,10 +204,10 @@ button.btn-template{
     font-size: small;
     top: 21%;
     left: 20%;
-    height: 51%;
+    height: 48%;
     width: 40%;
     color: white;
-    padding: 8px;
+    padding: 15px 10px 0px 10px;
     box-sizing: border-box;
     border-radius: 10px;
     background: #17a2b8;  /* fallback for old browsers */
@@ -448,6 +448,7 @@ input.btn-light{
 .head-outcome{
     border-bottom: 1px solid white;
 }
+
 .tutorial a {
     padding: 4px;
     /* margin-top: 10px; */
@@ -456,8 +457,8 @@ input.btn-light{
 
 .tutorial {
     position: absolute;
-    top: 102.5%;
-    left: 57%;
+    top: 102.2%;
+    left: 52%;
 }
 @media  screen and (max-width: 991px) {
     body{

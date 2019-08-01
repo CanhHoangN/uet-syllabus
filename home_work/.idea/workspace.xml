@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/save-to-pdf/icons/save-to-pdf.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/save-to-pdf/plugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/homeWork.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/homeWork.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/frontend_css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
     </list>
@@ -267,7 +259,8 @@
       <workItem from="1564408158302" duration="2096000" />
       <workItem from="1564490291219" duration="3697000" />
       <workItem from="1564539990822" duration="3253000" />
-      <workItem from="1564559078797" duration="8501000" />
+      <workItem from="1564559078797" duration="8707000" />
+      <workItem from="1564625465491" duration="1699000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1561359950138</created>
@@ -367,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564217586191</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update_editor">
+      <created>1564574009820</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1564574009820</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,6 +397,7 @@
     <MESSAGE value="update_login" />
     <MESSAGE value="update_language" />
     <MESSAGE value="update_language_tutorial" />
-    <option name="LAST_COMMIT_MESSAGE" value="update_language_tutorial" />
+    <MESSAGE value="update_editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="update_editor" />
   </component>
 </project>
