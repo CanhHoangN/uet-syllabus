@@ -14,6 +14,7 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/syllabus.css')}}">
     <link rel="stylesheet" href="{{asset('css/frontend_css/syllabustest.css')}}">
@@ -37,23 +38,32 @@
                                 <h2>Edit</h2>
                                 <span class="close">&times;</span>
                             </div>
-                            <div class="copy-ilo">
+                            <div class="copy">
                                 <div class="texttitle text-light">
                                     <p>Intended Learning Outcomes</p>
                                 </div>
-                                <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo"></textarea>
+                                <div class="copy-ilo">
+                                <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo" class="text_replace_ilo"></textarea>
+                                </div>
+                            
                             </div>
-                            <div class="copy-oba">
+                            <div class="copy">
                                 <div class="texttitle text-light">
                                     <p>Outcome-based Assessment</p>
                                 </div>
-                                <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba"></textarea>
+                                <div class="copy-oba">
+                                <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba" class="text_replace_oba"></textarea>
+                                </div>
+                               
                             </div>
-                            <div class="copy-tla">
+                            <div class="copy">
                                 <div class="texttitle text-light">
                                     <p>Teaching and Learning Activities</p>
                                 </div>
-                                <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla"></textarea>
+                                <div class="copy-tla">
+                                <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla" class="text_replace_tla"></textarea>
+                                </div>
+                               
                             </div>
                             <textarea name="idsyl" style="display:none" id='idsyllabus'></textarea>
                             <div class="modal-footer">
@@ -70,13 +80,11 @@
                     <textarea name="idsyl_dl" style="display:none; height: 0px; width: 0px" id='idsyllabus_dl' required></textarea>
                     <input type="submit" id="delete" value="Delete">
                 </form>
-                <form action="{!! url('export') !!}" id="formep" method="post" enctype="multipart/form-data">
-                    <!-- form Begin -->
-                    <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-                    <textarea name="idsyl_ep" style="display:none; height: 0px; width: 0px" id='idsyllabus_ep' required></textarea>
-                    <input type="submit" id="export" value="Export">
-                </form>
+
+                <input type="submit" onclick="exportHTML();" class="btn-light" value="Export">
+
                 <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
+                
             </div>
         </div>
         <div class="left_bar">
@@ -102,7 +110,6 @@
                     $arr = (explode("\r\n", $firstSyllabus->intended));
                     foreach ($arr as $el) {
                         echo $el;
-                        echo "<br>";
                     }
                     ?>
 
@@ -148,6 +155,17 @@
         </div>
     </div>
 </body>
+
+<script>
+    CKEDITOR.replace("replace_ilo");
+    CKEDITOR.replace("replace_oba");
+    CKEDITOR.replace("replace_tla");
+    CKEDITOR.disableAutoInline = true;
+    CKEDITOR.config.width = '100%';
+    CKEDITOR.config.resize_enabled = false;
+    CKEDITOR.config.height = "100px";
+    CKEDITOR.config.line_height = '1px';
+</script>
 <script>
     $(document).ready(function() {
 
@@ -161,44 +179,46 @@
                 if (data.intended == null) {
                     $(".text-copy-ilo").append("<i>" + "Danh sách rỗng");
                 }
+                $(".text-copy-ilo").append(data.intended);
+                // for (var i in data.intended) {
+                //     if (data.intended[i] != "\n") {
+                //         $(".text-copy-ilo").append(data.intended[i]);
+                //     } else {
+                //         $(".text-copy-ilo").append("<br>");
+                //     }
 
-                for (var i in data.intended) {
-                    if (data.intended[i] != "\n") {
-                        $(".text-copy-ilo").append(data.intended[i]);
-                    } else {
-                        $(".text-copy-ilo").append("<br>");
-                    }
 
-
-                }
+                // }
                 //--------------------------------------------------------
                 if (data.OutcomeBased == null) {
                     $(".text-copy-oba").append("<i>" + "Danh sách rỗng");
                 }
-                for (var i in data.OutcomeBased) {
+                $(".text-copy-oba").append(data.OutcomeBased);
+                // for (var i in data.OutcomeBased) {
 
-                    if (data.OutcomeBased[i] != "\n") {
-                        $(".text-copy-oba").append(data.OutcomeBased[i]);
-                    } else {
-                        $(".text-copy-oba").append("<br>");
-                    }
+                //     if (data.OutcomeBased[i] != "\n") {
+                //         $(".text-copy-oba").append(data.OutcomeBased[i]);
+                //     } else {
+                //         $(".text-copy-oba").append("<br>");
+                //     }
 
 
-                }
+                // }
                 //--------------------------------------------------------------
                 if (data.Teaching == null) {
                     $(".text-copy-tla").append("<i>" + "Danh sách rỗng");
                 }
-                for (var i in data.Teaching) {
+                $(".text-copy-tla").append(data.Teaching);
+                // for (var i in data.Teaching) {
 
-                    if (data.Teaching[i] != "\n") {
-                        $(".text-copy-tla").append(data.Teaching[i]);
-                    } else {
-                        $(".text-copy-tla").append("<br>");
-                    }
+                //     if (data.Teaching[i] != "\n") {
+                //         $(".text-copy-tla").append(data.Teaching[i]);
+                //     } else {
+                //         $(".text-copy-tla").append("<br>");
+                //     }
 
 
-                }
+                // }
             });
 
         });
@@ -206,6 +226,25 @@
 
 
     });
+</script>
+<script>
+    function exportHTML(){
+        var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+            "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+            "xmlns='http://www.w3.org/TR/REC-html40'>"+
+            "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+        var footer = "</body></html>";
+        //var sourceHTML = header+document.getElementById("source-html").innerHTML+footer;
+        var sourceHTML = header+"<h3 style='color:red'>Kết quả học tập dự định</h3>"+document.getElementById("ilo").innerHTML+"<h3 style='color:red'>Đánh giá dựa trên kết quả</h3>"+document.getElementById("oba").innerHTML+"<h3 style='color:red'>Dạy và học</h3>"+document.getElementById("tla").innerHTML+footer;
+
+        var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+        var fileDownload = document.createElement("a");
+        document.body.appendChild(fileDownload);
+        fileDownload.href = source;
+        fileDownload.download = 'document.doc';
+        fileDownload.click();
+        document.body.removeChild(fileDownload);
+    }
 </script>
 <script>
     var modal = document.getElementById("myModal");
@@ -220,10 +259,6 @@
 
     var idsyl = document.getElementById("idsyllabus");
 
-    var replace = document.getElementById("replace_ilo");
-    var replace1 = document.getElementById("replace_oba");
-    var replace2 = document.getElementById("replace_tla");
-
     var btnsave = document.getElementById("save");
 
     var btndelete = document.getElementById("delete");
@@ -231,6 +266,7 @@
 
     var idsyl_dl = document.getElementById("idsyllabus_dl");
     var idsyl_ep = document.getElementById("idsyllabus_ep");
+
     var id;
     $("li a").click(function() {
         id = $(this).attr('id');
@@ -238,10 +274,14 @@
 
     btn.onclick = function() {
         if (Number(id) % 1 == 0) {
+            $.get("ajax/content/" + id, function(data) {
+                console.log(data);
+                CKEDITOR.instances['replace_ilo'].setData(data.intended);
+                CKEDITOR.instances['replace_oba'].setData(data.OutcomeBased);
+                CKEDITOR.instances['replace_tla'].setData(data.Teaching);
+                $("#replace_ilo").val(data.intended);
+            })
             modal.style.display = "block";
-            replace.innerHTML = _ilo.innerHTML.replace(/<br>/g, '\n').replace('<i>Danh sách rỗng</i>', '').trim();
-            replace1.innerHTML = _oba.innerHTML.replace(/<br>/g, '\n').replace('<i>Danh sách rỗng</i>', '').trim();
-            replace2.innerHTML = _tla.innerHTML.replace(/<br>/g, '\n').replace('<i>Danh sách rỗng</i>', '').trim();
             idsyl.innerHTML = id.trim();
         } else {
             Swal.fire("Please select a syllabus.");
@@ -249,6 +289,7 @@
     }
 
     btnsave.onclick = function() {
+
         Swal.fire(
             'Updated',
             '',
@@ -334,6 +375,5 @@
         }
     }
 </script>
-
 
 </html>

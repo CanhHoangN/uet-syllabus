@@ -60,14 +60,8 @@
                                     {{Auth::user()->name}}
                                 </button>
                                 <div class="dropdown-menu">
-                                    @if($language == "vi")
-                                        <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Đã lưu</a>
-                                        <a class="dropdown-item" href="{{asset('/logout')}}">Đăng xuất</a>
-                                    @else
-                                        <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
-                                        <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
-                                    @endif
-
+                                    <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
+                                    <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 
                                 </div>
                             </div>
@@ -186,17 +180,17 @@
 
                         <div class="text-box">
                             <div class="btn-info" style="color: antiquewhite">
-                                <div class="head-outcome widthOutcome">
+                                <div class="head-outcome">
                                     @if($language == "vi")
-                                        Kết quả học tập dự định
+                                        <p>Kết quả học tập dự định</p>
                                     @else
-                                        Intended Learning Outcomes
+                                        <p>Intended Learning Outcomes</p>
                                     @endif
                                 </div>
 
                             </div>
                            <!-- <div id="box-outcome" style="height: 80% !important;" name="textboxvalue"></div>-->
-                            <textarea id="boxoutcome" style="color: white" class="bg-info"></textarea>
+                            <textarea id="boxoutcome" style="margin-top: -15px;color: white" class="bg-info" name="textboxvalue"></textarea>
                             <textarea id="boxoutcome1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue"></textarea>
                         </div>
 
@@ -209,9 +203,10 @@
                                         Outcome-based Assessment
                                     @endif
 
+                                    <span class="click-outcome"><i class="fas fa-angle-down"></i></span>
                                 </div>
 
-                                <textarea id="boxoutcome2" style="color: white" class="bg-info"></textarea>
+                                <textarea id="boxoutcome2" style="color: white" class="bg-info" name="textboxvalue1"></textarea>
                                 <textarea id="boxoutcome21" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue1"></textarea>
 
 
@@ -227,8 +222,9 @@
                                         Teaching and Learning
                                     @endif
 
+                                    <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
                                 </div>
-                                <textarea id="boxteaching" style="color: white" class="bg-info"></textarea>
+                                <textarea id="boxteaching" style="color: white" class="bg-info" name="textboxvalue2"></textarea>
                                 <textarea id="boxteaching1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue2"></textarea>
 
                             </div>
@@ -248,11 +244,11 @@
                     <div class="copy-print">
                         @if($language == "vi")
                             <input type="submit" id="copy" class="btn-light" value="Sao chép">
-                            <input type="submit" onclick="exportHTML();" class="btn-light" value="Tải xuống">
+                            <input type="submit" onclick="exportHTML();" class="btn-light" value="In ra">
 
                         @else
                             <input type="submit" id="copy" class="btn-light" value="copy">
-                            <input type="submit" onclick="exportHTML();" class="btn-light" value="export word">
+                            <input type="submit" onclick="print();" class="btn-light" value="print">
 
                         @endif
                     </div>
@@ -274,6 +270,7 @@
                 @else
                     <h5>My Syllabus</h5>
                 @endif
+
                 <a id="close"><i class="fas fa-times"></i></a>
             </div>
             <div class="copy-result">

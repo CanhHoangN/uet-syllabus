@@ -323,7 +323,6 @@ class PageController extends Controller
         $data = $req->all();
         $sylep = Syllabus::where('idSyllabus', $data['idsyl_ep'])->first();
         $wordTest = new \PhpOffice\PhpWord\PhpWord();
-
         $newSection = $wordTest->addSection();
         $desc1 = "Intended Learning Outcomes: ";
         $desc2 = $sylep->intended;
