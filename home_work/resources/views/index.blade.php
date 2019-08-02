@@ -603,12 +603,12 @@
         $("#listMethod").click(function() {
 
             count++;
-            var currentVal = $("#boxoutcome1").val();
+            var currentVal = $("#boxoutcome").val();
             var curCopyIlo = $(".text-copy-ilo").val();
             var curCopyOba = $(".text-copy-oba").val();
             var curCopyTla = $(".text-copy-tla").val();
-            var curBoxCome = $("#boxoutcome21").val();
-            var curTeaching = $("#boxteaching1").val();
+            var curBoxCome = $("#boxoutcome2").val();
+            var curTeaching = $("#boxteaching").val();
             var text = $("#listMethod option:selected").text();
             var val = $("#listMethod").val();
             if(template == 1){
@@ -622,38 +622,38 @@
             }
             if (count == 1) {
                 if (template == 1) {
-                    $("#boxoutcome1").val(text);
+                    $("#boxoutcome").val(text);
                     //$(".text-copy-ilo").append(text + "<br>");
                 } else if (template == 2) {
-                    $("#boxoutcome21").val(text);
+                    $("#boxoutcome2").val(text);
                     //$(".text-copy-oba").append(text + "<br>");
                 } else {
-                    $("#boxteaching1").val(text);
+                    $("#boxteaching").val(text);
                     //$(".text-copy-tla").val(text + "<br>");
                 }
             } else {
                 if (template == 1) {
-                    $("#boxoutcome1").val(currentVal + "\n" + text);
+                    $("#boxoutcome").val(currentVal + "\n" + text);
 
                     //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
                 } else if (template == 2) {
                     //$(".text-copy-oba").append(curCopyOba + text + "<br>");
-                    if($("#boxoutcome21").val() == "")
+                    if($("#boxoutcome2").val() == "")
                     {
-                        $("#boxoutcome21").val(text);
+                        $("#boxoutcome2").val(text);
                     }
                     else
                     {
-                        $("#boxoutcome21").val(curBoxCome + "\n" + text);
+                        $("#boxoutcome2").val(curBoxCome + "\n" + text);
                     }
                 } else {
-                    if($("#boxteaching1").val() == "")
+                    if($("#boxteaching").val() == "")
                     {
-                        $("#boxteaching1").val(text);
+                        $("#boxteaching").val(text);
                     }
                     else
                     {
-                        $("#boxteaching1").val(curTeaching + "\n" + text);
+                        $("#boxteaching").val(curTeaching + "\n" + text);
                     }
                 }
             }
@@ -665,7 +665,7 @@
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
-            var list =  $("#boxoutcome1").val();
+            var list =  $("#boxoutcome").val();
 
             //$(".text-copy-ilo").html(quill.getText());
             for(var i in list){
@@ -678,7 +678,7 @@
 
 
             }
-            var list2 = $("#boxoutcome21").val();
+            var list2 = $("#boxoutcome2").val();
             for(var i in list2){
                 if(list2[i]!="\n")
                 {
@@ -689,7 +689,7 @@
 
 
             }
-            var list3 = $("#boxteaching1").val();
+            var list3 = $("#boxteaching").val();
             for(var i in list3){
                 if(list3[i]!="\n")
                 {
