@@ -43,10 +43,10 @@
                 @csrf
                 @if($language == "vi")
                     <div class="nameSyllabus">Tên đề cương</div>
-                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
+                    <textarea class="nameSyllabus" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
                 @else
                     <div class="nameSyllabus">Name syllabus</div>
-                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
+                    <textarea class="nameSyllabus" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
                 @endif
 
                 <div id="nameajax"></div>
@@ -55,14 +55,30 @@
                 @else
                     <div class="intended">Intended Learning Outcomes</div>
                 @endif
-                <textarea class="textbox" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
-
+                <textarea class="textbox" style="display: none;visibility: visible" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
+                <div class="textbox" name="text1">
+                    <?php
+                    $arr = (explode("\r\n", $data['textboxvalue']));
+                    foreach ($arr as $el) {
+                        echo $el;
+                    }
+                    ?>
+                </div>
                 @if($language == "vi")
                     <div class="outcome">Đánh giá dựa trên kết quả</div>
                 @else
                     <div class="outcome">Outcome-based Assessment</div>
                 @endif
-                <textarea class="textbox" name="text2" id="" cols="95%" rows="5">{{$data['textboxvalue1']}}</textarea>
+                <div class="textbox" name="text2">
+                    <?php
+                    $arr = (explode("\r\n", $data['textboxvalue1']));
+                    foreach ($arr as $el) {
+                        echo $el;
+                        echo "<br>";
+                    }
+                    ?>
+                </div>
+                <textarea class="textbox" style="display: none;visibility: visible" name="text2" id="" cols="95%" rows="5">{{$data['textboxvalue1']}}</textarea>
 
                 @if($language == "vi")
                     <div class="teaching">Dạy và học</div>
@@ -70,7 +86,16 @@
                     <div class="teaching">Teaching and Learning</div>
                 @endif
 
-                <textarea class="textbox" name="text3" id="" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
+                <div class="textbox" name="text3">
+                    <?php
+                    $arr = (explode("\r\n", $data['textboxvalue2']));
+                    foreach ($arr as $el) {
+                        echo $el;
+                        echo "<br>";
+                    }
+                    ?>
+                </div>
+                <textarea class="textbox" style="display: none;visibility: visible" name="text3" id="" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
 
                 @if($language == "vi")
                     <input id="checkresult" type="submit" class="btn-warning" value="Xác nhận">
