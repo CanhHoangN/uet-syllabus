@@ -170,7 +170,7 @@
                         <div class="text-box">
                             <div class="btn-info" style="color: antiquewhite">
                                 <div class="head-outcome">
-                                        <p>{{$cstLB->r1}}</p>
+                                        {{$cstLB->r1}}
                                 </div>
 
                             </div>

@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/syllabus.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/syllabus.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/syllabustest.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/syllabustest.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/syllabus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/syllabus.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -264,7 +260,7 @@
       <workItem from="1564539990822" duration="3253000" />
       <workItem from="1564559078797" duration="8707000" />
       <workItem from="1564625465491" duration="1699000" />
-      <workItem from="1564721119999" duration="1244000" />
+      <workItem from="1564721119999" duration="1676000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1561359950138</created>
@@ -371,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564574009820</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update_index_saved">
+      <created>1564722437670</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1564722437670</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,6 +405,7 @@
     <MESSAGE value="update_language" />
     <MESSAGE value="update_language_tutorial" />
     <MESSAGE value="update_editor" />
-    <option name="LAST_COMMIT_MESSAGE" value="update_editor" />
+    <MESSAGE value="update_index_saved" />
+    <option name="LAST_COMMIT_MESSAGE" value="update_index_saved" />
   </component>
 </project>
