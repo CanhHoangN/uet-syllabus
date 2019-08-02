@@ -48,7 +48,7 @@
                     <td>{{$c->email}}</td>
                     <td>{{$c->admin}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/syllabus/'.$c->id)}}">syllabus</a></button>
+                        <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/syllabus/'.$c->id)}}" target="_blank">syllabus</a></button>
                         <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/editUser/'.$c->id)}}">edit</a></button>
                         <button type="button" class="btn btn-primary"><a style="color:white" href="{{url('/admin/add/'.$c->id)}}">add admin</a></button>
                         <button onclick="return myFunction()" type="button" class="btn btn-danger"><a style="color:white" href="{{url('/admin/customer/delete/'.$c->id)}}">delete user</a></button>

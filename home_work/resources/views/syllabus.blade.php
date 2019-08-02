@@ -23,10 +23,10 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="name col-sm-12">
+            <div class="name col-sm-8">
                 List Syllabuses
             </div>
-            <div class="btn-group">
+            <div class="btn-group col-md-4">
                 <button type="button" class="btn" id="edit">Edit</button>
                 <div id="myModal" class="modal">
                     <!-- Modal content -->
@@ -181,7 +181,7 @@
                 }
                 $(".text-copy-ilo").append(data.intended);
                 // for (var i in data.intended) {
-                //     if (data.intended[i] != "\n") {
+                //     if (data.intended[i] != "\nz") {
                 //         $(".text-copy-ilo").append(data.intended[i]);
                 //     } else {
                 //         $(".text-copy-ilo").append("<br>");

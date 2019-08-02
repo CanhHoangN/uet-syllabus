@@ -28,6 +28,8 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
 
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/confirm.css')}}">
@@ -43,10 +45,10 @@
                 @csrf
                 @if($language == "vi")
                     <div class="nameSyllabus">Tên đề cương</div>
-                    <textarea class="nameSyllabus" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
+                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
                 @else
                     <div class="nameSyllabus">Name syllabus</div>
-                    <textarea class="nameSyllabus" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
+                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
                 @endif
 
                 <div id="nameajax"></div>
@@ -55,30 +57,14 @@
                 @else
                     <div class="intended">Intended Learning Outcomes</div>
                 @endif
-                <textarea class="textbox" style="display: none;visibility: visible" name="text1" id="" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
-                <div class="textbox" name="text1">
-                    <?php
-                    $arr = (explode("\r\n", $data['textboxvalue']));
-                    foreach ($arr as $el) {
-                        echo $el;
-                    }
-                    ?>
-                </div>
+                <textarea class="textbox" name="text1" id="tlosave" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
+
                 @if($language == "vi")
                     <div class="outcome">Đánh giá dựa trên kết quả</div>
                 @else
                     <div class="outcome">Outcome-based Assessment</div>
                 @endif
-                <div class="textbox" name="text2">
-                    <?php
-                    $arr = (explode("\r\n", $data['textboxvalue1']));
-                    foreach ($arr as $el) {
-                        echo $el;
-                        echo "<br>";
-                    }
-                    ?>
-                </div>
-                <textarea class="textbox" style="display: none;visibility: visible" name="text2" id="" cols="95%" rows="5">{{$data['textboxvalue1']}}</textarea>
+                <textarea class="textbox" name="text2" id="obasave" cols="95%" rows="5">{{$data['textboxvalue1']}}</textarea>
 
                 @if($language == "vi")
                     <div class="teaching">Dạy và học</div>
@@ -86,21 +72,12 @@
                     <div class="teaching">Teaching and Learning</div>
                 @endif
 
-                <div class="textbox" name="text3">
-                    <?php
-                    $arr = (explode("\r\n", $data['textboxvalue2']));
-                    foreach ($arr as $el) {
-                        echo $el;
-                        echo "<br>";
-                    }
-                    ?>
-                </div>
-                <textarea class="textbox" style="display: none;visibility: visible" name="text3" id="" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
+                <textarea class="textbox" name="text3" id="tlasave" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
 
                 @if($language == "vi")
-                    <input id="checkresult" type="submit" class="btn-warning" value="Xác nhận">
+                    <input id="checkresult" type="submit" class="btn-info" value="Xác nhận">
                 @else
-                    <input id="checkresult" type="submit" class="btn-warning" value="Confirm">
+                    <input id="checkresult" type="submit" class="btn-info" value="Confirm">
                 @endif
 
 
@@ -109,6 +86,15 @@
     </div>
 
 </body>
+<script>
+    CKEDITOR.replace('tlosave');
+    CKEDITOR.replace('obasave');
+    CKEDITOR.replace('tlasave');
+    CKEDITOR.disableAutoInline = true;
+    CKEDITOR.config.width = '100%';
+    CKEDITOR.config.resize_enabled = false;
+    CKEDITOR.config.height = "120px";
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#check').keyup(function() {

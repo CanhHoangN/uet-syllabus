@@ -15,10 +15,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="{{asset('css/frontend_css/syllabus.css')}}">
+    <link rel="stylesheet" href="{{asset('css/frontend_css/syllabustest.css')}}">
 </head>
 
 <body>
-<div class="content_box">
+
+<div class="container-fluid" style="background: linear-gradient(to right, #2C5364, #203A43, #0F2027);">
     <div class="left_bar">
         <ul class=" nav-tabs--vertical nav" role="navigation">
             @foreach($syllabuses as $syl)

@@ -56,14 +56,8 @@
                                     {{Auth::user()->name}}
                                 </button>
                                 <div class="dropdown-menu">
-                                    @if($language == "vi")
-                                        <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Đã lưu</a>
-                                        <a class="dropdown-item" href="{{asset('/logout')}}">Đăng xuất</a>
-                                    @else
-                                        <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
-                                        <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
-                                    @endif
-
+                                    <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
+                                    <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 
                                 </div>
                             </div>
@@ -182,7 +176,7 @@
                             </div>
                            <!-- <div id="box-outcome" style="height: 80% !important;" name="textboxvalue"></div>-->
                             <textarea id="boxoutcome" style="margin-top: -15px;color: white" class="bg-info" name="textboxvalue"></textarea>
-                            <!--<textarea id="boxoutcome1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue"></textarea>-->
+                            <!-- <textarea id="boxoutcome1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue"></textarea> -->
                         </div>
 
                         <div class="outcome">
@@ -193,7 +187,7 @@
                                 </div>
 
                                 <textarea id="boxoutcome2" style="color: white" class="bg-info" name="textboxvalue1"></textarea>
-
+                                <!-- <textarea id="boxoutcome21" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue1"></textarea> -->
 
 
                             </div>
@@ -206,6 +200,7 @@
                                     <span class="click-teaching"><i class="fas fa-angle-down"></i></span>
                                 </div>
                                 <textarea id="boxteaching" style="color: white" class="bg-info" name="textboxvalue2"></textarea>
+                                <!-- <textarea id="boxteaching1" style="color: white;display: none;visibility: hidden" class="bg-info" name="textboxvalue2"></textarea> -->
 
                             </div>
                         </div>
@@ -316,11 +311,8 @@
     CKEDITOR.config.width = '100%';
     CKEDITOR.config.resize_enabled = false;
     CKEDITOR.config.height = "120px";
-
-
-
-
 </script>
+
 <script>
     function exportHTML(){
         var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
@@ -605,12 +597,12 @@
         $("#listMethod").click(function() {
 
             count++;
-            var currentVal = $("#boxoutcome").val();
+            var currentVal = $("#boxoutcome1").val();
             var curCopyIlo = $(".text-copy-ilo").val();
             var curCopyOba = $(".text-copy-oba").val();
             var curCopyTla = $(".text-copy-tla").val();
-            var curBoxCome = $("#boxoutcome2").val();
-            var curTeaching = $("#boxteaching").val();
+            var curBoxCome = $("#boxoutcome21").val();
+            var curTeaching = $("#boxteaching1").val();
             var text = $("#listMethod option:selected").text();
             var val = $("#listMethod").val();
             if(template == 1){
@@ -624,38 +616,38 @@
             }
             if (count == 1) {
                 if (template == 1) {
-                    $("#boxoutcome").val(text);
+                    $("#boxoutcome1").val(text);
                     //$(".text-copy-ilo").append(text + "<br>");
                 } else if (template == 2) {
-                    $("#boxoutcome2").val(text);
+                    $("#boxoutcome21").val(text);
                     //$(".text-copy-oba").append(text + "<br>");
                 } else {
-                    $("#boxteaching").val(text);
+                    $("#boxteaching1").val(text);
                     //$(".text-copy-tla").val(text + "<br>");
                 }
             } else {
                 if (template == 1) {
-                    $("#boxoutcome").val(currentVal + "\n" + text);
+                    $("#boxoutcome1").val(currentVal + "\n" + text);
 
                     //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
                 } else if (template == 2) {
                     //$(".text-copy-oba").append(curCopyOba + text + "<br>");
-                    if($("#boxoutcome2").val() == "")
+                    if($("#boxoutcome21").val() == "")
                     {
-                        $("#boxoutcome2").val(text);
+                        $("#boxoutcome21").val(text);
                     }
                     else
                     {
-                        $("#boxoutcome2").val(curBoxCome + "\n" + text);
+                        $("#boxoutcome21").val(curBoxCome + "\n" + text);
                     }
                 } else {
-                    if($("#boxteaching").val() == "")
+                    if($("#boxteaching1").val() == "")
                     {
-                        $("#boxteaching").val(text);
+                        $("#boxteaching1").val(text);
                     }
                     else
                     {
-                        $("#boxteaching").val(curTeaching + "\n" + text);
+                        $("#boxteaching1").val(curTeaching + "\n" + text);
                     }
                 }
             }
@@ -667,7 +659,7 @@
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
-            var list =  $("#boxoutcome").val();
+            var list =  $("#boxoutcome1").val();
 
             //$(".text-copy-ilo").html(quill.getText());
             for(var i in list){
@@ -680,7 +672,7 @@
 
 
             }
-            var list2 = $("#boxoutcome2").val();
+            var list2 = $("#boxoutcome21").val();
             for(var i in list2){
                 if(list2[i]!="\n")
                 {
@@ -691,7 +683,7 @@
 
 
             }
-            var list3 = $("#boxteaching").val();
+            var list3 = $("#boxteaching1").val();
             for(var i in list3){
                 if(list3[i]!="\n")
                 {

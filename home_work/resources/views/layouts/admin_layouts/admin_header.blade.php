@@ -1,6 +1,6 @@
 <!--Header-part-->
 <div id="header">
-    <h3>Syllabus</h3>
+    <h3 style="color: #6CD">Syllabus</h3>
 </div>
 <!--close-Header-part-->
 
