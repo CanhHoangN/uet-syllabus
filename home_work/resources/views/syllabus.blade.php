@@ -23,7 +23,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="name">
+            <div class="name col-sm-12">
                 List Syllabuses
             </div>
             <div class="btn-group">
@@ -45,7 +45,7 @@
                                 <div class="copy-ilo">
                                 <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo" class="text_replace_ilo"></textarea>
                                 </div>
-                            
+
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
@@ -54,7 +54,7 @@
                                 <div class="copy-oba">
                                 <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba" class="text_replace_oba"></textarea>
                                 </div>
-                               
+
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
@@ -63,7 +63,7 @@
                                 <div class="copy-tla">
                                 <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla" class="text_replace_tla"></textarea>
                                 </div>
-                               
+
                             </div>
                             <textarea name="idsyl" style="display:none" id='idsyllabus'></textarea>
                             <div class="modal-footer">
@@ -84,7 +84,7 @@
                 <input type="submit" onclick="exportHTML();" class="btn-light" value="Export">
 
                 <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
-                
+
             </div>
         </div>
         <div class="left_bar">

@@ -28,7 +28,7 @@ button.btn-template{
 }
 .dropdown {
     position: absolute;
-    top: 6%;
+    top: 5%;
     right: 1.2%;
 }
 .login a{
@@ -456,8 +456,8 @@ input.btn-light{
 
 .tutorial {
     position: absolute;
-    top: 102.5%;
-    left: 57%;
+    top: 102.2%;
+    left: 52%;
 }
 @media  screen and (max-width: 991px) {
     body{

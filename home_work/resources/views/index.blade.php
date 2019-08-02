@@ -158,10 +158,10 @@
                 </div>
                 <div class="col-sm-6 col-right">
                     <div class="text-head">
-                     
+
                             <h4>{{$cstLB->title}}</h4>
                             <i>{{$cstLB->des}}</i>
-        
+
                     </div>
                     <form action="{!! url('save') !!}" method="post" enctype="multipart/form-data" id="print">
                         <!-- form Begin -->
@@ -219,11 +219,11 @@
                     <div class="copy-print">
                         @if($language == "vi")
                             <input type="submit" id="copy" class="btn-light" value="Sao chép">
-                            <input type="submit" onclick="exportHTML();" class="btn-light" value="In ra">
+                            <input type="submit" onclick="exportHTML();" class="btn-light" value="Tải xuống">
 
                         @else
                             <input type="submit" id="copy" class="btn-light" value="copy">
-                            <input type="submit" onclick="print();" class="btn-light" value="print">
+                            <input type="submit" onclick="exportHTML()" class="btn-light" value="Download">
 
                         @endif
                     </div>

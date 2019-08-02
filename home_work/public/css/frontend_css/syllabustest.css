@@ -41,7 +41,8 @@
 .btn-group {
     margin-top: 23px;
     height: 2em;
-    margin-left: 31%;
+    margin-left: 70%;
+    margin-bottom: 20px;
 }
 
 button,
@@ -50,6 +51,7 @@ input {
     height: 2em;
     border-radius: 9px;
     margin-right: 1em;
+    cursor: pointer;
 }
 
 button#edit {
