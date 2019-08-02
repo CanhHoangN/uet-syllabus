@@ -56,8 +56,14 @@
                                     {{Auth::user()->name}}
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
-                                    <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
+                                    @if($language == "vi")
+                                        <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Đã lưu</a>
+                                        <a class="dropdown-item" href="{{asset('/logout')}}">Đăng xuất</a>
+                                    @else
+                                        <a class="dropdown-item border-bottom" href="{{route("syllabus")}}">Saved</a>
+                                        <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
+                                    @endif
+
 
                                 </div>
                             </div>

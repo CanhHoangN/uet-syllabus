@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/confirm.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/confirm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -262,7 +261,7 @@
       <workItem from="1564559078797" duration="8707000" />
       <workItem from="1564625465491" duration="1699000" />
       <workItem from="1564721119999" duration="5637000" />
-      <workItem from="1564757526382" duration="1152000" />
+      <workItem from="1564757526382" duration="1504000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1561359950138</created>
@@ -397,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564727639768</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="update_ui">
+      <created>1564758751284</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1564758751284</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,13 +428,13 @@
     <MESSAGE value="fix_error" />
     <MESSAGE value="update_index" />
     <MESSAGE value="update_project" />
-    <MESSAGE value="update_ui" />
     <MESSAGE value="update_login_register" />
     <MESSAGE value="update_login" />
     <MESSAGE value="update_language" />
     <MESSAGE value="update_language_tutorial" />
     <MESSAGE value="update_editor" />
     <MESSAGE value="update_index_saved" />
-    <option name="LAST_COMMIT_MESSAGE" value="update_index_saved" />
+    <MESSAGE value="update_ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="update_ui" />
   </component>
 </project>
