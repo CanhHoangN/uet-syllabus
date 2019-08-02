@@ -14,11 +14,11 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="{{asset('css/frontend_css/syllabus.css')}}">
-    <link rel="stylesheet" href="{{asset('css/frontend_css/syllabustest.css')}}">
+    <link rel="stylesheet" href="{{asset('css/backend_css/syllabus.css')}}">
+    <link rel="stylesheet" href="{{asset('css/backend_css/syllabustest.css')}}">
 </head>
 
-<body>
+<body style="    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);" >
 
 <div class="container-fluid" style="background: linear-gradient(to right, #2C5364, #203A43, #0F2027);">
     <div class="left_bar">
@@ -91,66 +91,132 @@
 </div>
 </body>
 <script>
-    $(document).ready(function() {
+    var modal = document.getElementById("myModal");
 
-            $("li a").click(function() {
-                $(".text-copy-tla").empty();
-                $(".text-copy-oba").empty();
-                $(".text-copy-ilo").empty();
+    var btn = document.getElementById("edit");
 
-                var id = $(this).attr('id');
-                $.get("ajax/content/"+id, function(data) {
-                    if(data.intended == null){
-                        $(".text-copy-ilo").append("<i>"+"Danh sách rỗng");
-                    }
+    var span = document.getElementsByClassName("close")[0];
 
-                    for(var i in data.intended){
-                        if(data.intended[i]!="\n")
-                        {
-                            $(".text-copy-ilo").append(data.intended[i]);
-                        }else{
-                            $(".text-copy-ilo").append("<br>");
-                        }
+    var _ilo = document.getElementById("ilo");
+    var _oba = document.getElementById("oba");
+    var _tla = document.getElementById("tla");
 
+    var idsyl = document.getElementById("idsyllabus");
 
-                    }
-                    //--------------------------------------------------------
-                    if(data.OutcomeBased == null){
-                        $(".text-copy-oba").append("<i>"+"Danh sách rỗng");
-                    }
-                    for(var i in data.OutcomeBased){
+    var btnsave = document.getElementById("save");
 
-                        if(data.OutcomeBased[i]!="\n")
-                        {
-                            $(".text-copy-oba").append(data.OutcomeBased[i]);
-                        }else{
-                            $(".text-copy-oba").append("<br>");
-                        }
+    var btndelete = document.getElementById("delete");
+    var btnexport = document.getElementById("export");
 
+    var idsyl_dl = document.getElementById("idsyllabus_dl");
+    var idsyl_ep = document.getElementById("idsyllabus_ep");
 
-                    }
-                    //--------------------------------------------------------------
-                    if(data.Teaching == null){
-                        $(".text-copy-tla").append("<i>"+"Danh sách rỗng");
-                    }
-                    for(var i in data.Teaching){
-
-                        if(data.Teaching[i]!="\n")
-                        {
-                            $(".text-copy-tla").append(data.Teaching[i]);
-                        }else{
-                            $(".text-copy-tla").append("<br>");
-                        }
-
-
-                    }
-                });
-
-            });
-
-
-
+    var id;
+    $("li a").click(function() {
+        id = $(this).attr('id');
     });
-</script>
 
+    btn.onclick = function() {
+        if (Number(id) % 1 == 0) {
+            $.get("ajax/content/" + id, function(data) {
+                console.log(data);
+                CKEDITOR.instances['replace_ilo'].setData(data.intended);
+                CKEDITOR.instances['replace_oba'].setData(data.OutcomeBased);
+                CKEDITOR.instances['replace_tla'].setData(data.Teaching);
+                $("#replace_ilo").val(data.intended);
+            })
+            modal.style.display = "block";
+            idsyl.innerHTML = id.trim();
+        } else {
+            Swal.fire("Please select a syllabus.");
+        }
+    }
+
+    btnsave.onclick = function() {
+
+        Swal.fire(
+            'Updated',
+            '',
+            'success'
+        )
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    btndelete.onclick = function() {
+        if (Number(id) % 1 == 0) {
+            var cf = confirm("Are you sure you want to delete this syllabus.");
+            if (cf) {
+                idsyl_dl.innerHTML = id.trim();
+                let timerInterval
+                Swal.fire({
+                    title: 'Auto close alert!',
+                    html: 'I will delete in <strong></strong> seconds.',
+                    timer: 500,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            Swal.getContent().querySelector('strong')
+                                .textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.timer
+                    ) {
+                        console.log('I was closed by the timer')
+                    }
+                })
+            }
+        } else {
+            Swal.fire("Please select a syllabus.");
+        }
+    }
+
+    btnexport.onclick = function() {
+        if (Number(id) % 1 == 0) {
+            var cf = confirm("Are you sure you want to export this syllabus.");
+            if (cf) {
+                idsyl_ep.innerHTML = id.trim();
+                let timerInterval
+                Swal.fire({
+                    title: 'Auto close alert!',
+                    html: 'I will export in <strong></strong> seconds.',
+                    timer: 1000,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            Swal.getContent().querySelector('strong')
+                                .textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.timer
+                    ) {
+                        console.log('I was closed by the timer')
+                    }
+                })
+            }
+        } else {
+            Swal.fire("Please select a syllabus.");
+        }
+    }
+</script>
 </html>
