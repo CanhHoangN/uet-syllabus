@@ -365,6 +365,11 @@
     }
 
     $(document).ready(function() {
+        @if(\Illuminate\Support\Facades\Auth::check())
+        @if(\App\User::where('id',\Illuminate\Support\Facades\Auth::id())->value('email_verified_at') == null)
+                alert("Vui lòng xác minh tài khoản trước sử dụng chức năng, mục xác nhận có thể nằm trong thưc mục spam!");
+        @endif
+        @endif
         @if(session('emptySyllabus'))
             @if($language == "vi")
                 alert('Hiện tại giáo trình đang rỗng, vui lòng chọn hoặc nhập thêm !');

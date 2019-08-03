@@ -153,72 +153,137 @@ class PageController extends Controller
     }
     public function login()
     {
+        $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         if (Auth::check()) {
             return redirect('/');
         } else {
-            return view('loginandregister.login');
+            return view('loginandregister.login',compact('language'));
         }
     }
     public function postlogin(Request $req)
     {
+        $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
         if (Auth::check()) {
             return redirect('/');
         } else {
-            $this->validate(
-                $req,
-                [
-                    'email' => 'email',
-                    'password' => 'required|min:6|max:20'
-                ],
-                [
-                    'email.email' => 'Incorrect email format',
-                    'password.max' => 'Max 20',
-                    'password.min' => 'Password is at least 6 characters'
-                ]
-            );
+            if($language == "vi"){
+                $this->validate(
+                    $req,
+                    [
+                        'email' => 'email',
+                        'password' => 'required|min:6|max:20'
+                    ],
+                    [
+                        'email.email' => 'Sai về cú pháp email',
+                        'password.max' => 'Mật khẩu dài nhất là 20 kí tự',
+                        'password.min' => 'Mật khẩu ngắn nhất là 6 kí tự'
+                    ]
+                );
+            } else{
+                $this->validate(
+                    $req,
+                    [
+                        'email' => 'email',
+                        'password' => 'required|min:6|max:20'
+                    ],
+                    [
+                        'email.email' => 'Incorrect email format',
+                        'password.max' => 'Max 20',
+                        'password.min' => 'Password is at least 6 characters'
+                    ]
+                );
+            }
+
             $remember_me = $req->has('remember') ? true : false;
 
             if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'admin' => '0'], $remember_me)) {
 
                 return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully']);
             } else {
+                $mess = "";
+                if($language == "vi"){
+                    $mess = "Tài khoản hoặc mật khẩu không chính xác.";
+                }else{
+                    $mess = "These credentials do not match our records.";
+                }
 
-                return redirect()->back()->with(['flag' => 'danger', 'message' => 'These credentials do not match our records.']);
+                return redirect()->back()->with(['flag' => 'danger', 'message' => $mess]);
             }
         }
     }
     public function register()
     {
-        return view('loginandregister.register');
+        $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
+
+        return view('loginandregister.register',compact('language'));
     }
     public function tutorial()
     {
         return view('tutorial');
     }
-    /*   public function postregister(Request $req)
+      public function postregister(Request $req)
     {
-        $this->validate(
-            $req,
-            [
-                'email' => 'email|unique:users',
-                'password' => 'min:6|max:20',
-                'repassword' => 'same:password'
-            ],
-            [
-                'email.email' => 'Incorrect email format',
-                'email.unique' => 'Someone used this email',
-                'password.min' => 'Min: 6',
-                'password.max' => 'Max: 20',
-                'repassword.same' => 'Password is not the same'
-            ]
-        );
+        $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
+        if($language == "vi"){
+            $this->validate(
+                $req,
+                [
+                    'email' => 'email|unique:users',
+                    'password' => 'min:6|max:20',
+                    'repassword' => 'same:password'
+                ],
+                [
+                    'email.email' => 'Sai cú pháp email',
+                    'email.unique' => 'Email đã được sử dụng',
+                    'password.min' => 'Mật khẩu ngắn nhất gồm 6 kí tự',
+                    'password.max' => 'Mật khẩu dài nhất gồm 20 kí tự',
+                    'repassword.same' => 'Mật khẩu xác nhận không khớp'
+                ]
+            );
+        }else{
+            $this->validate(
+                $req,
+                [
+                    'email' => 'email|unique:users',
+                    'password' => 'min:6|max:20',
+                    'repassword' => 'same:password'
+                ],
+                [
+                    'email.email' => 'Incorrect email format',
+                    'email.unique' => 'Someone used this email',
+                    'password.min' => 'Min: 6',
+                    'password.max' => 'Max: 20',
+                    'repassword.same' => 'Password is not the same'
+                ]
+            );
+        }
+
         $user = new User();
         $user->name = $req->name;
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
         $user->save();
-        return redirect('/login')->with('success', 'Account successfully created.');
-    }*/
+        $mess = "";
+        if($language == "vi"){
+            $mess = "Tạo tài khoản thành công.";
+        }
+        else{
+            $mess = "Account successfully created.";
+        }
+        return redirect('/login')->with('success',$mess);
+    }
     public function logout()
     {
         Auth::logout();
@@ -278,6 +343,10 @@ class PageController extends Controller
     }
     public function syllabus()
     {
+        $language = Session::get('language');
+        if ($language == null) {
+            $language = "vi";
+        }
         if (Auth::check()) {
 
             $firstSyllabus = Syllabus::where('idUser', Auth::user()->id)->first();
@@ -286,7 +355,7 @@ class PageController extends Controller
             if (sizeof($syllabuses) == 0) {
                 return Redirect('/')->with('empty', 'Your syllabus is empty');
             }
-            return view('syllabus', compact('syllabuses', 'firstSyllabus'));
+            return view('syllabus', compact('syllabuses', 'firstSyllabus','language'));
         } else {
             return Redirect('/login');
         }

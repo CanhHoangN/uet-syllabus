@@ -36,14 +36,13 @@
 {{-- Outro Lines --}}
 @foreach ($outroLines as $line)
 {{ $line }}
-Hoàng
 @endforeach
 
 {{-- Salutation --}}
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br><p class="alert-info">Nguyễn Cảnh Hoàng</p>
+@lang('Regards'),<br><p class="alert-info">Syllabus team</p>
 @endif
 
 {{-- Subcopy --}}

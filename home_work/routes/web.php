@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth']], function ()
     Route::post('/admin/editedUser/{id}', 'AdminController@editedUser');
     Route::match(['get', 'post'], '/admin/editConstraintLB', 'AdminController@editConstraintLB');
     Route::match(['get', 'post'], '/admin/editedConstraintLB', 'AdminController@editedConstraintLB');
-    
+
 
 });
 Route::get('/admin/logout', 'AdminController@logout');

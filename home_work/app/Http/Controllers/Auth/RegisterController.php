@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Session;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 class RegisterController extends Controller
@@ -48,11 +49,36 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $language = Session::get('language');
+        if($language == null){
+            $language = "vi";
+        }
+        $mess = "";
+        if($language == "vi"){
+            $mess = [
+                'name.string'=>'Tên người dùng là một chuỗi kí tự.',
+                'name.max'=>'Tên người dùng dài nhất gồm 255 kí tự.',
+                'email.unique'=>'Email đã có người sử dụng.',
+                'password.string'=>'Mật khẩu là gồm 1 chuỗi kí tự.',
+                'password.confirmed'=>'Mật khẩu không giống nhau.',
+                'password.min'=>'Mật khẩu phải ít nhất 6 kí tự',
+
+            ];
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:6', 'confirmed'],
+            ],$mess);
+        }else{
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:6', 'confirmed'],
+            ]);
+        }
+
+
+
     }
 
     /**

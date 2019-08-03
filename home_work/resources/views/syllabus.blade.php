@@ -35,12 +35,21 @@
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h2>Edit</h2>
+                                @if($language == "vi")
+                                    <h2>Chỉnh sửa</h2>
+                                @else
+                                    <h2>Edit</h2>
+                                @endif
+
                                 <span class="close">&times;</span>
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
-                                    <p>Intended Learning Outcomes</p>
+                                    @if($language == "vi")
+                                        <p>Kết quả học tập dự định</p>
+                                    @else
+                                        <p>Intended Learning Outcomes</p>
+                                    @endif
                                 </div>
                                 <div class="copy-ilo">
                                 <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo" class="text_replace_ilo"></textarea>
@@ -49,7 +58,12 @@
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
-                                    <p>Outcome-based Assessment</p>
+                                    @if($language == "vi")
+                                        <p>Đánh giá dựa trên kết quả</p>
+                                    @else
+                                        <p>Outcome-based Assessment</p>
+                                    @endif
+
                                 </div>
                                 <div class="copy-oba">
                                 <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba" class="text_replace_oba"></textarea>
@@ -58,7 +72,12 @@
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
-                                    <p>Teaching and Learning Activities</p>
+                                    @if($language == "vi")
+                                        <p>Hoạt động dạy và học</p>
+                                    @else
+                                        <p>Teaching and Learning Activities</p>
+                                    @endif
+
                                 </div>
                                 <div class="copy-tla">
                                 <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla" class="text_replace_tla"></textarea>
@@ -67,7 +86,12 @@
                             </div>
                             <textarea name="idsyl" style="display:none" id='idsyllabus'></textarea>
                             <div class="modal-footer">
-                                <input type="submit" id="save" value="Save">
+                                @if($language == "vi")
+                                    <input type="submit" id="save" value="Lưu">
+                                @else
+                                    <input type="submit" id="save" value="Save">
+                                @endif
+
                             </div>
                         </div>
                     </form>
@@ -78,12 +102,26 @@
                     <!-- form Begin -->
                     <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                     <textarea name="idsyl_dl" style="display:none; height: 0px; width: 0px" id='idsyllabus_dl' required></textarea>
-                    <input type="submit" id="delete" value="Delete">
+                    @if($language == "vi")
+                        <input type="submit" id="delete" value="Xoá">
+                    @else
+                        <input type="submit" id="delete" value="Delete">
+                    @endif
+
                 </form>
+                @if($language == "vi")
+                    <input type="submit" onclick="exportHTML();" class="btn-light" value="Tải xuống">
+                @else
+                    <input type="submit" onclick="exportHTML();" class="btn-light" value="Export">
+                @endif
 
-                <input type="submit" onclick="exportHTML();" class="btn-light" value="Export">
 
-                <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
+                @if($language == "vi")
+                    <button><a href="{{url('/')}}" class="homebtn">Trang chủ</a></button>
+                @else
+                    <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
+                @endif
+
 
             </div>
         </div>
