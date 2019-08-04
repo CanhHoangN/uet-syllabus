@@ -24,10 +24,18 @@
     <div class="container">
         <div class="row">
             <div class="name col-sm-8">
+                @if($language == "vi")
+                Danh sách
+                @else
                 List Syllabuses
+                @endif
             </div>
             <div class="btn-group col-md-4">
+                @if($language == "vi")
+                <button type="button" class="btn" id="edit">Sửa</button>
+                @else
                 <button type="button" class="btn" id="edit">Edit</button>
+                @endif
                 <div id="myModal" class="modal">
                     <!-- Modal content -->
                     <form action="{!! url('edit') !!}" method="post" enctype="multipart/form-data">
@@ -36,60 +44,48 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 @if($language == "vi")
-                                    <h2>Chỉnh sửa</h2>
+                                <h2>Chỉnh sửa</h2>
                                 @else
-                                    <h2>Edit</h2>
+                                <h2>Edit</h2>
                                 @endif
 
                                 <span class="close">&times;</span>
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
-                                    @if($language == "vi")
-                                        <p>Kết quả học tập dự định</p>
-                                    @else
-                                        <p>Intended Learning Outcomes</p>
-                                    @endif
+                                    <p>{{$lb->r1}}</p>
                                 </div>
                                 <div class="copy-ilo">
-                                <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo" class="text_replace_ilo"></textarea>
+                                    <textarea name="_ilo" style="width: 100%; height: 5em" id="replace_ilo" class="text_replace_ilo"></textarea>
                                 </div>
 
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
-                                    @if($language == "vi")
-                                        <p>Đánh giá dựa trên kết quả</p>
-                                    @else
-                                        <p>Outcome-based Assessment</p>
-                                    @endif
+                                    <p>{{$lb->r2}}</p>
 
                                 </div>
                                 <div class="copy-oba">
-                                <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba" class="text_replace_oba"></textarea>
+                                    <textarea name="_oba" style="width: 100%; height: 5em" id="replace_oba" class="text_replace_oba"></textarea>
                                 </div>
 
                             </div>
                             <div class="copy">
                                 <div class="texttitle text-light">
-                                    @if($language == "vi")
-                                        <p>Hoạt động dạy và học</p>
-                                    @else
-                                        <p>Teaching and Learning Activities</p>
-                                    @endif
+                                    <p>{{$lb->r3}}</p>
 
                                 </div>
                                 <div class="copy-tla">
-                                <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla" class="text_replace_tla"></textarea>
+                                    <textarea name="_tla" style="width: 100%; height: 5em" id="replace_tla" class="text_replace_tla"></textarea>
                                 </div>
 
                             </div>
                             <textarea name="idsyl" style="display:none" id='idsyllabus'></textarea>
                             <div class="modal-footer">
                                 @if($language == "vi")
-                                    <input type="submit" id="save" value="Lưu">
+                                <input type="submit" id="save" value="Lưu">
                                 @else
-                                    <input type="submit" id="save" value="Save">
+                                <input type="submit" id="save" value="Save">
                                 @endif
 
                             </div>
@@ -103,23 +99,23 @@
                     <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                     <textarea name="idsyl_dl" style="display:none; height: 0px; width: 0px" id='idsyllabus_dl' required></textarea>
                     @if($language == "vi")
-                        <input type="submit" id="delete" value="Xoá">
+                    <input type="submit" id="delete" value="Xoá">
                     @else
-                        <input type="submit" id="delete" value="Delete">
+                    <input type="submit" id="delete" value="Delete">
                     @endif
 
                 </form>
                 @if($language == "vi")
-                    <input type="submit" onclick="exportHTML();" class="btn-light" value="Tải xuống">
+                <input type="submit" onclick="exportHTML();" class="btn-light" value="Tải xuống">
                 @else
-                    <input type="submit" onclick="exportHTML();" class="btn-light" value="Export">
+                <input type="submit" onclick="exportHTML();" class="btn-light" value="Export">
                 @endif
 
 
                 @if($language == "vi")
-                    <button><a href="{{url('/')}}" class="homebtn">Trang chủ</a></button>
+                <button><a href="{{url('/')}}" class="homebtn">Trang chủ</a></button>
                 @else
-                    <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
+                <button><a href="{{url('/')}}" class="homebtn">Home</a></button>
                 @endif
 
 
@@ -138,7 +134,7 @@
         <div class="right_bar row ">
             <div class="intended col-sm-4">
                 <div class="head">
-                    Intended Learning Outcomes
+                    {{$lb->r1}}
                 </div>
                 <div class="text-copy-ilo" id="ilo">
                     @if($firstSyllabus->intended == null)
@@ -156,7 +152,7 @@
             </div>
             <div class="outcome col-sm-4">
                 <div class="head">
-                    Outcome-based Assessment
+                    {{$lb->r2}}
                 </div>
                 <div class="text-copy-oba" id="oba">
                     @if($firstSyllabus->OutcomeBased == null)
@@ -174,7 +170,7 @@
             </div>
             <div class="teaching col-sm-4">
                 <div class="head">
-                    Teaching and Learning
+                    {{$lb->r3}}
                 </div>
                 <div class="text-copy-tla" id="tla">
                     @if($firstSyllabus->Teaching == null)
@@ -266,14 +262,14 @@
     });
 </script>
 <script>
-    function exportHTML(){
-        var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
-            "xmlns:w='urn:schemas-microsoft-com:office:word' "+
-            "xmlns='http://www.w3.org/TR/REC-html40'>"+
+    function exportHTML() {
+        var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+            "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+            "xmlns='http://www.w3.org/TR/REC-html40'>" +
             "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
         var footer = "</body></html>";
         //var sourceHTML = header+document.getElementById("source-html").innerHTML+footer;
-        var sourceHTML = header+"<h3 style='color:red'>Kết quả học tập dự định</h3>"+document.getElementById("ilo").innerHTML+"<h3 style='color:red'>Đánh giá dựa trên kết quả</h3>"+document.getElementById("oba").innerHTML+"<h3 style='color:red'>Dạy và học</h3>"+document.getElementById("tla").innerHTML+footer;
+        var sourceHTML = header + "<h3 style='color:red'>Kết quả học tập dự định</h3>" + document.getElementById("ilo").innerHTML + "<h3 style='color:red'>Đánh giá dựa trên kết quả</h3>" + document.getElementById("oba").innerHTML + "<h3 style='color:red'>Dạy và học</h3>" + document.getElementById("tla").innerHTML + footer;
 
         var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
         var fileDownload = document.createElement("a");
@@ -322,7 +318,11 @@
             modal.style.display = "block";
             idsyl.innerHTML = id.trim();
         } else {
+            @if($language == "vi")
+            Swal.fire("Vui lòng chọn một giáo trình.");
+            @else
             Swal.fire("Please select a syllabus.");
+            @endif
         }
     }
 
@@ -375,7 +375,12 @@
                 })
             }
         } else {
+            @if($language == "vi")
+            Swal.fire("Vui lòng chọn một giáo trình.");
+            @else
             Swal.fire("Please select a syllabus.");
+            @endif
+
         }
     }
 
@@ -409,7 +414,12 @@
                 })
             }
         } else {
+
+            @if($language == "vi")
+            Swal.fire("Vui lòng chọn một giáo trình.");
+            @else
             Swal.fire("Please select a syllabus.");
+            @endif
         }
     }
 </script>

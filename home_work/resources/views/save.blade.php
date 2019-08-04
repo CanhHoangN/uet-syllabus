@@ -38,46 +38,39 @@
 <body>
     <div class="box col-sm-9">
         <div class="header">
+            @if($language == "vi")
+            <h3 class="text-center">Xác nhận</h3>
+            @else
             <h3 class="text-center">Confirm</h3>
+            @endif
+            
         </div>
         <div class="content">
             <form action="{{asset('/confirmsave')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @if($language == "vi")
-                    <div class="nameSyllabus">Tên đề cương</div>
-                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
+                <div class="nameSyllabus">Tên đề cương</div>
+                <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Nhập tên giáo trình" required></textarea>
                 @else
-                    <div class="nameSyllabus">Name syllabus</div>
-                    <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
+                <div class="nameSyllabus">Name syllabus</div>
+                <textarea class="textbox" name="name" id="check" cols="95%" rows="1" placeholder="Enter name syllabus" required></textarea>
                 @endif
 
                 <div id="nameajax"></div>
-                @if($language == "vi")
-                    <div class="intended">Kết quả học tập dự định</div>
-                @else
-                    <div class="intended">Intended Learning Outcomes</div>
-                @endif
+                <div class="intended">{{$lb->r1}}</div>
                 <textarea class="textbox" name="text1" id="tlosave" cols="95%" rows="5">{{$data['textboxvalue']}}</textarea>
 
-                @if($language == "vi")
-                    <div class="outcome">Đánh giá dựa trên kết quả</div>
-                @else
-                    <div class="outcome">Outcome-based Assessment</div>
-                @endif
+                <div class="outcome">{{$lb->r2}}</div>
                 <textarea class="textbox" name="text2" id="obasave" cols="95%" rows="5">{{$data['textboxvalue1']}}</textarea>
 
-                @if($language == "vi")
-                    <div class="teaching">Dạy và học</div>
-                @else
-                    <div class="teaching">Teaching and Learning</div>
-                @endif
+                <div class="teaching">{{$lb->r3}}</div>
 
                 <textarea class="textbox" name="text3" id="tlasave" cols="95%" rows="5">{{$data['textboxvalue2']}}</textarea>
 
                 @if($language == "vi")
-                    <input id="checkresult" type="submit" class="btn-info" value="Xác nhận">
+                <input id="checkresult" type="submit" class="btn-info" value="Xác nhận">
                 @else
-                    <input id="checkresult" type="submit" class="btn-info" value="Confirm">
+                <input id="checkresult" type="submit" class="btn-info" value="Confirm">
                 @endif
 
 

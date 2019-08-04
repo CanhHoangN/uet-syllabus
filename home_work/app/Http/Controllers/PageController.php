@@ -154,25 +154,25 @@ class PageController extends Controller
     public function login()
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
         if (Auth::check()) {
             return redirect('/');
         } else {
-            return view('loginandregister.login',compact('language'));
+            return view('loginandregister.login', compact('language'));
         }
     }
     public function postlogin(Request $req)
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
         if (Auth::check()) {
             return redirect('/');
         } else {
-            if($language == "vi"){
+            if ($language == "vi") {
                 $this->validate(
                     $req,
                     [
@@ -185,7 +185,7 @@ class PageController extends Controller
                         'password.min' => 'Mật khẩu ngắn nhất là 6 kí tự'
                     ]
                 );
-            } else{
+            } else {
                 $this->validate(
                     $req,
                     [
@@ -207,9 +207,9 @@ class PageController extends Controller
                 return redirect('/')->with(['flag' => 'success', 'message' => 'Login successfully']);
             } else {
                 $mess = "";
-                if($language == "vi"){
+                if ($language == "vi") {
                     $mess = "Tài khoản hoặc mật khẩu không chính xác.";
-                }else{
+                } else {
                     $mess = "These credentials do not match our records.";
                 }
 
@@ -220,23 +220,23 @@ class PageController extends Controller
     public function register()
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
 
-        return view('loginandregister.register',compact('language'));
+        return view('loginandregister.register', compact('language'));
     }
     public function tutorial()
     {
         return view('tutorial');
     }
-      public function postregister(Request $req)
+    public function postregister(Request $req)
     {
         $language = Session::get('language');
-        if($language == null){
+        if ($language == null) {
             $language = "vi";
         }
-        if($language == "vi"){
+        if ($language == "vi") {
             $this->validate(
                 $req,
                 [
@@ -252,7 +252,7 @@ class PageController extends Controller
                     'repassword.same' => 'Mật khẩu xác nhận không khớp'
                 ]
             );
-        }else{
+        } else {
             $this->validate(
                 $req,
                 [
@@ -276,13 +276,12 @@ class PageController extends Controller
         $user->password = Hash::make($req->password);
         $user->save();
         $mess = "";
-        if($language == "vi"){
+        if ($language == "vi") {
             $mess = "Tạo tài khoản thành công.";
-        }
-        else{
+        } else {
             $mess = "Account successfully created.";
         }
-        return redirect('/login')->with('success',$mess);
+        return redirect('/login')->with('success', $mess);
     }
     public function logout()
     {
@@ -294,14 +293,19 @@ class PageController extends Controller
     public function save(Request $req)
     {
         $language = Session::get('language');
-        if ($language == null) {
-            $language = "vi";
-        }
+            if ($language == null) {
+                $language = "vi";
+            }
+            if ($language == "en") {
+                $lb = ConstraintLabel::find(1);
+            } else {
+                $lb = ConstraintLabel_vi::find(1);
+            }
         if (Auth::check()) {
             $data = $req->all();
             if ($data != null) {
                 if ($data['textboxvalue'] != null || $data['textboxvalue1'] != null || $data['textboxvalue2'] != null) {
-                    return view('save', compact('data', 'language'));
+                    return view('save', compact('data', 'language', 'lb'));
                 } else {
                     return Redirect('/')->with('emptySyllabus', 'Empty');
                 }
@@ -343,19 +347,24 @@ class PageController extends Controller
     }
     public function syllabus()
     {
-        $language = Session::get('language');
-        if ($language == null) {
-            $language = "vi";
-        }
         if (Auth::check()) {
 
             $firstSyllabus = Syllabus::where('idUser', Auth::user()->id)->first();
             //print_r(explode("\r\n",$firstSyllabus));
             $syllabuses = Syllabus::where('idUser', Auth::user()->id)->paginate(8);
+            $language = Session::get('language');
+            if ($language == null) {
+                $language = "vi";
+            }
+            if ($language == "en") {
+                $lb = ConstraintLabel::find(1);
+            } else {
+                $lb = ConstraintLabel_vi::find(1);
+            }
             if (sizeof($syllabuses) == 0) {
                 return Redirect('/')->with('empty', 'Your syllabus is empty');
             }
-            return view('syllabus', compact('syllabuses', 'firstSyllabus','language'));
+            return view('syllabus', compact('syllabuses', 'firstSyllabus', 'lb', 'language'));
         } else {
             return Redirect('/login');
         }
