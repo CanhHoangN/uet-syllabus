@@ -237,7 +237,7 @@ select option{
 .copy-print{
     position: absolute;
     top: 101%;
-    right: 3%;
+    left:27%;
 }
 .save{
     position: absolute;
@@ -457,12 +457,10 @@ input.btn-light{
 .tutorial {
     position: absolute;
     top: 102.2%;
-    left: 52%;
+    left: 12%;
 }
 @media  screen and (max-width: 991px) {
-    body{
-        background: red;
-    }
+
     .method{
         margin-top: 10px;
     }
@@ -497,6 +495,25 @@ input.btn-light{
         width: 349px;
         height: 472px;
         left: 15%;
+    }
+    .tutorial{
+        transform: scale(0.8);
+        position: absolute;
+        top: 102.2%;
+        left: 13%;
+
+    }
+    .copy-print{
+        position: absolute;
+        top: 101%;
+        left:30%;
+    }
+    input[type="submit"]{
+        transform: scale(0.8);
+
+    }
+    .teaching{
+        height: 150px;
     }
 }
 @media screen and (max-width:767px){

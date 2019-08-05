@@ -133,7 +133,7 @@
         </div>
         <div class="right_bar row ">
             <div class="intended col-sm-4">
-                <div class="head">
+                <div class="head" id="lbILO">
                     {{$lb->r1}}
                 </div>
                 <div class="text-copy-ilo" id="ilo">
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div class="outcome col-sm-4">
-                <div class="head">
+                <div class="head" id="lbOBA">
                     {{$lb->r2}}
                 </div>
                 <div class="text-copy-oba" id="oba">
@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div class="teaching col-sm-4">
-                <div class="head">
+                <div class="head" id="lbTLA">
                     {{$lb->r3}}
                 </div>
                 <div class="text-copy-tla" id="tla">
@@ -262,20 +262,29 @@
     });
 </script>
 <script>
+    var title = $('.nav-item a:first-child').attr('aria-controls');
+    var lbILO = $('#lbILO').text();
+    var lbOBA = $('#lbOBA').text();
+    var lbTLA = $('#lbTLA').text();
+    $(document).ready(function () {
+       $('.nav-item a').click(function () {
+           title =  ($(this).attr('aria-controls'));
+       });
+    });
     function exportHTML() {
         var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
             "xmlns:w='urn:schemas-microsoft-com:office:word' " +
             "xmlns='http://www.w3.org/TR/REC-html40'>" +
-            "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+            "<head><meta charset='utf-8'><title>title</title></head><body>";
         var footer = "</body></html>";
         //var sourceHTML = header+document.getElementById("source-html").innerHTML+footer;
-        var sourceHTML = header + "<h3 style='color:red'>Kết quả học tập dự định</h3>" + document.getElementById("ilo").innerHTML + "<h3 style='color:red'>Đánh giá dựa trên kết quả</h3>" + document.getElementById("oba").innerHTML + "<h3 style='color:red'>Dạy và học</h3>" + document.getElementById("tla").innerHTML + footer;
+        var sourceHTML = header+"<h1 style='text-align: center'>"+title+"</h1>"+ "<h3 style='color:red'>"+lbILO+"</h3>" + document.getElementById("ilo").innerHTML + "<h3 style='color:red'>"+lbOBA+"</h3>" + document.getElementById("oba").innerHTML + "<h3 style='color:red'>"+lbTLA+"</h3>" + document.getElementById("tla").innerHTML + footer;
 
         var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
         var fileDownload = document.createElement("a");
         document.body.appendChild(fileDownload);
         fileDownload.href = source;
-        fileDownload.download = 'document.doc';
+        fileDownload.download = title.concat('.doc');
         fileDownload.click();
         document.body.removeChild(fileDownload);
     }
@@ -324,7 +333,7 @@
             Swal.fire("Please select a syllabus.");
             @endif
         }
-    }
+    };
 
     btnsave.onclick = function() {
 
@@ -333,17 +342,17 @@
             '',
             'success'
         )
-    }
+    };
 
     span.onclick = function() {
         modal.style.display = "none";
-    }
+    };
 
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
+    };
 
     btndelete.onclick = function() {
         if (Number(id) % 1 == 0) {
@@ -382,7 +391,7 @@
             @endif
 
         }
-    }
+    };
 
     btnexport.onclick = function() {
         if (Number(id) % 1 == 0) {
@@ -421,7 +430,7 @@
             Swal.fire("Please select a syllabus.");
             @endif
         }
-    }
+    };
 </script>
 
 </html>

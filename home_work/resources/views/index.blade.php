@@ -357,17 +357,15 @@
 
     }
 
-    function print(){
-
-        var data = CKEDITOR.instances.boxoutcome.getData();
-        alert(data);
-
-    }
 
     $(document).ready(function() {
         @if(\Illuminate\Support\Facades\Auth::check())
         @if(\App\User::where('id',\Illuminate\Support\Facades\Auth::id())->value('email_verified_at') == null)
+            @if($language == "vi")
                 alert("Vui lòng xác minh tài khoản trước sử dụng chức năng, mục xác nhận có thể nằm trong thưc mục spam!");
+            @else
+                alert("Please verify the previous account using the function, the confirmation item may be in the spam folder");
+             @endif
         @endif
         @endif
         @if(session('emptySyllabus'))
