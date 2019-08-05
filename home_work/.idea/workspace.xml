@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/syllabus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/syllabus.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/syllabus.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/syllabus.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -269,7 +267,8 @@
       <workItem from="1564855831186" duration="542000" />
       <workItem from="1564907243067" duration="549000" />
       <workItem from="1564925807406" duration="224000" />
-      <workItem from="1564973490531" duration="4939000" />
+      <workItem from="1564973490531" duration="5347000" />
+      <workItem from="1564994496036" duration="544000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1561359950138</created>
@@ -432,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564850594317</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="update_saved">
+      <created>1564984318166</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1564984318166</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,6 +471,7 @@
     <MESSAGE value="update_ui" />
     <MESSAGE value="update_index" />
     <MESSAGE value="update_login_register_index" />
-    <option name="LAST_COMMIT_MESSAGE" value="update_login_register_index" />
+    <MESSAGE value="update_saved" />
+    <option name="LAST_COMMIT_MESSAGE" value="update_saved" />
   </component>
 </project>
