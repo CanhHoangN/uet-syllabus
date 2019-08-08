@@ -310,13 +310,17 @@
 
 
 <script>
+
     CKEDITOR.replace('boxoutcome');
     CKEDITOR.replace('boxoutcome2');
     CKEDITOR.replace('boxteaching');
     CKEDITOR.disableAutoInline = true;
     CKEDITOR.config.width = '100%';
+    CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_P;
     CKEDITOR.config.resize_enabled = false;
     CKEDITOR.config.height = "120px";
+
 </script>
 
 <script>
@@ -621,6 +625,8 @@
 
                 }
                 else{
+
+
                     CKEDITOR.instances['boxoutcome'].insertText("\n"+text);
                 }
 
