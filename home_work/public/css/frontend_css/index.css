@@ -254,12 +254,12 @@ input.btn-light{
 .box-copy{
     position: absolute;
     transition: 0.5s;
-    width: 400px;
-    height: 500px;
+    width: 500px;
+    height: 600px;
     background: white;
     border: 1px solid;
     top: 15%;
-    left: 36%;
+    left: 33%;
     opacity: 0;
     visibility: hidden;
     z-index: 4;
@@ -314,6 +314,7 @@ input.btn-light{
 }
 
 .copy-ilo{
+
     margin-bottom: 30%;
 }
 .copy-oba{

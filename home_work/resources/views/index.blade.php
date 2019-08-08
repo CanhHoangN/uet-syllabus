@@ -390,8 +390,9 @@
                 alert('success !');
             @endif
         @endif
-
+        var n = 0;
         $("button#1").addClass("btn1");
+        n = 0;
         var template = 1;
         var _level = 1;
         var _link = "level/".concat(_level);
@@ -604,62 +605,54 @@
         });
         var count = 0;
         $("#listMethod").click(function() {
-
+            n++;
             count++;
-            var currentVal = $("#boxoutcome").val();
-            var curCopyIlo = $(".text-copy-ilo").val();
-            var curCopyOba = $(".text-copy-oba").val();
-            var curCopyTla = $(".text-copy-tla").val();
-            var curBoxCome = $("#boxoutcome2").val();
-            var curTeaching = $("#boxteaching").val();
             var text = $("#listMethod option:selected").text();
-            var val = $("#listMethod").val();
             if(template == 1){
-                CKEDITOR.instances['boxoutcome'].insertText(text+"\n");
+                if(n == 1){
+                    var check = CKEDITOR.instances.boxoutcome.getData();
+                    if(check == ""){
+                        console.log("null boxoutcome");
+                        CKEDITOR.instances['boxoutcome'].insertText(text);
+                    }else{
+                        CKEDITOR.instances['boxoutcome'].insertText("\n"+text);
+                    }
+
+
+                }
+                else{
+                    CKEDITOR.instances['boxoutcome'].insertText("\n"+text);
+                }
+
             }
             else if(template == 2){
-                CKEDITOR.instances['boxoutcome2'].insertText(text+"\n");
+                if(n == 1){
+                    var check = CKEDITOR.instances.boxoutcome2.getData();
+                    if(check == ""){
+                        CKEDITOR.instances['boxoutcome2'].insertText(text);
+                    }else{
+                        CKEDITOR.instances['boxoutcome2'].insertText("\n"+text);
+                    }
+                }else{
+                    CKEDITOR.instances['boxoutcome2'].insertText("\n"+text);
+                }
+
             }
             else if(template == 3){
-                CKEDITOR.instances['boxteaching'].insertText(text+"\n");
-            }
-            if (count == 1) {
-                if (template == 1) {
-                    $("#boxoutcome").val(text);
-                    //$(".text-copy-ilo").append(text + "<br>");
-                } else if (template == 2) {
-                    $("#boxoutcome2").val(text);
-                    //$(".text-copy-oba").append(text + "<br>");
-                } else {
-                    $("#boxteaching").val(text);
-                    //$(".text-copy-tla").val(text + "<br>");
-                }
-            } else {
-                if (template == 1) {
-                    $("#boxoutcome").val(currentVal + "\n" + text);
+                if(n == 1){
+                    var check = CKEDITOR.instances.boxteaching.getData();
+                    if(check == ""){
+                        CKEDITOR.instances['boxteaching'].insertText(text);
+                    }else{
+                        CKEDITOR.instances['boxteaching'].insertText("\n"+text);
+                    }
 
-                    //$(".text-copy-ilo").append(curCopyIlo + text + "<br>");
-                } else if (template == 2) {
-                    //$(".text-copy-oba").append(curCopyOba + text + "<br>");
-                    if($("#boxoutcome2").val() == "")
-                    {
-                        $("#boxoutcome2").val(text);
-                    }
-                    else
-                    {
-                        $("#boxoutcome2").val(curBoxCome + "\n" + text);
-                    }
-                } else {
-                    if($("#boxteaching").val() == "")
-                    {
-                        $("#boxteaching").val(text);
-                    }
-                    else
-                    {
-                        $("#boxteaching").val(curTeaching + "\n" + text);
-                    }
+                }else{
+                    CKEDITOR.instances['boxteaching'].insertText("\n"+text);
                 }
             }
+
+
         });
         $("input[id='copy']").click(function() {
             $(".text-copy-ilo").empty();
@@ -668,42 +661,19 @@
             $(".box-copy").addClass("show-box-copy");
             $(".bg-cover").addClass("show-bg-cover");
             //console.log($("#box-outcome").val());
-            var list =  $("#boxoutcome").val();
+            var list = CKEDITOR.instances.boxoutcome.getData();
 
-            //$(".text-copy-ilo").html(quill.getText());
-            for(var i in list){
-                if(list[i]!="\n")
-                {
-                    $(".text-copy-ilo").append(list[i]);
-                }else{
-                    $(".text-copy-ilo").append("<br>");
-                }
+            $(".text-copy-ilo").html(list);
 
 
-            }
-            var list2 = $("#boxoutcome2").val();
-            for(var i in list2){
-                if(list2[i]!="\n")
-                {
-                    $(".text-copy-oba").append(list2[i]);
-                }else{
-                    $(".text-copy-oba").append("<br>");
-                }
+            var list2 = CKEDITOR.instances.boxoutcome2.getData();
 
+            $(".text-copy-oba").html(list2);
 
-            }
-            var list3 = $("#boxteaching").val();
-            for(var i in list3){
-                if(list3[i]!="\n")
-                {
-                    $(".text-copy-tla").append(list3[i]);
-                }else{
-                    $(".text-copy-tla").append("<br>");
-                }
+            var list3 = CKEDITOR.instances.boxteaching.getData();
 
+            $(".text-copy-tla").html(list3);
 
-            }
-            //$(".text-copy-ilo").append($("#box-outcome").val()+"<br>");
 
 
         });

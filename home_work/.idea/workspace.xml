@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="">
+    <list default="true" id="6e221384-b772-46b1-8327-6b9b45c8d57f" name="Default Changelist" comment="update_saved">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/syllabus.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/syllabus.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/frontend_css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend_css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,11 +114,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/vendor/unisharp/laravel-ckeditor" />
     </include_path>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="30" />
-    <option name="width" value="768" />
-    <option name="height" value="738" />
   </component>
   <component name="ProjectId" id="1OXkSp617jEzN1iGCgjHEEdIvCu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -268,7 +264,11 @@
       <workItem from="1564907243067" duration="549000" />
       <workItem from="1564925807406" duration="224000" />
       <workItem from="1564973490531" duration="5347000" />
-      <workItem from="1564994496036" duration="544000" />
+      <workItem from="1564994496036" duration="1112000" />
+      <workItem from="1565092479503" duration="389000" />
+      <workItem from="1565160782264" duration="210000" />
+      <workItem from="1565251459056" duration="28000" />
+      <workItem from="1565251516500" duration="2831000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1561359950138</created>
@@ -438,7 +438,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564984318166</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="update_saved">
+      <created>1564995763689</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1564995763689</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
